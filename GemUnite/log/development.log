@@ -4762,3 +4762,26 @@ config/routes.rb:4: syntax error, unexpected ':', expecting `end'
 config/routes.rb:14: syntax error, unexpected `end', expecting end-of-input
 config/routes.rb:4: syntax error, unexpected ':', expecting `end'
 config/routes.rb:14: syntax error, unexpected `end', expecting end-of-input
+Started GET "/" for ::1 at 2023-07-25 18:35:18 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (4.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/progettos" for ::1 at 2023-07-25 18:35:20 +0200
+Processing by ProgettosController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering progettos/index.html.erb within layouts/application
+  [1m[36mProgetto Load (7.5ms)[0m  [1m[34mSELECT "progettos".* FROM "progettos"[0m
+  ↳ app/views/progettos/index.html.erb:6
+  Rendered progettos/_progetto.html.erb (Duration: 22.3ms | Allocations: 359)
+  Rendered progettos/_progetto.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/index.html.erb within layouts/application (Duration: 338.4ms | Allocations: 9440)
+  Rendered layout layouts/application.html.erb (Duration: 20807.3ms | Allocations: 267415)
+Completed 200 OK in 21498ms (Views: 20974.9ms | ActiveRecord: 36.8ms | Allocations: 272646)
+
+
