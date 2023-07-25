@@ -9,7 +9,7 @@
 require 'faker'
 puts "Seeding data to the database ...."
 
-#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 Utente.destroy_all 
 
@@ -21,6 +21,14 @@ Utente.destroy_all
         password: Faker::Internet.password(min_length: 8),
         mail: Faker::Internet.unique.email
         ) 
+    @progetto = Progetto.create!(
+            id_progetto: Faker::IDNumber.valid,
+            info_leader: Faker::Lorem.paragraphs,
+            dimensione: Faker::Number.number,
+            descrizione:Faker::Lorem.paragraphs,
+            stato: Faker::Number.number 
+        )
     end
 
 puts "Seeding operation complete !"
+

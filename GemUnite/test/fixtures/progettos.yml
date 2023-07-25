@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_progetto: MyString
+  info_leader: MyString
+  dimensione: MyString
+  descrizione: MyString
+  stato: MyString
+
+two:
+  id_progetto: MyString
+  info_leader: MyString
+  dimensione: MyString
+  descrizione: MyString
+  stato: MyString
