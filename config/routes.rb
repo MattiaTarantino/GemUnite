@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :progettos
   resources :utentes
-  root :to => redirect('/progettos')
+  resources :requests
+  root to: 'pages#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
