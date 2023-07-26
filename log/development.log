@@ -4785,3 +4785,102 @@ Processing by ProgettosController#index as HTML
 Completed 200 OK in 21498ms (Views: 20974.9ms | ActiveRecord: 36.8ms | Allocations: 272646)
 
 
+Started GET "/" for ::1 at 2023-07-26 15:56:56 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (8.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/progettos" for ::1 at 2023-07-26 15:56:59 +0200
+Processing by ProgettosController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering progettos/index.html.erb within layouts/application
+  [1m[36mProgetto Load (11.1ms)[0m  [1m[34mSELECT "progettos".* FROM "progettos"[0m
+  ↳ app/views/progettos/index.html.erb:6
+  Rendered progettos/_progetto.html.erb (Duration: 45.0ms | Allocations: 356)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered progettos/_progetto.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered progettos/index.html.erb within layouts/application (Duration: 524.2ms | Allocations: 9448)
+  Rendered layout layouts/application.html.erb (Duration: 24878.7ms | Allocations: 79632)
+Completed 200 OK in 26108ms (Views: 25198.0ms | ActiveRecord: 49.8ms | Allocations: 84877)
+
+
+Started GET "/utentes" for ::1 at 2023-07-26 15:57:51 +0200
+Processing by UtentesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering utentes/index.html.erb within layouts/application
+  [1m[36mUtente Load (7.0ms)[0m  [1m[34mSELECT "utentes".* FROM "utentes"[0m
+  ↳ app/views/utentes/index.html.erb:6
+  Rendered utentes/_utente.html.erb (Duration: 27.0ms | Allocations: 419)
+  Rendered utentes/_utente.html.erb (Duration: 0.3ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.3ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/index.html.erb within layouts/application (Duration: 155.5ms | Allocations: 7607)
+  Rendered layout layouts/application.html.erb (Duration: 517.4ms | Allocations: 12270)
+Completed 200 OK in 654ms (Views: 502.8ms | ActiveRecord: 33.2ms | Allocations: 13320)
+
+
+Started GET "/utentes" for ::1 at 2023-07-26 16:08:54 +0200
+Processing by UtentesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering utentes/index.html.erb within layouts/application
+  [1m[36mUtente Load (4.9ms)[0m  [1m[34mSELECT "utentes".* FROM "utentes"[0m
+  ↳ app/views/utentes/index.html.erb:6
+  Rendered utentes/_utente.html.erb (Duration: 0.3ms | Allocations: 49)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.3ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/index.html.erb within layouts/application (Duration: 42.6ms | Allocations: 2619)
+  Rendered layout layouts/application.html.erb (Duration: 397.0ms | Allocations: 7068)
+Completed 200 OK in 476ms (Views: 398.9ms | ActiveRecord: 10.0ms | Allocations: 7377)
+
+
+Started GET "/utentes/1" for ::1 at 2023-07-26 16:08:59 +0200
+Processing by UtentesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUtente Load (6.1ms)[0m  [1m[34mSELECT "utentes".* FROM "utentes" WHERE "utentes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/utentes_controller.rb:63:in `set_utente'
+  Rendering layout layouts/application.html.erb
+  Rendering utentes/show.html.erb within layouts/application
+  Rendered utentes/_utente.html.erb (Duration: 0.4ms | Allocations: 81)
+  Rendered utentes/show.html.erb within layouts/application (Duration: 28.4ms | Allocations: 1006)
+  Rendered layout layouts/application.html.erb (Duration: 328.0ms | Allocations: 5562)
+Completed 200 OK in 825ms (Views: 330.5ms | ActiveRecord: 6.1ms | Allocations: 11173)
+
+
+Started GET "/utentes" for ::1 at 2023-07-26 16:09:04 +0200
+Processing by UtentesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering utentes/index.html.erb within layouts/application
+  [1m[36mUtente Load (4.6ms)[0m  [1m[34mSELECT "utentes".* FROM "utentes"[0m
+  ↳ app/views/utentes/index.html.erb:6
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 49)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.2ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered utentes/_utente.html.erb (Duration: 0.1ms | Allocations: 48)
+  Rendered utentes/index.html.erb within layouts/application (Duration: 19.6ms | Allocations: 2437)
+  Rendered layout layouts/application.html.erb (Duration: 292.6ms | Allocations: 6883)
+Completed 200 OK in 343ms (Views: 290.0ms | ActiveRecord: 4.6ms | Allocations: 7170)
+
+
