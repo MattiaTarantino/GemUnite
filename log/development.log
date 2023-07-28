@@ -7376,3 +7376,450 @@ Processing by UsersController#index as HTML
 Completed 200 OK in 103ms (Views: 83.4ms | ActiveRecord: 5.0ms | Allocations: 12687)
 
 
+Started GET "/" for 127.0.0.1 at 2023-07-28 19:00:24 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 9.3ms | Allocations: 316)
+  Rendered layouts/_navbar.html.erb (Duration: 6.5ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 2036.9ms | Allocations: 61523)
+Completed 200 OK in 2109ms (Views: 2057.7ms | ActiveRecord: 0.0ms | Allocations: 65203)
+
+
+Started GET "/tasks" for 127.0.0.1 at 2023-07-28 19:01:14 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (1.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:6
+  Rendered tasks/index.html.erb within layouts/application (Duration: 7.2ms | Allocations: 1263)
+  Rendered layouts/_navbar.html.erb (Duration: 0.1ms | Allocations: 11)
+  Rendered layout layouts/application.html.erb (Duration: 64.3ms | Allocations: 5744)
+Completed 200 OK in 96ms (Views: 67.6ms | ActiveRecord: 1.1ms | Allocations: 6932)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:01:18 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:33
+  Rendered projects/_project.html.erb (Duration: 4.2ms | Allocations: 324)
+  Rendered projects/_project.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/index.html.erb within layouts/application (Duration: 37.5ms | Allocations: 7761)
+  Rendered layouts/_navbar.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 92.8ms | Allocations: 12492)
+Completed 200 OK in 112ms (Views: 89.4ms | ActiveRecord: 6.9ms | Allocations: 13381)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-07-28 19:01:20 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/_project.html.erb (Duration: 0.1ms | Allocations: 28)
+  Rendered projects/show.html.erb within layouts/application (Duration: 5.1ms | Allocations: 823)
+  Rendered layouts/_navbar.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 52.6ms | Allocations: 5196)
+Completed 200 OK in 74ms (Views: 53.5ms | ActiveRecord: 1.1ms | Allocations: 7873)
+
+
+Started GET "/projects/1/edit" for 127.0.0.1 at 2023-07-28 19:01:22 +0200
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 49.4ms | Allocations: 3614)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 62.6ms | Allocations: 3971)
+  Rendered layouts/_navbar.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 122.9ms | Allocations: 8345)
+Completed 200 OK in 146ms (Views: 123.9ms | ActiveRecord: 1.2ms | Allocations: 9164)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:01:24 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.9ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:33
+  Rendered projects/_project.html.erb (Duration: 0.1ms | Allocations: 28)
+  Rendered projects/_project.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/index.html.erb within layouts/application (Duration: 6.5ms | Allocations: 2031)
+  Rendered layouts/_navbar.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 54.1ms | Allocations: 6579)
+Completed 200 OK in 64ms (Views: 54.0ms | ActiveRecord: 0.9ms | Allocations: 6864)
+
+
+Started GET "/" for 127.0.0.1 at 2023-07-28 19:35:53 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 7.1ms | Allocations: 316)
+  Rendered layouts/_navbar.html.erb (Duration: 4.7ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1351.6ms | Allocations: 61555)
+Completed 200 OK in 1406ms (Views: 1367.7ms | ActiveRecord: 0.0ms | Allocations: 65235)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:36:38 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:33
+  Rendered projects/_project.html.erb (Duration: 4.9ms | Allocations: 322)
+  Rendered projects/_project.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.1ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 27)
+  Rendered projects/index.html.erb within layouts/application (Duration: 40.8ms | Allocations: 7843)
+  Rendered layouts/_navbar.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 90.1ms | Allocations: 12528)
+Completed 200 OK in 109ms (Views: 87.9ms | ActiveRecord: 6.2ms | Allocations: 13454)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:39:37 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (2.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:41
+  Rendered projects/index.html.erb within layouts/application (Duration: 86.0ms | Allocations: 11738)
+  Rendered layout layouts/application.html.erb (Duration: 86.6ms | Allocations: 11826)
+Completed 500 Internal Server Error in 111ms (ActiveRecord: 2.0ms | Allocations: 12966)
+
+
+  
+ActionView::Template::Error (undefined method `name' for #<Project id: 1, info_leader: "[\"Et repellendus ullam. Sunt possimus quibusdam. P...", dimensione: 2861820452, descrizione: "[\"Ut autem molestias. Dolores quis esse. Voluptate...", stato: true, created_at: "2023-07-25 16:15:42.815918000 +0000", updated_at: "2023-07-25 16:15:42.815918000 +0000">):
+    40:     <tbody>
+    41:     <% @projects.each do |project| %>
+    42:       <tr>
+    43:         <td><%= project.name %></td>
+    44:         <td><%= project.description %></td>
+    45:         <td><%= link_to "Show this project", project %></td>
+    46:       </tr>
+  
+app/views/projects/index.html.erb:43
+app/views/projects/index.html.erb:41
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:41:42 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:41
+  Rendered projects/_project.html.erb (Duration: 4.4ms | Allocations: 273)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 23)
+  Rendered projects/index.html.erb within layouts/application (Duration: 20.6ms | Allocations: 3221)
+  Rendered layout layouts/application.html.erb (Duration: 72.0ms | Allocations: 9273)
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 1.2ms | Allocations: 10400)
+
+
+  
+ActionView::Template::Error (Missing partial layouts/_navbar with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :jbuilder, :arb]}.
+
+Searched in:
+  * "/mnt/c/Users/paolo/OneDrive/Desktop/GemUnite/app/views"
+  * "/usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views"
+  * "/usr/share/rvm/gems/ruby-3.2.2/gems/activeadmin-3.0.0/app/views"
+  * "/usr/share/rvm/gems/ruby-3.2.2/gems/kaminari-core-1.2.2/app/views"
+  * "/usr/share/rvm/gems/ruby-3.2.2/gems/turbo-rails-1.4.0/app/views"
+  * "/usr/share/rvm/gems/ruby-3.2.2/gems/actiontext-7.0.6/app/views"
+  * "/usr/share/rvm/gems/ruby-3.2.2/gems/actionmailbox-7.0.6/app/views"
+):
+    12:   </head>
+    13: 
+    14:   <body>
+    15:  <!-- <%= render "layouts/navbar" %> -->
+    16:     <%= yield %>
+    17:   </body>
+    18: </html>
+  
+app/views/layouts/application.html.erb:15
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:42:47 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:41
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.4ms | Allocations: 1496)
+  Rendered layout layouts/application.html.erb (Duration: 57.8ms | Allocations: 6304)
+Completed 200 OK in 78ms (Views: 63.1ms | ActiveRecord: 1.0ms | Allocations: 7450)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:44:28 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1492)
+  Rendered layout layouts/application.html.erb (Duration: 68.5ms | Allocations: 6259)
+Completed 200 OK in 91ms (Views: 74.1ms | ActiveRecord: 1.1ms | Allocations: 7397)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:45:27 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.4ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.7ms | Allocations: 1492)
+  Rendered layout layouts/application.html.erb (Duration: 63.9ms | Allocations: 6257)
+Completed 200 OK in 85ms (Views: 69.0ms | ActiveRecord: 1.4ms | Allocations: 7395)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:47:43 +0200
+Processing by ProjectsController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.3ms | Allocations: 1496)
+  Rendered layout layouts/application.html.erb (Duration: 57.7ms | Allocations: 6203)
+Completed 200 OK in 79ms (Views: 62.8ms | ActiveRecord: 1.2ms | Allocations: 7458)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:48:49 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.8ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 6.8ms | Allocations: 1497)
+  Rendered layout layouts/application.html.erb (Duration: 51.5ms | Allocations: 6278)
+Completed 200 OK in 72ms (Views: 57.6ms | ActiveRecord: 0.8ms | Allocations: 7423)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:49:09 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 6.9ms | Allocations: 1495)
+  Rendered layout layouts/application.html.erb (Duration: 57.4ms | Allocations: 6288)
+Completed 200 OK in 79ms (Views: 62.8ms | ActiveRecord: 1.0ms | Allocations: 7429)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:49:52 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.3ms | Allocations: 1493)
+  Rendered layout layouts/application.html.erb (Duration: 58.2ms | Allocations: 6297)
+Completed 200 OK in 80ms (Views: 63.6ms | ActiveRecord: 1.0ms | Allocations: 7435)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:50:19 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:42
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.2ms | Allocations: 1492)
+  Rendered layout layouts/application.html.erb (Duration: 59.1ms | Allocations: 6262)
+Completed 200 OK in 81ms (Views: 65.6ms | ActiveRecord: 1.1ms | Allocations: 7400)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:51:42 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.4ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:55
+  Rendered projects/index.html.erb within layouts/application (Duration: 9.9ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 74.2ms | Allocations: 6292)
+Completed 200 OK in 98ms (Views: 79.9ms | ActiveRecord: 1.4ms | Allocations: 7430)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:55:31 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.5ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:59
+  Rendered projects/index.html.erb within layouts/application (Duration: 8.1ms | Allocations: 1514)
+  Rendered layout layouts/application.html.erb (Duration: 64.1ms | Allocations: 6313)
+Completed 200 OK in 84ms (Views: 69.3ms | ActiveRecord: 1.5ms | Allocations: 7454)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:56:24 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:59
+  Rendered projects/index.html.erb within layouts/application (Duration: 6.8ms | Allocations: 1526)
+  Rendered layout layouts/application.html.erb (Duration: 56.6ms | Allocations: 6314)
+Completed 200 OK in 79ms (Views: 63.1ms | ActiveRecord: 1.0ms | Allocations: 7452)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 19:58:58 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:75
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.6ms | Allocations: 1541)
+  Rendered layout layouts/application.html.erb (Duration: 59.8ms | Allocations: 6299)
+Completed 200 OK in 81ms (Views: 64.9ms | ActiveRecord: 1.0ms | Allocations: 7437)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 20:01:46 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.9ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:60
+  Rendered projects/index.html.erb within layouts/application (Duration: 8.4ms | Allocations: 1529)
+  Rendered layout layouts/application.html.erb (Duration: 54.8ms | Allocations: 6334)
+Completed 200 OK in 75ms (Views: 61.2ms | ActiveRecord: 0.9ms | Allocations: 7472)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 20:02:11 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (2.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:60
+  Rendered projects/index.html.erb within layouts/application (Duration: 8.8ms | Allocations: 1527)
+  Rendered layout layouts/application.html.erb (Duration: 56.7ms | Allocations: 6305)
+Completed 200 OK in 79ms (Views: 61.2ms | ActiveRecord: 2.0ms | Allocations: 7447)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 20:02:57 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:60
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.1ms | Allocations: 1526)
+  Rendered layout layouts/application.html.erb (Duration: 59.3ms | Allocations: 6296)
+Completed 200 OK in 80ms (Views: 64.5ms | ActiveRecord: 1.1ms | Allocations: 7434)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-28 20:04:56 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 66.3ms | Allocations: 13900)
+  Rendered projects/new.html.erb within layouts/application (Duration: 74.8ms | Allocations: 14208)
+  Rendered layout layouts/application.html.erb (Duration: 121.8ms | Allocations: 18521)
+Completed 200 OK in 136ms (Views: 122.9ms | ActiveRecord: 0.0ms | Allocations: 18895)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-28 20:05:02 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.3ms | Allocations: 1653)
+  Rendered projects/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1743)
+  Rendered layout layouts/application.html.erb (Duration: 48.5ms | Allocations: 6079)
+Completed 200 OK in 59ms (Views: 49.3ms | ActiveRecord: 0.0ms | Allocations: 6362)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 20:05:49 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:60
+  Rendered projects/index.html.erb within layouts/application (Duration: 6.5ms | Allocations: 1531)
+  Rendered layout layouts/application.html.erb (Duration: 60.4ms | Allocations: 6339)
+Completed 200 OK in 82ms (Views: 66.0ms | ActiveRecord: 1.0ms | Allocations: 7479)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 20:06:14 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:61
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.6ms | Allocations: 1527)
+  Rendered layout layouts/application.html.erb (Duration: 55.6ms | Allocations: 6300)
+Completed 200 OK in 79ms (Views: 60.8ms | ActiveRecord: 1.1ms | Allocations: 7438)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-28 20:06:31 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.4ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:60
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 1525)
+  Rendered layout layouts/application.html.erb (Duration: 64.7ms | Allocations: 6289)
+Completed 200 OK in 86ms (Views: 69.7ms | ActiveRecord: 1.4ms | Allocations: 7427)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-07-28 20:06:41 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/_project.html.erb (Duration: 5.6ms | Allocations: 277)
+  Rendered projects/show.html.erb within layouts/application (Duration: 14.9ms | Allocations: 1163)
+  Rendered layout layouts/application.html.erb (Duration: 68.5ms | Allocations: 5491)
+Completed 200 OK in 146ms (Views: 69.5ms | ActiveRecord: 1.1ms | Allocations: 15451)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-28 20:06:45 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 5.3ms | Allocations: 2165)
+  Rendered projects/new.html.erb within layouts/application (Duration: 13.5ms | Allocations: 2465)
+  Rendered layout layouts/application.html.erb (Duration: 59.5ms | Allocations: 6778)
+Completed 200 OK in 73ms (Views: 60.4ms | ActiveRecord: 0.0ms | Allocations: 7116)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-07-28 20:09:06 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (2.8ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/_project.html.erb (Duration: 15.1ms | Allocations: 277)
+  Rendered projects/show.html.erb within layouts/application (Duration: 48.6ms | Allocations: 1157)
+  Rendered layout layouts/application.html.erb (Duration: 257.6ms | Allocations: 5755)
+Completed 200 OK in 336ms (Views: 278.4ms | ActiveRecord: 2.8ms | Allocations: 7369)
+
+

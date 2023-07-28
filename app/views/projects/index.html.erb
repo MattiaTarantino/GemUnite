@@ -15,7 +15,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Projects</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="background-image:linear-gradient(white)">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -28,18 +28,53 @@
     </div>
   </div>
 </nav>
+<style>
+    /* Add borders to the table */
+    table {
+        border-collapse: collapse;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 
+    /* Add borders to the table cells */
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+</style>
 <div id="projects">
-  <% @projects.each do |project| %>
-    <%= render project %>
-    <p>
-      <%= link_to "Show this project", project %>
-    </p>
-  <% end %>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Info Leader</th>
+      <th>Descrizione</th>
+      <th>Stato</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.id %></td>
+        <td><%= project.info_leader %></td>
+        <td><%= project.descrizione %></td>
+        <td><%= project.stato %></td>
+
+        <td><%= link_to "Show this project", project %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New project", new_project_path %>
+<div id="new-proj" style="text-align: center; margin-bottom: 5px">
+  <%= link_to "New project", new_project_path, class: "btn btn-custom-center"%>
 
+</div>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
