@@ -6321,3 +6321,74 @@ Processing by ProjectsController#show as HTML
 Completed 200 OK in 116ms (Views: 93.5ms | ActiveRecord: 1.2ms | Allocations: 6346)
 
 
+  [1m[36mActiveRecord::SchemaMigration Pluck (5.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveIdProgettoFromProject (20230728155013)
+  [1m[36mActiveRecord::SchemaMigration Pluck (7.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveIdProgettoFromProject (20230728155013)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aprojects" ("id" integer NOT NULL PRIMARY KEY, "id_progetto" integer DEFAULT NULL, "info_leader" varchar DEFAULT NULL, "dimensione" integer DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "stato" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[32mINSERT INTO "aprojects" ("id","id_progetto","info_leader","dimensione","descrizione","stato","created_at","updated_at")
+                     SELECT "id","id_progetto","info_leader","dimensione","descrizione","stato","created_at","updated_at" FROM "projects"[0m
+  [1m[35m (18.9ms)[0m  [1m[35mDROP TABLE "projects"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "projects" ("id" integer NOT NULL PRIMARY KEY, "info_leader" varchar DEFAULT NULL, "dimensione" integer DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "stato" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.7ms)[0m  [1m[32mINSERT INTO "projects" ("id","info_leader","dimensione","descrizione","stato","created_at","updated_at")
+                     SELECT "id","info_leader","dimensione","descrizione","stato","created_at","updated_at" FROM "aprojects"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aprojects"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230728155013"]]
+  [1m[36mTRANSACTION (23.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to RemoveRequestIdFromRequest (20230728155531)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "arequests" ("id" integer NOT NULL PRIMARY KEY, "request_id" varchar DEFAULT NULL, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "arequests" ("id","request_id","note","stato_accettazione","created_at","updated_at")
+                     SELECT "id","request_id","note","stato_accettazione","created_at","updated_at" FROM "requests"[0m
+  [1m[35m (18.3ms)[0m  [1m[35mDROP TABLE "requests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "requests" ("id","note","stato_accettazione","created_at","updated_at")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at" FROM "arequests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "arequests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230728155531"]]
+  [1m[36mTRANSACTION (23.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to ChangeTypeProject (20230728155810)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aprojects" ("id" integer NOT NULL PRIMARY KEY, "info_leader" varchar DEFAULT NULL, "dimensione" integer DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "stato" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aprojects" ("id","info_leader","dimensione","descrizione","stato","created_at","updated_at")
+                     SELECT "id","info_leader","dimensione","descrizione","stato","created_at","updated_at" FROM "projects"[0m
+  [1m[35m (20.0ms)[0m  [1m[35mDROP TABLE "projects"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "projects" ("id" integer NOT NULL PRIMARY KEY, "info_leader" varchar DEFAULT NULL, "dimensione" integer DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "stato" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.7ms)[0m  [1m[32mINSERT INTO "projects" ("id","info_leader","dimensione","descrizione","stato","created_at","updated_at")
+                     SELECT "id","info_leader","dimensione","descrizione","stato","created_at","updated_at" FROM "aprojects"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aprojects"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (5.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230728155810"]]
+  [1m[36mTRANSACTION (27.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to ChangeTypeRequest (20230728160145)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (24.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230728160145"]]
+  [1m[36mTRANSACTION (29.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (9.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (6.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (10.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateReports (20230728160736)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (21.1ms)[0m  [1m[35mCREATE TABLE "reports" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "descrizione" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (6.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230728160736"]]
+  [1m[36mTRANSACTION (27.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (6.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (6.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_152129) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_160736) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -38,7 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_152129) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.integer "id_progetto"
     t.string "info_leader"
     t.integer "dimensione"
     t.string "descrizione"
@@ -47,8 +46,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_152129) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.string "descrizione"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "requests", force: :cascade do |t|
-    t.string "request_id"
     t.string "note"
     t.string "stato_accettazione"
     t.datetime "created_at", null: false
