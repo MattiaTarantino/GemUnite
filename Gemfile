@@ -80,3 +80,6 @@ gem "devise", "~> 4.9"
 gem "faker", "~> 3.2"
 
 gem "sassc-rails", "~> 2.1"
+
+# API per le notizie
+gem "news-api"

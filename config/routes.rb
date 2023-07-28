@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :progettos
   resources :utentes
   resources :requests
+  resources :latest_news
   root to: 'pages#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

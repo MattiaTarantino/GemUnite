@@ -173,6 +173,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
+    news-api (0.2.0)
     nio4r (2.5.9)
     nokogiri (1.15.3-x86_64-linux)
       racc (~> 1.4)
@@ -288,6 +289,7 @@ DEPENDENCIES
   faker (~> 3.2)
   importmap-rails
   jbuilder
+  news-api
   puma (~> 5.0)
   rails (~> 7.0.6)
   sassc (~> 2.1.0)
