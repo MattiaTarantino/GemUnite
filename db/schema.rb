@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_193030) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_152129) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_193030) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "progettos", force: :cascade do |t|
+  create_table "projects", force: :cascade do |t|
     t.integer "id_progetto"
     t.string "info_leader"
     t.integer "dimensione"
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_193030) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "utentes", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "nome"
     t.string "cognome"

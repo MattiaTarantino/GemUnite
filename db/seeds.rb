@@ -21,7 +21,7 @@ Utente.destroy_all
         password: Faker::Internet.password(min_length: 8),
         mail: Faker::Internet.unique.email
         ) 
-    @progetto = Progetto.create!(
+    @projects = Project.create!(
             id_progetto: Faker::IDNumber.valid,
             info_leader: Faker::Lorem.paragraphs,
             dimensione: Faker::Number.number,

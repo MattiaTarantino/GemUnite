@@ -1,48 +1,48 @@
 require "test_helper"
 
-class ProgettosControllerTest < ActionDispatch::IntegrationTest
+class ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @progetto = progettos(:one)
+    @project = projects(:one)
   end
 
   test "should get index" do
-    get progettos_url
+    get projects_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_progetto_url
+    get new_project_url
     assert_response :success
   end
 
-  test "should create progetto" do
-    assert_difference("Progetto.count") do
-      post progettos_url, params: { progetto: { descrizione: @progetto.descrizione, dimensione: @progetto.dimensione, id_progetto: @progetto.id_progetto, info_leader: @progetto.info_leader, stato: @progetto.stato } }
+  test "should create project" do
+    assert_difference("Pproject.count") do
+      post projects_url, params: { project: { descrizione: @project.descrizione, dimensione: @project.dimensione, id_project: @project.id_project, info_leader: @project.info_leader, stato: @project.stato } }
     end
 
-    assert_redirected_to progetto_url(Progetto.last)
+    assert_redirected_to project_url(Pproject.last)
   end
 
-  test "should show progetto" do
-    get progetto_url(@progetto)
+  test "should show project" do
+    get project_url(@project)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_progetto_url(@progetto)
+    get edit_project_url(@project)
     assert_response :success
   end
 
-  test "should update progetto" do
-    patch progetto_url(@progetto), params: { progetto: { descrizione: @progetto.descrizione, dimensione: @progetto.dimensione, id_progetto: @progetto.id_progetto, info_leader: @progetto.info_leader, stato: @progetto.stato } }
-    assert_redirected_to progetto_url(@progetto)
+  test "should update project" do
+    patch project_url(@project), params: { project: { descrizione: @project.descrizione, dimensione: @project.dimensione, id_project: @project.id_project, info_leader: @project.info_leader, stato: @project.stato } }
+    assert_redirected_to project_url(@project)
   end
 
-  test "should destroy progetto" do
-    assert_difference("Progetto.count", -1) do
-      delete progetto_url(@progetto)
+  test "should destroy project" do
+    assert_difference("Pproject.count", -1) do
+      delete project_url(@project)
     end
 
-    assert_redirected_to progettos_url
+    assert_redirected_to projects_url
   end
 end

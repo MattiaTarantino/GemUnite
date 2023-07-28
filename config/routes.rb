@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :progettos
-  resources :utentes
+  resources :projects
+  resources :users
   resources :requests
   resources :latest_news
   root to: 'pages#home'
