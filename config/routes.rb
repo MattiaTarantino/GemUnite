@@ -3,7 +3,14 @@ Rails.application.routes.draw do
   resources :users
   resources :requests
   resources :latest_news
+<<<<<<< Updated upstream
   resources :reports
+=======
+  resources :tasks
+  resources :checkpoints
+
+
+>>>>>>> Stashed changes
   root to: 'pages#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

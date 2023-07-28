@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[7.0].define(version: 2023_07_28_160736) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_164304) do
+>>>>>>> Stashed changes
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -37,6 +41,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_160736) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "checkpoints", force: :cascade do |t|
+    t.string "nome"
+    t.string "descrizione"
+    t.string "completato"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "info_leader"
     t.integer "dimensione"
@@ -55,6 +73,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_160736) do
   create_table "requests", force: :cascade do |t|
     t.string "note"
     t.string "stato_accettazione"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "nome"
+    t.string "descrizione"
+    t.string "completato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

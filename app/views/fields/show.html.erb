@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @field %>
+
+<div>
+  <%= link_to "Edit this field", edit_field_path(@field) %> |
+  <%= link_to "Back to fields", fields_path %>
+
+  <%= button_to "Destroy this field", @field, method: :delete %>
+</div>
