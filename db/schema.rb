@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_160736) do
-=======
 ActiveRecord::Schema[7.0].define(version: 2023_07_28_164304) do
->>>>>>> Stashed changes
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
