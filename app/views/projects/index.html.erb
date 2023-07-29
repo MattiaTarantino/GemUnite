@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,23 +11,23 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Projects</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="background-image:linear-gradient(white)">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav" >
+      <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="#">News</a>
         <a class="nav-link" href="">Profilo</a>
         <a class="nav-link" href="#">LogOut</a>
-        <!--   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
       </div>
     </div>
   </div>
 </nav>
 <style>
+
     /* Add borders to the table */
     table {
         border-collapse: collapse;
@@ -45,35 +44,59 @@
         padding: 8px;
     }
 
+    /* Add custom style for the "New project" button */
+    .btn-custom-center {
+        display: block;
+        margin: 0 auto;
+        background-color:#c3d9ff;
+        color: white;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .btn-custom-center:hover {
+        background-color: lightblue;
+    }
+    /* Style for "Show this project" link */
+    .project-link {
+        display: inline-block;
+        background-color: #c3d9ff;
+        color: white;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 8px 15px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .project-link:hover {
+        background-color: lightblue;
+    }
 </style>
 <div id="projects">
   <table>
     <thead>
     <tr>
       <th>ID</th>
-      <th>Info Leader</th>
       <th>Descrizione</th>
-      <th>Stato</th>
     </tr>
     </thead>
     <tbody>
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.id %></td>
-        <td><%= project.info_leader %></td>
         <td><%= project.descrizione %></td>
-        <td><%= project.stato %></td>
-
-        <td><%= link_to "Show this project", project %></td>
+        <td><%= link_to "Show this project", project, class: "project-link" %> </td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
 
-<div id="new-proj" style="text-align: center; margin-bottom: 5px">
+<div id="new-proj" style="text-align: center; margin-bottom: 5px; width: fit-content; margin-left: auto;margin-right: auto;">
   <%= link_to "New project", new_project_path, class: "btn btn-custom-center"%>
-
 </div>
 <!-- Optional JavaScript; choose one of the two! -->
 
@@ -87,3 +110,4 @@
 -->
 </body>
 </html>
+
