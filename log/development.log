@@ -8213,3 +8213,709 @@ Processing by PagesController#home as TURBO_STREAM
 Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.0ms | Allocations: 5528)
 
 
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 15:54:32 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:87
+  Rendered projects/index.html.erb within layouts/application (Duration: 34.8ms | Allocations: 6978)
+  Rendered layout layouts/application.html.erb (Duration: 1446.0ms | Allocations: 71276)
+Completed 200 OK in 1582ms (Views: 1479.0ms | ActiveRecord: 5.4ms | Allocations: 76827)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-07-29 15:54:36 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 7.2ms | Allocations: 915)
+  Rendered layout layouts/application.html.erb (Duration: 66.9ms | Allocations: 5221)
+Completed 200 OK in 92ms (Views: 68.0ms | ActiveRecord: 1.3ms | Allocations: 7916)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 15:56:04 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.0ms | Allocations: 1628)
+  Rendered layout layouts/application.html.erb (Duration: 57.1ms | Allocations: 6414)
+Completed 200 OK in 80ms (Views: 64.5ms | ActiveRecord: 1.2ms | Allocations: 7560)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeStatoType (20230729140226)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230729140226"]]
+  [1m[36mTRANSACTION (10.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:05:41 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 21.5ms | Allocations: 6871)
+  Rendered layout layouts/application.html.erb (Duration: 1511.2ms | Allocations: 67847)
+Completed 200 OK in 1566ms (Views: 1521.1ms | ActiveRecord: 5.8ms | Allocations: 71667)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeStatoType (20230729140720)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aprojects" ("id" integer NOT NULL PRIMARY KEY, "info_leader" varchar DEFAULT NULL, "dimensione" integer DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "stato" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "aprojects" ("id","info_leader","dimensione","descrizione","stato","created_at","updated_at")
+                     SELECT "id","info_leader","dimensione","descrizione","stato","created_at","updated_at" FROM "projects"[0m
+  [1m[35m (5.7ms)[0m  [1m[35mDROP TABLE "projects"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "projects" ("id" integer NOT NULL PRIMARY KEY, "info_leader" varchar DEFAULT NULL, "dimensione" integer DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "stato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "projects" ("id","info_leader","dimensione","descrizione","stato","created_at","updated_at")
+                     SELECT "id","info_leader","dimensione","descrizione","stato","created_at","updated_at" FROM "aprojects"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aprojects"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230729140720"]]
+  [1m[36mTRANSACTION (15.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:08:55 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 22.6ms | Allocations: 6849)
+  Rendered layout layouts/application.html.erb (Duration: 1448.5ms | Allocations: 67969)
+Completed 200 OK in 1502ms (Views: 1457.7ms | ActiveRecord: 6.5ms | Allocations: 71789)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:09:37 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 116.6ms | Allocations: 14413)
+  Rendered projects/new.html.erb within layouts/application (Duration: 124.5ms | Allocations: 14783)
+  Rendered layout layouts/application.html.erb (Duration: 175.5ms | Allocations: 19099)
+Completed 200 OK in 190ms (Views: 176.4ms | ActiveRecord: 0.0ms | Allocations: 19481)
+
+
+Started POST "/projects" for 127.0.0.1 at 2023-07-29 16:09:51 +0200
+Processing by ProjectsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"21", "info_leader"=>"ness", "dimensione"=>"2", "descrizione"=>"ne", "stato"=>"aperto"}, "commit"=>"Create Project"}
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms | Allocations: 966)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'id_project' for Project.):
+  
+app/controllers/projects_controller.rb:24:in `create'
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:11:44 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.7ms | Allocations: 1630)
+  Rendered projects/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 1703)
+  Rendered layout layouts/application.html.erb (Duration: 44.6ms | Allocations: 6114)
+Completed 200 OK in 54ms (Views: 45.6ms | ActiveRecord: 0.0ms | Allocations: 6406)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:11:46 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.9ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1268)
+  Rendered layout layouts/application.html.erb (Duration: 40.7ms | Allocations: 5727)
+Completed 200 OK in 50ms (Views: 40.5ms | ActiveRecord: 0.9ms | Allocations: 6006)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:11:52 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.8ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1272)
+  Rendered layout layouts/application.html.erb (Duration: 52.2ms | Allocations: 5747)
+Completed 200 OK in 62ms (Views: 51.3ms | ActiveRecord: 1.8ms | Allocations: 6031)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_admin_comments"[0m
+  [1m[35m (24.7ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "namespace" varchar, "body" text, "resource_type" varchar, "resource_id" integer, "author_type" varchar, "author_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (22.8ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_author" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (20.6ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[35m (19.2ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_resource" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "admin_users"[0m
+  [1m[35m (21.7ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (22.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (25.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkpoints"[0m
+  [1m[35m (26.6ms)[0m  [1m[35mCREATE TABLE "checkpoints" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome" varchar, "descrizione" varchar, "completato" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "fields"[0m
+  [1m[35m (27.4ms)[0m  [1m[35mCREATE TABLE "fields" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "projects"[0m
+  [1m[35m (25.0ms)[0m  [1m[35mCREATE TABLE "projects" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "info_leader" varchar, "dimensione" integer, "descrizione" varchar, "stato" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "reports"[0m
+  [1m[35m (25.9ms)[0m  [1m[35mCREATE TABLE "reports" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "descrizione" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "requests"[0m
+  [1m[35m (24.5ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "note" varchar, "stato_accettazione" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks"[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome" varchar, "descrizione" varchar, "completato" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (22.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (21.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (22.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (21.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (22.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20230729140720)[0m
+  [1m[35m (20.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20230725102715),
+(20230725103038),
+(20230725103040),
+(20230725153100),
+(20230726193030),
+(20230728143259),
+(20230728152129),
+(20230728155013),
+(20230728155125),
+(20230728155531),
+(20230728155810),
+(20230728155859),
+(20230728160145),
+(20230728160736),
+(20230728164304),
+(20230729100255),
+(20230729100704);
+
+[0m
+  [1m[35m (19.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-07-29 14:13:19.297760"], ["updated_at", "2023-07-29 14:13:19.297760"]]
+  [1m[36mTRANSACTION (14.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (5.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "b9df9ed337af7ce06e2120e9f5a4f88605d494c8"], ["created_at", "2023-07-29 14:13:19.334679"], ["updated_at", "2023-07-29 14:13:19.334679"]]
+  [1m[36mTRANSACTION (14.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_admin_comments"[0m
+  [1m[35m (18.6ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "namespace" varchar, "body" text, "resource_type" varchar, "resource_id" integer, "author_type" varchar, "author_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (18.5ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_author" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (29.3ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[35m (31.8ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_resource" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  [1m[35m (4.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "admin_users"[0m
+  [1m[35m (34.6ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (29.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (27.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[35m (3.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkpoints"[0m
+  [1m[35m (29.8ms)[0m  [1m[35mCREATE TABLE "checkpoints" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome" varchar, "descrizione" varchar, "completato" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (3.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "fields"[0m
+  [1m[35m (31.7ms)[0m  [1m[35mCREATE TABLE "fields" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "projects"[0m
+  [1m[35m (23.0ms)[0m  [1m[35mCREATE TABLE "projects" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "info_leader" varchar, "dimensione" integer, "descrizione" varchar, "stato" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "reports"[0m
+  [1m[35m (22.5ms)[0m  [1m[35mCREATE TABLE "reports" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "descrizione" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "requests"[0m
+  [1m[35m (24.6ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "note" varchar, "stato_accettazione" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks"[0m
+  [1m[35m (26.2ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome" varchar, "descrizione" varchar, "completato" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (26.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (25.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (22.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (22.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20230729140720)[0m
+  [1m[35m (28.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20230725102715),
+(20230725103038),
+(20230725103040),
+(20230725153100),
+(20230726193030),
+(20230728143259),
+(20230728152129),
+(20230728155013),
+(20230728155125),
+(20230728155531),
+(20230728155810),
+(20230728155859),
+(20230728160145),
+(20230728160736),
+(20230728164304),
+(20230729100255),
+(20230729100704);
+
+[0m
+  [1m[35m (29.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (10.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-07-29 14:13:20.004852"], ["updated_at", "2023-07-29 14:13:20.004852"]]
+  [1m[36mTRANSACTION (20.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Update (9.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2023-07-29 14:13:20.047508"], ["key", "environment"]]
+  [1m[36mTRANSACTION (20.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (9.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "b9df9ed337af7ce06e2120e9f5a4f88605d494c8"], ["created_at", "2023-07-29 14:13:20.089830"], ["updated_at", "2023-07-29 14:13:20.089830"]]
+  [1m[36mTRANSACTION (20.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mAdminUser Create (8.7ms)[0m  [1m[32mINSERT INTO "admin_users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "admin@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-07-29 14:13:20.810643"], ["updated_at", "2023-07-29 14:13:20.810643"]]
+  [1m[36mTRANSACTION (18.3ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:13:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 8.5ms | Allocations: 1398)
+  Rendered layout layouts/application.html.erb (Duration: 1324.3ms | Allocations: 62478)
+Completed 200 OK in 1379ms (Views: 1340.5ms | ActiveRecord: 1.1ms | Allocations: 66298)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:14:47 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 9.0ms | Allocations: 1398)
+  Rendered layout layouts/application.html.erb (Duration: 1471.0ms | Allocations: 62481)
+Completed 200 OK in 1530ms (Views: 1484.3ms | ActiveRecord: 1.2ms | Allocations: 66301)
+
+
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (3.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (3.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAdminUser Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = ? LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (5.4ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Placeat iure nemo. Consequuntur libero doloribus. Consectetur eum a.\", \"Fugit architecto omnis. Explicabo similique animi. Deleniti perspiciatis quos.\", \"Et deleniti reprehenderit. Odio quis quo. Eveniet aliquam excepturi.\"]"], ["dimensione", 6460282699], ["descrizione", "[\"Itaque et nihil. Perspiciatis ipsam qui. In voluptatem repellendus.\", \"Quia animi voluptate. Modi fugit magni. Rem repudiandae nihil.\", \"Quia veritatis natus. Ducimus et molestias. Aut soluta voluptatem.\"]"], ["stato", "completato"], ["created_at", "2023-07-29 14:23:58.232814"], ["updated_at", "2023-07-29 14:23:58.232814"]]
+  [1m[36mTRANSACTION (13.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (8.5ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Nesciunt voluptas vero. Quia aliquid non. Harum laboriosam eos.\", \"Sed aut impedit. Iure voluptatem odit. Sunt ab dolor.\", \"Aut a inventore. Temporibus odio et. Pariatur blanditiis sint.\"]"], ["dimensione", 1728443353], ["descrizione", "[\"Quisquam nihil omnis. Iure ut neque. Et quos natus.\", \"Libero omnis maiores. Consequatur animi dicta. Aut non veniam.\", \"Voluptatem laboriosam eaque. Autem quia aliquam. Et et sequi.\"]"], ["stato", "completato"], ["created_at", "2023-07-29 14:23:58.257374"], ["updated_at", "2023-07-29 14:23:58.257374"]]
+  [1m[36mTRANSACTION (17.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (8.7ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Et nulla est. Mollitia id sapiente. Illum eius rem.\", \"Iste temporibus commodi. Cupiditate fuga quaerat. Molestias eum quia.\", \"Sint unde eligendi. Voluptatem laborum est. Reiciendis tempora est.\"]"], ["dimensione", 4593073166], ["descrizione", "[\"Vero rem quas. Quia ea consequuntur. Esse et et.\", \"Adipisci eum non. Distinctio qui veniam. Nam maiores velit.\", \"Dolorem saepe voluptas. Molestiae veniam nostrum. Voluptatem omnis culpa.\"]"], ["stato", "completato"], ["created_at", "2023-07-29 14:23:58.288303"], ["updated_at", "2023-07-29 14:23:58.288303"]]
+  [1m[36mTRANSACTION (18.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (7.9ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Dolores qui hic. Eveniet quisquam et. Quas consequuntur quibusdam.\", \"Odio id porro. Est officiis soluta. Ullam dolores sunt.\", \"Maiores eveniet pariatur. Rerum autem saepe. Quia aspernatur mollitia.\"]"], ["dimensione", 8079975656], ["descrizione", "[\"Commodi aliquam sed. Culpa reprehenderit iste. Beatae in nemo.\", \"Nihil sed laborum. A non perferendis. Et id adipisci.\", \"Quidem mollitia nihil. Neque et velit. Aspernatur unde quas.\"]"], ["stato", "chiuso"], ["created_at", "2023-07-29 14:23:58.320249"], ["updated_at", "2023-07-29 14:23:58.320249"]]
+  [1m[36mTRANSACTION (17.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (8.6ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Tenetur vel et. In cum nihil. Ducimus quae et.\", \"Doloremque commodi cupiditate. Enim nemo porro. Rerum rerum ut.\", \"Rerum quidem iste. Vel libero aut. Ratione nihil porro.\"]"], ["dimensione", 9007687251], ["descrizione", "[\"Et non velit. Necessitatibus nihil sint. Error consequatur nam.\", \"Vitae autem harum. Omnis et nemo. Voluptatem ratione reiciendis.\", \"Laudantium excepturi minus. Qui fuga magnam. Enim optio et.\"]"], ["stato", "completato"], ["created_at", "2023-07-29 14:23:58.350343"], ["updated_at", "2023-07-29 14:23:58.350343"]]
+  [1m[36mTRANSACTION (16.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (9.2ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Amet autem et. Et quia architecto. Eius quaerat dolorem.\", \"Ullam ratione culpa. Fuga quis nemo. Nemo laudantium dolorem.\", \"Consequuntur aspernatur eos. Cumque totam quis. Dolore ea odio.\"]"], ["dimensione", 7417482882], ["descrizione", "[\"Odio molestias eaque. Accusamus minus aliquam. Nesciunt saepe porro.\", \"Qui aliquid omnis. Magnam provident accusantium. Incidunt voluptatibus et.\", \"Quasi magni ut. Est dolores doloribus. Suscipit sed excepturi.\"]"], ["stato", "aperto"], ["created_at", "2023-07-29 14:23:58.380241"], ["updated_at", "2023-07-29 14:23:58.380241"]]
+  [1m[36mTRANSACTION (16.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (9.3ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Sint sit nemo. Cumque recusandae numquam. Quia est cum.\", \"At voluptas id. Quia provident beatae. Fugiat sunt omnis.\", \"Ullam velit excepturi. Et eaque enim. Et ipsum et.\"]"], ["dimensione", 4547383421], ["descrizione", "[\"Temporibus nulla voluptas. Iste porro neque. Veniam nam earum.\", \"Alias enim doloremque. Eos aut neque. Voluptas nulla veritatis.\", \"Possimus explicabo aut. Voluptatem hic qui. Quia rerum dolores.\"]"], ["stato", "aperto"], ["created_at", "2023-07-29 14:23:58.410875"], ["updated_at", "2023-07-29 14:23:58.410875"]]
+  [1m[36mTRANSACTION (17.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (9.1ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Ut rerum hic. Ducimus adipisci distinctio. Sed ducimus minima.\", \"Fugit et ab. In sed quia. At quo cupiditate.\", \"Id ex voluptatum. Ex tenetur autem. Consectetur explicabo assumenda.\"]"], ["dimensione", 6009134122], ["descrizione", "[\"Cupiditate magni tempore. Inventore fugit occaecati. Quisquam laboriosam distinctio.\", \"Quo ut qui. Et accusantium qui. Facere quis asperiores.\", \"Dolores rerum illo. Quia quis qui. Fugiat quia necessitatibus.\"]"], ["stato", "completato"], ["created_at", "2023-07-29 14:23:58.442406"], ["updated_at", "2023-07-29 14:23:58.442406"]]
+  [1m[36mTRANSACTION (17.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (7.6ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Possimus totam non. Dolores illum et. Nihil voluptas qui.\", \"Voluptas ut et. Suscipit deleniti recusandae. Id quae numquam.\", \"Est enim exercitationem. Quis est rerum. Quo deserunt inventore.\"]"], ["dimensione", 8445625185], ["descrizione", "[\"Et eaque id. Sit nihil consectetur. Nesciunt sed repellendus.\", \"Molestiae repellat quidem. Consequatur omnis sapiente. Ut velit veniam.\", \"Sed quae dolore. Ut eum repellat. Reiciendis quod consequuntur.\"]"], ["stato", "completato"], ["created_at", "2023-07-29 14:23:58.474638"], ["updated_at", "2023-07-29 14:23:58.474638"]]
+  [1m[36mTRANSACTION (16.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Create (8.4ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", "[\"Officia tempora ad. Exercitationem recusandae nulla. Sint sit omnis.\", \"Consequatur omnis eos. Iure qui vel. Soluta accusantium sit.\", \"Natus ipsam aut. Ut eligendi qui. Illum est ducimus.\"]"], ["dimensione", 5769049360], ["descrizione", "[\"Aut cupiditate fuga. Dignissimos omnis quo. Repellendus blanditiis reprehenderit.\", \"Nemo est ut. Molestiae aut sed. Enim voluptatem similique.\", \"Quibusdam in occaecati. Est modi quas. Aperiam velit dolorem.\"]"], ["stato", "aperto"], ["created_at", "2023-07-29 14:23:58.504134"], ["updated_at", "2023-07-29 14:23:58.504134"]]
+  [1m[36mTRANSACTION (17.4ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:24:27 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.4ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 23.5ms | Allocations: 6833)
+  Rendered layout layouts/application.html.erb (Duration: 1381.2ms | Allocations: 67896)
+Completed 200 OK in 1438ms (Views: 1390.4ms | ActiveRecord: 5.9ms | Allocations: 71716)
+
+
+Started GET "/projects/7" for 127.0.0.1 at 2023-07-29 16:43:29 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (4.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mProject Load (1.6ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 30.3ms | Allocations: 1548)
+  Rendered layout layouts/application.html.erb (Duration: 2118.2ms | Allocations: 62088)
+Completed 200 OK in 2307ms (Views: 2156.4ms | ActiveRecord: 8.4ms | Allocations: 72985)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:43:33 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.7ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 20.6ms | Allocations: 1696)
+  Rendered layout layouts/application.html.erb (Duration: 69.7ms | Allocations: 6178)
+Completed 200 OK in 91ms (Views: 68.9ms | ActiveRecord: 1.7ms | Allocations: 6548)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:43:35 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 59.4ms | Allocations: 3061)
+  Rendered projects/new.html.erb within layouts/application (Duration: 74.5ms | Allocations: 3427)
+  Rendered layout layouts/application.html.erb (Duration: 149.8ms | Allocations: 7741)
+Completed 200 OK in 171ms (Views: 150.7ms | ActiveRecord: 0.0ms | Allocations: 8115)
+
+
+Started POST "/projects" for 127.0.0.1 at 2023-07-29 16:44:03 +0200
+Processing by ProjectsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"dnkdeded", "dimensione"=>"3", "descrizione"=>"xslklsds", "stato"=>"aperto"}, "commit"=>"Create Project"}
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms | Allocations: 953)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'id_project' for Project.):
+  
+app/controllers/projects_controller.rb:24:in `create'
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:46:30 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.8ms | Allocations: 1639)
+  Rendered projects/new.html.erb within layouts/application (Duration: 2.3ms | Allocations: 1712)
+  Rendered layout layouts/application.html.erb (Duration: 55.1ms | Allocations: 6122)
+Completed 200 OK in 71ms (Views: 56.1ms | ActiveRecord: 0.0ms | Allocations: 6407)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:47:36 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.2ms | Allocations: 1639)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.6ms | Allocations: 1712)
+  Rendered layout layouts/application.html.erb (Duration: 57.4ms | Allocations: 6025)
+Completed 200 OK in 69ms (Views: 58.3ms | ActiveRecord: 0.0ms | Allocations: 6306)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:47:38 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.9ms | Allocations: 1633)
+  Rendered projects/new.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1706)
+  Rendered layout layouts/application.html.erb (Duration: 74.6ms | Allocations: 6022)
+Completed 200 OK in 92ms (Views: 75.5ms | ActiveRecord: 0.0ms | Allocations: 6303)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:47:56 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 5.2ms | Allocations: 1632)
+  Rendered projects/new.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1705)
+  Rendered layout layouts/application.html.erb (Duration: 73.9ms | Allocations: 6115)
+Completed 200 OK in 85ms (Views: 75.0ms | ActiveRecord: 0.0ms | Allocations: 6396)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 16:47:57 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1272)
+  Rendered layout layouts/application.html.erb (Duration: 58.3ms | Allocations: 5821)
+Completed 200 OK in 71ms (Views: 58.0ms | ActiveRecord: 1.2ms | Allocations: 6106)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:47:59 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 2.1ms | Allocations: 1633)
+  Rendered projects/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1706)
+  Rendered layout layouts/application.html.erb (Duration: 57.9ms | Allocations: 6031)
+Completed 200 OK in 73ms (Views: 59.4ms | ActiveRecord: 0.0ms | Allocations: 6314)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:48:29 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.3ms | Allocations: 1648)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1721)
+  Rendered layout layouts/application.html.erb (Duration: 43.4ms | Allocations: 6035)
+Completed 200 OK in 54ms (Views: 44.3ms | ActiveRecord: 0.0ms | Allocations: 6316)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:49:00 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 21.9ms | Allocations: 3495)
+  Rendered projects/new.html.erb within layouts/application (Duration: 33.9ms | Allocations: 4138)
+  Rendered layout layouts/application.html.erb (Duration: 1388.9ms | Allocations: 64716)
+Completed 200 OK in 1514ms (Views: 1406.5ms | ActiveRecord: 9.2ms | Allocations: 73161)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:49:55 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.4ms | Allocations: 1625)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1698)
+  Rendered layout layouts/application.html.erb (Duration: 49.8ms | Allocations: 6014)
+Completed 200 OK in 63ms (Views: 50.8ms | ActiveRecord: 0.0ms | Allocations: 6304)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:49:57 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.2ms | Allocations: 1663)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.6ms | Allocations: 1736)
+  Rendered layout layouts/application.html.erb (Duration: 54.9ms | Allocations: 6050)
+Completed 200 OK in 66ms (Views: 55.7ms | ActiveRecord: 0.0ms | Allocations: 6338)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:50:23 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.5ms | Allocations: 1832)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1922)
+  Rendered layout layouts/application.html.erb (Duration: 173.0ms | Allocations: 21553)
+Completed 200 OK in 197ms (Views: 174.4ms | ActiveRecord: 6.6ms | Allocations: 24340)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:50:25 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.4ms | Allocations: 1642)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1715)
+  Rendered layout layouts/application.html.erb (Duration: 48.4ms | Allocations: 6029)
+Completed 200 OK in 64ms (Views: 49.9ms | ActiveRecord: 0.0ms | Allocations: 6317)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:50:31 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.3ms | Allocations: 1627)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 1700)
+  Rendered layout layouts/application.html.erb (Duration: 75.5ms | Allocations: 6052)
+Completed 200 OK in 89ms (Views: 76.5ms | ActiveRecord: 0.0ms | Allocations: 6333)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:50:47 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 15.6ms | Allocations: 3526)
+  Rendered projects/new.html.erb within layouts/application (Duration: 26.0ms | Allocations: 4110)
+  Rendered layout layouts/application.html.erb (Duration: 1461.9ms | Allocations: 64631)
+Completed 200 OK in 1531ms (Views: 1477.0ms | ActiveRecord: 4.5ms | Allocations: 73072)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:53:44 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 15.9ms | Allocations: 3512)
+  Rendered projects/new.html.erb within layouts/application (Duration: 26.4ms | Allocations: 4096)
+  Rendered layout layouts/application.html.erb (Duration: 1612.0ms | Allocations: 64682)
+Completed 200 OK in 1679ms (Views: 1629.1ms | ActiveRecord: 5.3ms | Allocations: 73123)
+
+
+Started POST "/projects" for 127.0.0.1 at 2023-07-29 16:53:48 +0200
+Processing by ProjectsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project"}
+[31mUnpermitted parameter: :id_project. Context: { controller: ProjectsController, action: create, request: #<ActionDispatch::Request:0x00007fe6f43bafa0>, params: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project", "controller"=>"projects", "action"=>"create"} }[0m
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms | Allocations: 974)
+
+
+  
+NameError (undefined local variable or method `project_id' for #<ProjectsController:0x00000000013768>):
+  
+app/controllers/projects_controller.rb:24:in `create'
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:54:12 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 6.2ms | Allocations: 2194)
+  Rendered projects/new.html.erb within layouts/application (Duration: 14.4ms | Allocations: 2536)
+  Rendered layout layouts/application.html.erb (Duration: 67.9ms | Allocations: 7241)
+Completed 200 OK in 90ms (Views: 74.6ms | ActiveRecord: 0.0ms | Allocations: 8368)
+
+
+Started POST "/projects" for 127.0.0.1 at 2023-07-29 16:54:14 +0200
+Processing by ProjectsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project"}
+[31mUnpermitted parameter: :id_project. Context: { controller: ProjectsController, action: create, request: #<ActionDispatch::Request:0x00007fe6f7bd8fe0>, params: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project", "controller"=>"projects", "action"=>"create"} }[0m
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms | Allocations: 841)
+
+
+  
+NameError (undefined local variable or method `project_id' for #<ProjectsController:0x00000000013c18>):
+  
+app/controllers/projects_controller.rb:24:in `create'
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 16:54:43 +0200
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 2.6ms | Allocations: 1638)
+  Rendered projects/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1711)
+  Rendered layout layouts/application.html.erb (Duration: 50.4ms | Allocations: 6121)
+Completed 200 OK in 63ms (Views: 51.4ms | ActiveRecord: 0.0ms | Allocations: 6405)
+
+
+Started POST "/projects" for 127.0.0.1 at 2023-07-29 16:54:44 +0200
+Processing by ProjectsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project"}
+[31mUnpermitted parameter: :id_project. Context: { controller: ProjectsController, action: create, request: #<ActionDispatch::Request:0x00007fe6fc393718>, params: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project", "controller"=>"projects", "action"=>"create"} }[0m
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms | Allocations: 833)
+
+
+  
+NameError (undefined local variable or method `project_id' for #<ProjectsController:0x00000000013f88>):
+  
+app/controllers/projects_controller.rb:24:in `create'
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/projects/new" for 127.0.0.1 at 2023-07-29 17:05:46 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 16.5ms | Allocations: 3511)
+  Rendered projects/new.html.erb within layouts/application (Duration: 28.7ms | Allocations: 4095)
+  Rendered layout layouts/application.html.erb (Duration: 1628.7ms | Allocations: 64615)
+Completed 200 OK in 1717ms (Views: 1645.5ms | ActiveRecord: 4.5ms | Allocations: 73055)
+
+
+Started POST "/projects" for 127.0.0.1 at 2023-07-29 17:06:04 +0200
+Processing by ProjectsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project"}
+[31mUnpermitted parameter: :id_project. Context: { controller: ProjectsController, action: create, request: #<ActionDispatch::Request:0x00007f9fd77e3e88>, params: {"authenticity_token"=>"[FILTERED]", "project"=>{"id_project"=>"", "info_leader"=>"", "dimensione"=>"", "descrizione"=>"", "stato"=>""}, "commit"=>"Create Project", "controller"=>"projects", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/projects_controller.rb:27:in `block in create'
+  [1m[36mProject Create (4.9ms)[0m  [1m[32mINSERT INTO "projects" ("info_leader", "dimensione", "descrizione", "stato", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["info_leader", ""], ["dimensione", nil], ["descrizione", ""], ["stato", ""], ["created_at", "2023-07-29 15:06:04.895600"], ["updated_at", "2023-07-29 15:06:04.895600"]]
+  ↳ app/controllers/projects_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (10.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/projects_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/projects/11
+Completed 302 Found in 35ms (ActiveRecord: 15.9ms | Allocations: 4002)
+
+
+Started GET "/projects/11" for 127.0.0.1 at 2023-07-29 17:06:05 +0200
+Processing by ProjectsController#show as TURBO_STREAM
+  Parameters: {"id"=>"11"}
+  [1m[36mProject Load (1.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 5.6ms | Allocations: 908)
+  Rendered layout layouts/application.html.erb (Duration: 55.6ms | Allocations: 5216)
+Completed 200 OK in 79ms (Views: 56.6ms | ActiveRecord: 1.2ms | Allocations: 7952)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-07-29 17:06:12 +0200
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:89
+  Rendered projects/index.html.erb within layouts/application (Duration: 7.6ms | Allocations: 1755)
+  Rendered layout layouts/application.html.erb (Duration: 56.9ms | Allocations: 6247)
+Completed 200 OK in 73ms (Views: 56.7ms | ActiveRecord: 1.1ms | Allocations: 6616)
+
+
+Started GET "/projects/11" for 127.0.0.1 at 2023-07-29 17:06:23 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:63:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 0.9ms | Allocations: 486)
+  Rendered layout layouts/application.html.erb (Duration: 47.4ms | Allocations: 4889)
+Completed 200 OK in 60ms (Views: 48.2ms | ActiveRecord: 1.0ms | Allocations: 5654)
+
+

@@ -81,6 +81,8 @@
     <tr>
       <th>ID</th>
       <th>Descrizione</th>
+      <th>Stato</th>
+
     </tr>
     </thead>
     <tbody>
@@ -88,6 +90,8 @@
       <tr>
         <td><%= project.id %></td>
         <td><%= project.descrizione %></td>
+        <td><%= project.stato %></td>
+
         <td><%= link_to "Show this project", project, class: "project-link" %> </td>
       </tr>
     <% end %>
