@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   resources :projects
-  resources :users
   resources :requests
   resources :latest_news
   resources :reports
   resources :tasks
   resources :checkpoints
-
+  devise_for :users
   root to: 'pages#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
