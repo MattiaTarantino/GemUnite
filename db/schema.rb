@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_29_140720) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_30_100953) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_140720) do
     t.string "completato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "project_id", null: false
+    t.index ["project_id"], name: "index_checkpoints_on_project_id"
   end
 
   create_table "fields", force: :cascade do |t|
@@ -64,6 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_140720) do
     t.string "descrizione"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|
@@ -71,6 +75,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_140720) do
     t.string "stato_accettazione"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "project_id", null: false
+    t.index ["project_id"], name: "index_requests_on_project_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -79,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_140720) do
     t.string "completato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "checkpoint_id", null: false
+    t.index ["checkpoint_id"], name: "index_tasks_on_checkpoint_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,4 +103,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_140720) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "checkpoints", "projects"
+  add_foreign_key "reports", "users"
+  add_foreign_key "requests", "projects"
+  add_foreign_key "requests", "users"
+  add_foreign_key "tasks", "checkpoints"
 end

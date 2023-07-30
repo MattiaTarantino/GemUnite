@@ -8919,3 +8919,246 @@ Processing by ProjectsController#show as HTML
 Completed 200 OK in 60ms (Views: 48.2ms | ActiveRecord: 1.0ms | Allocations: 5654)
 
 
+Started GET "/" for 127.0.0.1 at 2023-07-30 02:21:01 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 2.3ms | Allocations: 459)
+  Rendered layout layouts/application.html.erb (Duration: 900.4ms | Allocations: 250641)
+Completed 200 OK in 927ms (Views: 908.9ms | ActiveRecord: 0.0ms | Allocations: 256022)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-07-30 02:21:11 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 53.2ms | Allocations: 723)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 80.9ms | Allocations: 4660)
+  Rendered layout layouts/application.html.erb (Duration: 85.2ms | Allocations: 9085)
+Completed 200 OK in 112ms (Views: 87.5ms | ActiveRecord: 1.5ms | Allocations: 16902)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2023-07-30 02:21:18 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/users/sign_up" for 127.0.0.1 at 2023-07-30 02:21:23 +0200
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_error_messages.html.erb (Duration: 1.1ms | Allocations: 233)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 156)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/registrations/new.html.erb within layouts/application (Duration: 5.3ms | Allocations: 2088)
+  Rendered layout layouts/application.html.erb (Duration: 11.9ms | Allocations: 6499)
+Completed 200 OK in 16ms (Views: 15.1ms | ActiveRecord: 0.0ms | Allocations: 7626)
+
+
+Started GET "/users/" for 127.0.0.1 at 2023-07-30 02:21:50 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUserToReports (20230730100647)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "areports" ("id" integer NOT NULL PRIMARY KEY, "descrizione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "areports" ("id","descrizione","created_at","updated_at")
+                     SELECT "id","descrizione","created_at","updated_at" FROM "reports"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "reports"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "reports" ("id" integer NOT NULL PRIMARY KEY, "descrizione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "reports" ("id","descrizione","created_at","updated_at")
+                     SELECT "id","descrizione","created_at","updated_at" FROM "areports"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "areports"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_reports_on_user_id" ON "reports" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "areports" ("id" integer NOT NULL PRIMARY KEY, "descrizione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_areports_on_user_id" ON "areports" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "areports" ("id","descrizione","created_at","updated_at","user_id")
+                     SELECT "id","descrizione","created_at","updated_at","user_id" FROM "reports"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "reports"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "reports" ("id" integer NOT NULL PRIMARY KEY, "descrizione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_c7699d537d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_reports_on_user_id" ON "reports" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "reports" ("id","descrizione","created_at","updated_at","user_id")
+                     SELECT "id","descrizione","created_at","updated_at","user_id" FROM "areports"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "areports"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230730100647"]]
+  [1m[36mTRANSACTION (9.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserToRequests (20230730100811)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "arequests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "arequests" ("id","note","stato_accettazione","created_at","updated_at")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at" FROM "requests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "requests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "requests" ("id","note","stato_accettazione","created_at","updated_at")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at" FROM "arequests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "arequests"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_requests_on_user_id" ON "requests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "arequests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_arequests_on_user_id" ON "arequests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "arequests" ("id","note","stato_accettazione","created_at","updated_at","user_id")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at","user_id" FROM "requests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "requests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_8ead8b1e6b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_requests_on_user_id" ON "requests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "requests" ("id","note","stato_accettazione","created_at","updated_at","user_id")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at","user_id" FROM "arequests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "arequests"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230730100811"]]
+  [1m[36mTRANSACTION (9.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProjectToRequests (20230730100826)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "arequests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_arequests_on_user_id" ON "arequests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "arequests" ("id","note","stato_accettazione","created_at","updated_at","user_id")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at","user_id" FROM "requests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "requests"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, "project_id" integer NOT NULL, CONSTRAINT "fk_rails_8ead8b1e6b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_requests_on_user_id" ON "requests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "requests" ("id","note","stato_accettazione","created_at","updated_at","user_id")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at","user_id" FROM "arequests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "arequests"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_requests_on_project_id" ON "requests" ("project_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "arequests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, "project_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_arequests_on_project_id" ON "arequests" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_arequests_on_user_id" ON "arequests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "arequests" ("id","note","stato_accettazione","created_at","updated_at","user_id","project_id")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at","user_id","project_id" FROM "requests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "requests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "requests" ("id" integer NOT NULL PRIMARY KEY, "note" varchar DEFAULT NULL, "stato_accettazione" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, "project_id" integer NOT NULL, CONSTRAINT "fk_rails_8ead8b1e6b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_7be751744d"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_requests_on_user_id" ON "requests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_requests_on_project_id" ON "requests" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "requests" ("id","note","stato_accettazione","created_at","updated_at","user_id","project_id")
+                     SELECT "id","note","stato_accettazione","created_at","updated_at","user_id","project_id" FROM "arequests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "arequests"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230730100826"]]
+  [1m[36mTRANSACTION (10.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProjectToCheckpoints (20230730100920)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acheckpoints" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acheckpoints" ("id","nome","descrizione","completato","created_at","updated_at")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at" FROM "checkpoints"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "checkpoints"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "checkpoints" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "project_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "checkpoints" ("id","nome","descrizione","completato","created_at","updated_at")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at" FROM "acheckpoints"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "acheckpoints"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_checkpoints_on_project_id" ON "checkpoints" ("project_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acheckpoints" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "project_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_acheckpoints_on_project_id" ON "acheckpoints" ("project_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acheckpoints" ("id","nome","descrizione","completato","created_at","updated_at","project_id")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at","project_id" FROM "checkpoints"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "checkpoints"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "checkpoints" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "project_id" integer NOT NULL, CONSTRAINT "fk_rails_8bf3835082"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_checkpoints_on_project_id" ON "checkpoints" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "checkpoints" ("id","nome","descrizione","completato","created_at","updated_at","project_id")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at","project_id" FROM "acheckpoints"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "acheckpoints"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230730100920"]]
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddCheckpointToTasks (20230730100953)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atasks" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atasks" ("id","nome","descrizione","completato","created_at","updated_at")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at" FROM "tasks"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "tasks"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "checkpoint_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "tasks" ("id","nome","descrizione","completato","created_at","updated_at")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at" FROM "atasks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atasks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_checkpoint_id" ON "tasks" ("checkpoint_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atasks" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "checkpoint_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atasks_on_checkpoint_id" ON "atasks" ("checkpoint_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atasks" ("id","nome","descrizione","completato","created_at","updated_at","checkpoint_id")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at","checkpoint_id" FROM "tasks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "tasks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" integer NOT NULL PRIMARY KEY, "nome" varchar DEFAULT NULL, "descrizione" varchar DEFAULT NULL, "completato" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "checkpoint_id" integer NOT NULL, CONSTRAINT "fk_rails_b1f4225d42"
+FOREIGN KEY ("checkpoint_id")
+  REFERENCES "checkpoints" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_checkpoint_id" ON "tasks" ("checkpoint_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tasks" ("id","nome","descrizione","completato","created_at","updated_at","checkpoint_id")
+                     SELECT "id","nome","descrizione","completato","created_at","updated_at","checkpoint_id" FROM "atasks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atasks"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230730100953"]]
+  [1m[36mTRANSACTION (10.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
