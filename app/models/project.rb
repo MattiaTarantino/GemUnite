@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
-  has_many :requests
+  has_many :requests, dependent: :destroy
   has_many :users, through: :requests
-  has_many :checkpoints
+  has_many :checkpoints, dependent: :destroy
   has_many :tasks, through: :checkpoints
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "descrizione", "dimensione", "id", "info_leader", "stato", "updated_at"]

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  resources :projects
-  resources :requests
+  resources :projects do
+    resources :requests
+    resources :checkpoints do
+      resources :tasks
+    end
+  end
   resources :latest_news
+  resources :fields
   resources :reports
-  resources :tasks
-  resources :checkpoints
   devise_for :users
+
   root to: 'pages#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -13,7 +17,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  Rails.application.routes.draw do
-    resources :movies
-  end
 end
