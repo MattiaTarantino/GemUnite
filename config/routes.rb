@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :latest_news
   resources :fields
   resources :reports
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'users/registrations' } # per collegare il controller customizzato a devise
   resource :profile, only: [:show, :edit, :update]
 
   root to: 'pages#home'
@@ -16,7 +16,5 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 
 end
