@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :fields
   resources :reports
   devise_for :users
+  resource :profile, only: [:show, :edit, :update]
 
   root to: 'pages#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -17,4 +18,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
 end
