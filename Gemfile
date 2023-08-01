@@ -79,7 +79,14 @@ gem "devise", "~> 4.9"
 
 gem "faker", "~> 3.2"
 
+# per creare variabili d'ambiente
+gem "figaro"
+
 gem "sassc-rails", "~> 2.1"
 
 # API per le notizie
 gem "news-api"
+
+# OAuth con Github
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-rails_csrf_protection'
