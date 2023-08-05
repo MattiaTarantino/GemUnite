@@ -1,5 +1,8 @@
 ActiveAdmin.register Project do
 
+  remove_filter :users
+  remove_filter :checkpoints
+  remove_filter :tasks
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
