@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
 
+
   # GET /progettos or /progettos.json
   def index
     @projects = Project.all
@@ -57,14 +58,23 @@ class ProjectsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+
+    @project = Project.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
     def project_params
       params.require(:project).permit(:id, :info_leader, :dimensione, :descrizione, :stato)
     end
+  def my_projects
+    @user = current_user
+    @projects = @user.projects
+
+  end
+
+
 end

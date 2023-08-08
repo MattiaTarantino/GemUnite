@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   resources :projects do
+    get 'my_projects', on: :collection
     resources :requests
     resources :checkpoints do
       resources :tasks
     end
   end
+
   resources :latest_news
   resources :fields
   resources :reports
@@ -20,6 +22,6 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  #
 
 end

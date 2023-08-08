@@ -1,0 +1,34 @@
+<h1>My Projects</h1>
+
+<div id="projects">
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Stato</th>
+      <th> Actions </th>
+
+    </thead>
+    <tbody>
+    <% if current_user.projects.present? %>
+      <% current_user.projects.each do |project| %>
+        <tr>
+          <td><%= project.id %></td>
+
+          <td><%= project.stato %></td>
+
+
+          <td><%= link_to "Show this project", project, class: "project-link" %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4">No projects available.</td>
+      </tr>
+    <% end %>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
