@@ -1,0 +1,2 @@
+class LatestNews < ApplicationRecord
+end

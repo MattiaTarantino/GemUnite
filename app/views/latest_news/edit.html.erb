@@ -1,0 +1,10 @@
+<h1>Editing latest news</h1>
+
+<%= render "form", latest_news: @latest_news %>
+
+<br>
+
+<div>
+  <%= link_to "Show this latest news", @latest_news %> |
+  <%= link_to "Back to latest news", latest_news_index_path %>
+</div>

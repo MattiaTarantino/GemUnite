@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cool Project View</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          padding: 20px;
+      }
+      .project-container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+      }
+      .project-title {
+          font-size: 24px;
+          color: #2E2F30;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+      .project-description {
+          font-size: 16px;
+          color: #2E2F30;
+          margin-bottom: 10px;
+      }
+      h3 {
+          font-weight: 600;
+          color: slategray;
+      }
+      .back-button {
+
+          display: inline-block;
+          background-color: white;
+          color: white;
+          font-size: 16px;
+          padding: 10px 20px;
+          border-radius: 4px;
+          text-decoration: none;
+          margin-top: 20px;
+          transition: background-color 0.3s ease;
+      }
+      .back-button:hover {
+          background-color: lightblue;
+      }
+  </style>
+</head>
+<body>
+<div class="project-container">
+
+  <% if @project %>
+    <h3>Descrizione</h3>
+    <p class="project-description"><%= @project.descrizione %></p>
+    <h3>Dimensione</h3>
+    <p class="project-description"><%= @project.dimensione %></p>
+    <h3>Informazioni Leader</h3>
+    <p class="project-description"><span class="project-leader"><%= @project.info_leader %></span></p>
+    <h3>Ambito</h3>
+  <% else %>
+    <p class="project-description">No project found.</p>
+  <% end %>
+</div>
+
+<%= link_to "Back to projects", projects_path, class: "back-button" %>
+
+<!-- Admin Only
+  <%= link_to "Edit this project", edit_project_path(@project) %> |
+  <%= button_to "Destroy this project", @project, method: :delete %>
+  -->
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+module RichiestaHelper
+end
