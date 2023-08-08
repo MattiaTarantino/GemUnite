@@ -19051,3 +19051,578 @@ Migrating to AddRoleToUserProject (20230808105529)
   [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
   [1m[36mUserProject Create (0.8ms)[0m  [1m[32mINSERT INTO "user_projects" ("user_id", "project_id", "created_at", "updated_at", "role") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 1], ["project_id", 1], ["created_at", "2023-08-08 10:56:50.970448"], ["updated_at", "2023-08-08 10:56:50.970448"], ["role", "member"]]
   [1m[36mTRANSACTION (10.7ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:09:14 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 9.5ms | Allocations: 459)
+  Rendered layout layouts/application.html.erb (Duration: 853.7ms | Allocations: 249737)
+Completed 200 OK in 896ms (Views: 874.0ms | ActiveRecord: 0.0ms | Allocations: 255344)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-08-08 19:09:19 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /Users/mattia/.gem/ruby/3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/mattia/.gem/ruby/3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 1.5ms | Allocations: 1019)
+  Rendered /Users/mattia/.gem/ruby/3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 12.7ms | Allocations: 4918)
+  Rendered layout layouts/application.html.erb (Duration: 16.4ms | Allocations: 9429)
+Completed 200 OK in 33ms (Views: 19.3ms | ActiveRecord: 0.5ms | Allocations: 19636)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-08-08 19:09:27 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"prova2@prova.com", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "prova2@prova.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (1.1ms)[0m  [1m[33mUPDATE "users" SET "remember_created_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_created_at", "2023-08-08 17:09:27.704693"], ["updated_at", "2023-08-08 17:09:27.705135"], ["id", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 462ms (ActiveRecord: 2.1ms | Allocations: 13202)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:09:27 +0200
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.4ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:74
+  Rendered projects/index.html.erb within layouts/application (Duration: 4.8ms | Allocations: 4661)
+  Rendered layout layouts/application.html.erb (Duration: 8.6ms | Allocations: 9277)
+Completed 200 OK in 11ms (Views: 9.2ms | ActiveRecord: 0.6ms | Allocations: 10349)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:11:11 +0200
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:74
+  Rendered projects/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1025)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 5993)
+Completed 200 OK in 20ms (Views: 16.1ms | ActiveRecord: 0.1ms | Allocations: 7257)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:11:30 +0200
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:73
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1025)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 5993)
+Completed 200 OK in 13ms (Views: 11.2ms | ActiveRecord: 0.2ms | Allocations: 7258)
+
+
+Started GET "/projects/my_projects" for 127.0.0.1 at 2023-08-08 19:12:03 +0200
+Processing by ProjectsController#my_projects as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/my_projects.html.erb within layouts/application
+  [1m[36mProject Load (0.4ms)[0m  [1m[34mSELECT "projects".* FROM "projects" INNER JOIN "user_projects" ON "projects"."id" = "user_projects"."project_id" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/views/projects/my_projects.html.erb:13
+  Rendered projects/my_projects.html.erb within layouts/application (Duration: 41.6ms | Allocations: 22259)
+  Rendered layout layouts/application.html.erb (Duration: 48.5ms | Allocations: 27205)
+Completed 200 OK in 55ms (Views: 50.0ms | ActiveRecord: 0.7ms | Allocations: 29377)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-08 19:12:05 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 1.8ms | Allocations: 670)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | Allocations: 5139)
+Completed 200 OK in 12ms (Views: 7.5ms | ActiveRecord: 0.2ms | Allocations: 8107)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:19:45 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:73
+  Rendered projects/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 4860)
+  Rendered layout layouts/application.html.erb (Duration: 90.5ms | Allocations: 65879)
+Completed 200 OK in 99ms (Views: 92.9ms | ActiveRecord: 0.5ms | Allocations: 69994)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:22:52 +0200
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:73
+  [1m[36mUserProject Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:78
+  Rendered projects/index.html.erb within layouts/application (Duration: 25.1ms | Allocations: 15421)
+  Rendered layout layouts/application.html.erb (Duration: 33.9ms | Allocations: 20392)
+Completed 200 OK in 40ms (Views: 35.6ms | ActiveRecord: 1.3ms | Allocations: 21659)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:24:43 +0200
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:73
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:78
+  Rendered projects/index.html.erb within layouts/application (Duration: 4.1ms | Allocations: 3169)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | Allocations: 7657)
+Completed 200 OK in 15ms (Views: 13.5ms | ActiveRecord: 0.4ms | Allocations: 8063)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:50:33 +0200
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:73
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:78
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:78
+  Rendered projects/index.html.erb within layouts/application (Duration: 4.2ms | Allocations: 3200)
+  Rendered layout layouts/application.html.erb (Duration: 14.9ms | Allocations: 7716)
+Completed 200 OK in 18ms (Views: 14.9ms | ActiveRecord: 0.5ms | Allocations: 8119)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:52:27 +0200
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:76
+  Rendered projects/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 3477)
+  Rendered layout layouts/application.html.erb (Duration: 14.7ms | Allocations: 8469)
+Completed 200 OK in 24ms (Views: 20.3ms | ActiveRecord: 0.4ms | Allocations: 9737)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:53:04 +0200
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:76
+  Rendered projects/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 3474)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 8441)
+Completed 200 OK in 14ms (Views: 12.0ms | ActiveRecord: 0.3ms | Allocations: 9705)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:54:48 +0200
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:76
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:76
+  Rendered projects/index.html.erb within layouts/application (Duration: 10.7ms | Allocations: 3474)
+  Rendered layout layouts/application.html.erb (Duration: 20.8ms | Allocations: 8473)
+Completed 200 OK in 26ms (Views: 22.9ms | ActiveRecord: 0.5ms | Allocations: 9737)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:55:36 +0200
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:70
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:74
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:74
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:74
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:74
+  Rendered projects/index.html.erb within layouts/application (Duration: 5.1ms | Allocations: 3456)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | Allocations: 8449)
+Completed 200 OK in 26ms (Views: 16.7ms | ActiveRecord: 0.4ms | Allocations: 9717)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 19:58:25 +0200
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:70
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:74
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:74
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:74
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:74
+  Rendered projects/index.html.erb within layouts/application (Duration: 14.9ms | Allocations: 3736)
+  Rendered layout layouts/application.html.erb (Duration: 22.4ms | Allocations: 8678)
+Completed 200 OK in 28ms (Views: 24.7ms | ActiveRecord: 0.5ms | Allocations: 9942)
+
+
+Started GET "/projects/6" for 127.0.0.1 at 2023-08-08 19:58:26 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 2.5ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 13.8ms | Allocations: 5171)
+Completed 200 OK in 20ms (Views: 14.3ms | ActiveRecord: 0.3ms | Allocations: 8208)
+
+
+Started GET "/projects/7" for 127.0.0.1 at 2023-08-08 19:58:28 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 319)
+  Rendered layout layouts/application.html.erb (Duration: 7.5ms | Allocations: 4816)
+Completed 200 OK in 11ms (Views: 7.9ms | ActiveRecord: 0.2ms | Allocations: 7033)
+
+
+Started GET "/projects/10" for 127.0.0.1 at 2023-08-08 19:58:30 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 319)
+  Rendered layout layouts/application.html.erb (Duration: 5.9ms | Allocations: 4803)
+Completed 200 OK in 10ms (Views: 6.2ms | ActiveRecord: 0.2ms | Allocations: 7043)
+
+
+Started GET "/projects/11" for 127.0.0.1 at 2023-08-08 19:58:32 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 315)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 4784)
+Completed 200 OK in 10ms (Views: 6.4ms | ActiveRecord: 0.2ms | Allocations: 7020)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 20:01:19 +0200
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:67
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 4]]
+  ↳ app/views/projects/index.html.erb:92
+  Rendered projects/index.html.erb within layouts/application (Duration: 25.3ms | Allocations: 4503)
+  Rendered layout layouts/application.html.erb (Duration: 34.6ms | Allocations: 9477)
+Completed 200 OK in 47ms (Views: 42.9ms | ActiveRecord: 0.7ms | Allocations: 10743)
+
+
+Started GET "/projects/4" for 127.0.0.1 at 2023-08-08 20:01:24 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 1.7ms | Allocations: 646)
+  Rendered layout layouts/application.html.erb (Duration: 7.2ms | Allocations: 5142)
+Completed 200 OK in 13ms (Views: 7.6ms | ActiveRecord: 0.2ms | Allocations: 7465)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 20:02:20 +0200
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:67
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 3]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 5]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 4]]
+  ↳ app/views/projects/index.html.erb:113
+  Rendered projects/index.html.erb within layouts/application (Duration: 11.0ms | Allocations: 8610)
+  Rendered layout layouts/application.html.erb (Duration: 19.6ms | Allocations: 13552)
+Completed 200 OK in 25ms (Views: 21.6ms | ActiveRecord: 0.9ms | Allocations: 14818)
+
+
+Started GET "/projects/6" for 127.0.0.1 at 2023-08-08 20:02:37 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 1.6ms | Allocations: 650)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | Allocations: 5148)
+Completed 200 OK in 12ms (Views: 8.4ms | ActiveRecord: 0.2ms | Allocations: 7459)
+
+
+Started GET "/projects/3" for 127.0.0.1 at 2023-08-08 20:02:39 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 319)
+  Rendered layout layouts/application.html.erb (Duration: 5.9ms | Allocations: 4815)
+Completed 200 OK in 11ms (Views: 6.5ms | ActiveRecord: 0.5ms | Allocations: 7051)
+
+
+Started GET "/projects/my_projects" for 127.0.0.1 at 2023-08-08 20:03:35 +0200
+Processing by ProjectsController#my_projects as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/my_projects.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" INNER JOIN "user_projects" ON "projects"."id" = "user_projects"."project_id" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/views/projects/my_projects.html.erb:13
+  Rendered projects/my_projects.html.erb within layouts/application (Duration: 43.9ms | Allocations: 16922)
+  Rendered layout layouts/application.html.erb (Duration: 50.6ms | Allocations: 21390)
+Completed 200 OK in 58ms (Views: 51.0ms | ActiveRecord: 1.0ms | Allocations: 23154)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 20:05:04 +0200
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:67
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 3]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 5]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 4]]
+  ↳ app/views/projects/index.html.erb:113
+  Rendered projects/index.html.erb within layouts/application (Duration: 17.0ms | Allocations: 8609)
+  Rendered layout layouts/application.html.erb (Duration: 26.6ms | Allocations: 13584)
+Completed 200 OK in 33ms (Views: 28.9ms | ActiveRecord: 0.8ms | Allocations: 14850)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-08 20:05:43 +0200
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:67
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 3]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 5]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 4]]
+  ↳ app/views/projects/index.html.erb:113
+  Rendered projects/index.html.erb within layouts/application (Duration: 20.0ms | Allocations: 8610)
+  Rendered layout layouts/application.html.erb (Duration: 27.8ms | Allocations: 13576)
+Completed 200 OK in 33ms (Views: 29.1ms | ActiveRecord: 1.4ms | Allocations: 14844)
+
+
+Started GET "/projects/6" for 127.0.0.1 at 2023-08-08 20:06:01 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 1.5ms | Allocations: 645)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | Allocations: 5114)
+Completed 200 OK in 14ms (Views: 8.6ms | ActiveRecord: 0.2ms | Allocations: 7445)
+
+
+Started GET "/projects/my_projects" for 127.0.0.1 at 2023-08-08 20:06:11 +0200
+Processing by ProjectsController#my_projects as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/my_projects.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" INNER JOIN "user_projects" ON "projects"."id" = "user_projects"."project_id" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/views/projects/my_projects.html.erb:13
+  Rendered projects/my_projects.html.erb within layouts/application (Duration: 3.3ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 8.4ms | Allocations: 5766)
+Completed 200 OK in 11ms (Views: 8.7ms | ActiveRecord: 0.4ms | Allocations: 7519)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-08 20:06:12 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:66:in `set_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 319)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 4796)
+Completed 200 OK in 10ms (Views: 6.3ms | ActiveRecord: 0.2ms | Allocations: 7029)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2023-08-08 20:06:16 +0200
+Processing by ProjectsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 23.2ms | Allocations: 14401)
+  Rendered projects/new.html.erb within layouts/application (Duration: 24.8ms | Allocations: 14763)
+  Rendered layout layouts/application.html.erb (Duration: 28.8ms | Allocations: 19240)
+Completed 200 OK in 33ms (Views: 29.2ms | ActiveRecord: 0.1ms | Allocations: 21067)
+
+
+Started GET "/projects" for 127.0.0.1 at 2023-08-08 20:06:18 +0200
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:67
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 6]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/index.html.erb:71
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 3]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 5]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/index.html.erb:92
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 4]]
+  ↳ app/views/projects/index.html.erb:113
+  Rendered projects/index.html.erb within layouts/application (Duration: 13.1ms | Allocations: 7998)
+  Rendered layout layouts/application.html.erb (Duration: 18.4ms | Allocations: 12503)
+Completed 200 OK in 22ms (Views: 17.9ms | ActiveRecord: 1.0ms | Allocations: 14254)
+
+
