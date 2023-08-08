@@ -60,6 +60,8 @@
 </style>
 <div id="projects">
   <table>
+    <caption>Available Projects</caption>
+
     <thead>
     <tr>
       <th>ID</th>
@@ -70,21 +72,22 @@
     </thead>
     <tbody>
     <% @projects.each do |project| %>
+      <% if project.stato == "aperto" %>
       <tr>
         <td><%= project.id %></td>
         <td><%= project.descrizione %></td>
         <td><%= project.stato %></td>
 
-        <td><%= link_to "Show this project", project, class: "project-link" %> </td>
+        <!-- here goes the "join project" button -->
+
       </tr>
     <% end %>
+    <% end %>
+
     </tbody>
   </table>
 </div>
 
-<div id="new-proj" style="text-align: center; margin-bottom: 5px; width: fit-content; margin-left: auto;margin-right: auto;">
-  <%= link_to "New project", new_project_path, class: "btn btn-custom-center"%>
-</div>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
