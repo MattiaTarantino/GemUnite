@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
   has_many :requests, dependent: :destroy
-  has_many :user_projects
+  has_many :user_projects, dependent: :destroy
   has_many :users, through: :user_projects
   has_many :checkpoints, dependent: :destroy
   has_many :tasks, through: :checkpoints
