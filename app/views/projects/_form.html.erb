@@ -12,8 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label :id_project, style: "display: block" %>
-    <%= form.text_field :id_project %>
+    <%= form.label :nome, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :dimensione, style: "display: block" %>
+    <%= form.collection_select(:dimensione, [2, 3, 4, 5, 6], :itself, :itself) %>
   </div>
 
   <div>
@@ -21,20 +26,12 @@
     <%= form.text_field :info_leader %>
   </div>
 
-  <div>
-    <%= form.label :dimensione, style: "display: block" %>
-    <%= form.text_field :dimensione %>
-  </div>
 
   <div>
     <%= form.label :descrizione, style: "display: block" %>
     <%= form.text_field :descrizione %>
   </div>
 
-  <div>
-    <%= form.label :stato, style: "display: block" %>
-    <%= form.text_field :stato %>
-  </div>
 
   <div>
     <%= form.submit %>

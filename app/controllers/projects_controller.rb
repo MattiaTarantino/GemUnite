@@ -20,12 +20,13 @@ class ProjectsController < ApplicationController
   def edit
   end
 
-  # POST /progettos or /progettos.json
   def create
     @project = Project.new(project_params)
 
     respond_to do |format|
       if @project.save
+        @user_project = UserProject.new(user_id: current_user.id, project_id: @project.id, role: "leader")
+        @user_project.save
         format.html { redirect_to project_url(@project), notice: "Progetto was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -68,7 +69,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:id, :info_leader, :dimensione, :descrizione, :stato)
+      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione)
     end
   def my_projects
     @user = current_user
