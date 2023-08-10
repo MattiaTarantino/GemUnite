@@ -1,24 +1,25 @@
+
 <h1>My Projects</h1>
 
 <div id="projects">
   <table>
     <thead>
     <tr>
-      <th>ID</th>
+      <th>Nome</th>
       <th>Stato</th>
-      <th> Actions </th>
+      <th>Azioni</th>
 
     </thead>
     <tbody>
     <% if current_user.projects.present? %>
       <% current_user.projects.each do |project| %>
         <tr>
-          <td><%= project.id %></td>
+          <td><%= project.name %></td>
 
           <td><%= project.stato %></td>
 
 
-          <td><%= link_to "Show this project", project, class: "project-link" %></td>
+          <td><%= link_to "Accedi al progetto", project_project_home_path(project), class: "project-link" %></td>
         </tr>
       <% end %>
     <% else %>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :projects do
     get 'my_projects', on: :collection
+    get 'project_home'
     resources :requests
     resources :checkpoints do
       resources :tasks
