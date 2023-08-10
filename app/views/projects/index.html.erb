@@ -60,57 +60,22 @@
     <caption style="caption-side: top">Progetti aperti:</caption>
     <thead>
     <tr>
+      <th>Nome</th>
       <th>Descrizione</th>
     </tr>
     </thead>
     <tbody>
     <% @projects.each do |project| %>
       <% if project.stato == "aperto" %>
-      <tr>
-        <td><%= project.descrizione %></td>
-        <td>Numero membri: <%= UserProject.where(:project_id => project.id).count %></td>
-        <td><%= link_to "Show this project", project, class: "project-link" %> </td>
-      </tr>
-    <% end %>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-<div id="completed projects">
-  <table>
-    <caption style="caption-side: top">Progetti completati:</caption>
-    <thead>
-    <tr>
-      <th>Descrizione</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @projects.each do |project| %>
-      <% if project.stato == "completato" %>
         <tr>
+          <td><%= project.name %></td>
           <td><%= project.descrizione %></td>
           <td>Numero membri: <%= UserProject.where(:project_id => project.id).count %></td>
-          <td><%= link_to "Show this project", project, class: "project-link" %> </td>
-        </tr>
-      <% end %>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-<div id="closed projects">
-  <table>
-    <caption style="caption-side: top">Progetti chiusi:</caption>
-    <thead>
-    <tr>
-      <th>Descrizione</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @projects.each do |project| %>
-      <% if project.stato == "chiuso" %>
-        <tr>
-          <td><%= project.descrizione %></td>
-          <td>Numero membri: <%= UserProject.where(:project_id => project.id).count %></td>
+          <td>Ambito:
+            <% project.fields.each do |field| %>
+               <%= field.nome %>
+            <% end %>
+          </td>
           <td><%= link_to "Show this project", project, class: "project-link" %> </td>
         </tr>
       <% end %>
