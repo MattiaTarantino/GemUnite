@@ -32,6 +32,11 @@
     <%= form.text_field :descrizione %>
   </div>
 
+  <div>
+    <%= form.label :ambiti, style: "display: block" %>
+    <%= form.collection_select(:ambiti, @fields, :id, :nome, {}, {:multiple => true}) %>
+  </div>
+
 
   <div>
     <%= form.submit %>

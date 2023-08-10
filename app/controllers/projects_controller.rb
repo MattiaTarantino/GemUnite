@@ -24,6 +24,7 @@ class ProjectsController < ApplicationController
   # GET /progettos/new
   def new
     @project = Project.new
+    @fields = Field.all
   end
 
   # GET /progettos/1/edit
@@ -31,7 +32,12 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    parameters = project_params.except(:ambiti)
+    @project = Project.new(parameters)
+    id_ambiti = params[:project][:ambiti].drop(1)
+    id_ambiti.each do |ambito|
+      @project.fields << Field.find(ambito)
+    end
 
     respond_to do |format|
       if @project.save
@@ -79,7 +85,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione)
+      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :ambiti => [])
     end
 
   def my_projects

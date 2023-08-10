@@ -49,6 +49,7 @@
   </style>
 </head>
 <body>
+
 <div class="project-container">
 
   <% if @project %>
@@ -58,7 +59,12 @@
     <p class="project-description"><%= @project.dimensione %></p>
     <h3>Informazioni Leader</h3>
     <p class="project-description"><span class="project-leader"><%= @project.info_leader %></span></p>
-    <h3>Ambito</h3>
+    <h3>Ambiti</h3>
+    <p class="project-description">
+      <% @project.fields.each do |field|%>
+        <%= field.nome %> <br>
+      <% end %>
+    </p>
   <% else %>
     <p class="project-description">No project found.</p>
   <% end %>
