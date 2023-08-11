@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy show_my_project]
 
 
   # GET /progettos or /progettos.json
@@ -74,6 +74,10 @@ class ProjectsController < ApplicationController
   def my_projects
     @user = current_user
     @projects = @user.projects
+
+  end
+
+  def show_my_project
 
   end
 

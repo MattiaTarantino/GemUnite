@@ -18,8 +18,8 @@
           <td><%= project.stato %></td>
 
 
-          <td><%= link_to "Show this project", project, class: "project-link" %></td>
-        </tr>
+
+          <td><%= link_to "Show My Project", show_my_project_project_path(project), class: "project-link" %></td>        </tr>
       <% end %>
     <% else %>
       <tr>
