@@ -19,7 +19,7 @@
           <td><%= project.stato %></td>
 
 
-          <td><%= link_to "Accedi al progetto", project_project_home_path(project), class: "project-link" %></td>
+          <td><%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "project-link" %></td>
         </tr>
       <% end %>
     <% else %>

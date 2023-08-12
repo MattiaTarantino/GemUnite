@@ -1,8 +1,17 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy show_my_project]
+  before_action :set_project, only: %i[ edit update destroy show_my_project]
   before_action :is_member?, only: %i[ show_my_project ]
 
 
+  def is_member?
+    @project = Project.find(params[:project_id])
+    @user = current_user
+    @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
+    if @user_project.nil?
+      redirect_to my_projects_projects_path
+      flash[:notice] = "Non sei membro di questo progetto"
+    end
+  end
   # GET /progettos or /progettos.json
   def index
     @projects = Project.all
@@ -10,6 +19,7 @@ class ProjectsController < ApplicationController
 
   # GET /progettos/1 or /progettos/1.json
   def show
+    @project = Project.find(params[:id])
   end
 
   # GET /progettos/new
@@ -71,12 +81,12 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   def set_project
 
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:project_id])
   end
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione)
+      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :ambiti => [])
     end
   def my_projects
     @user = current_user
