@@ -1,77 +1,102 @@
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <h1> <%=@project.name %></h1>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Chat Example</title>
+  <style>
+      /* Colori definiti come variabili */
+      :root {
+          --gray:  #E5E5E5;
+          --gray2: #808080;
+          --blue:  #2183DD;
+          --green: #009900;
+          --white: #FFFFFF;
+      }
+
+      body {
+          font-family: Arial, sans-serif;
+      }
+
+      .chat-project {
+          display: flex;
+          justify-content: space-between;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      .chat-container {
+          max-width: 400px;
+          margin: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 10px;
+          border-radius: 30px;
+      }
+
+      .project-container {
+          border-radius: 30px;
+      }
+
+      .chat-log {
+          height: 300px;
+          overflow-y: scroll;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 10px;
+          margin-bottom: 10px;
+      }
+
+      .chat-input {
+          display: flex;
+      }
+
+      #message-input {
+          flex: 1;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+
+      #send-button {
+          padding: 5px 10px;
+          border: none;
+          background-color: #007bff;
+          color: white;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+
+  </style>
 </head>
-
 <body>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
 
-    .chat-container {
-        max-width: 400px;
-        margin: 0 auto;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-    }
+<div class="chat-project">
+  <div class="chat-container">
+    <div class="chat-log" id="chat-log"></div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button id="send-button">Send</button>
+    </div>
+  </div>
 
-    .chat-log {
-        height: 300px;
-        overflow-y: scroll;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .chat-input {
-        display: flex;
-    }
-
-    #message-input {
-        flex: 1;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    #send-button {
-        padding: 5px 10px;
-        border: none;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-
-</style>
-<div class="chat-container">
-  <div class="chat-log" id="chat-log"></div>
-  <div class="chat-input">
-    <input type="text" id="message-input" placeholder="Type your message...">
-    <button id="send-button">Send</button>
+  <div class="project-container bg-light p-4">
+    <h2 class="mb-3">Project Infos</h2>
+    <p><%=@project.descrizione %></p>
+    <p><%=@project.stato %></p>
+    <div class="github-link">
+      <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
+    </div>
   </div>
 </div>
 
-<div class="github-link">
-
-  <button style="font-size:24px">Open with GitHub <i class="fa fa-github"></i></button>
-</div>
-
-
-
+<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
 
 <script>
     const chatLog = document.getElementById('chat-log');
@@ -101,16 +126,82 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
     }
-/*
-    function getBotResponse(userMessage) {
-        // Here you can implement a function to generate a bot response based on user input
-        // For simplicity, let's just echo the user's message for now
-        return userMessage;
-    }
-    */
-</script>
+    /*
+        function getBotResponse(userMessage) {
+            // Here you can implement a function to generate a bot response based on user input
+            // For simplicity, let's just echo the user's message for now
+            return userMessage;
+        }
+        */
 
-<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            currentStep: null,
+            steps: [
+                {"label": "one"},
+                {"label": "two"},
+                {"label": "three"},
+                {"label": "complete"}
+            ]
+        },
+
+        methods: {
+            nextStep(next=true) {
+                const steps = this.steps
+                const currentStep = this.currentStep
+                const currentIndex = steps.indexOf(currentStep)
+
+                // handle back
+                if (!next) {
+                    if (currentStep && currentStep.label === 'complete') {
+                        return this.currentStep = steps[steps.length - 1]
+                    }
+
+                    if (steps[currentIndex - 1]) {
+                        return this.currentStep = steps[currentIndex - 1]
+                    }
+
+                    return this.currentStep = { "label": "start" }
+                }
+
+                // handle next
+                if (this.currentStep && this.currentStep.label === 'complete') {
+                    return this.currentStep = { "label": "start" }
+                }
+
+                if (steps[currentIndex + 1]) {
+                    return this.currentStep = steps[currentIndex + 1]
+                }
+
+                this.currentStep = { "label": "complete" }
+            },
+
+            stepClasses(index) {
+                let result = `progress__step progress__step--${index + 1} `
+                if (this.currentStep && this.currentStep.label === 'complete' ||
+                  index < this.steps.indexOf(this.currentStep)) {
+                    return result += 'progress__step--complete'
+                }
+                if (index === this.steps.indexOf(this.currentStep)) {
+                    return result += 'progress__step--active'
+                }
+                return result
+            }
+        },
+
+        computed: {
+            progressClasses() {
+                let result = 'progress '
+                if (this.currentStep && this.currentStep.label === 'complete') {
+                    return result += 'progress--complete'
+                }
+                return result += `progress--${this.steps.indexOf(this.currentStep) + 1}`
+            }
+        }
+    })
+</script>
 </body>
 </html>
 
