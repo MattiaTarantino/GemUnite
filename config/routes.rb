@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :projects do
+  member do
+    get 'show_my_project'
+  end
+  end
+
+
+
   resources :latest_news
   resources :fields
   resources :reports

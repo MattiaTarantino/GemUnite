@@ -1,16 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
-  before_action :is_member?, only: %i[ project_home ]
+  before_action :set_project, only: %i[ show edit update destroy show_my_project]
+  before_action :is_member?, only: %i[ show_my_project ]
 
-  def is_member?
-    @project = Project.find(params[:project_id])
-    @user = current_user
-    @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
-    if @user_project.nil?
-      redirect_to my_projects_projects_path
-      flash[:notice] = "Non sei membro di questo progetto"
-    end
-  end
 
   # GET /progettos or /progettos.json
   def index
@@ -85,18 +76,16 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :ambiti => [])
+      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione)
     end
-
   def my_projects
     @user = current_user
     @projects = @user.projects
 
   end
 
-  def project_home
-    @project = Project.find(params[:project_id])
-    @user = current_user
+  def show_my_project
+
   end
 
 
