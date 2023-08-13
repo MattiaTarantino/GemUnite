@@ -78,6 +78,7 @@ class ProjectsController < ApplicationController
   end
 
   def show_my_project
+    @checkpoints = @project.checkpoints
 
   end
 

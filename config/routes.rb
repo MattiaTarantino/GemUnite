@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     get 'show_my_project'
   end
   end
-
+  resources :checkpoints 
+  resources :tasks
 
 
   resources :latest_news

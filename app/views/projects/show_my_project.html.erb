@@ -76,6 +76,21 @@
   </style>
 </head>
 <body>
+<h2>QUI</h2>
+<% if @project.checkpoints.present? %>
+  <% @project.checkpoints.each do |checkpoint| %>
+    <tr>
+      <td><%= checkpoint.nome %></td>
+     <td> <%= link_to "Show this checkpoint", checkpoint %> </td>
+    </tr>
+
+
+<% end %>
+<% else %>
+  <tr>
+    <td colspan="4">No checkpoints available.</td>
+  </tr>
+<% end %>
 
 <div class="chat-project">
   <div class="chat-container">
@@ -97,6 +112,8 @@
 </div>
 
 <%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
+
+
 
 <script>
     const chatLog = document.getElementById('chat-log');
