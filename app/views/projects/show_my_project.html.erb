@@ -1,18 +1,5 @@
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <h1> <%=@project.name %></h1>
-  <title>Chat Example</title>
-</head>
-
-<body>
+<h1> <%=@project.name %></h1>
+<title>Chat Example</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -54,63 +41,69 @@
         border-radius: 5px;
         cursor: pointer;
     }
-
-
 </style>
-<div class="chat-container">
-  <div class="chat-log" id="chat-log"></div>
-  <div class="chat-input">
-    <input type="text" id="message-input" placeholder="Type your message...">
-    <button id="send-button">Send</button>
-  </div>
-</div>
-
-<div class="github-link">
-
-  <button style="font-size:24px">Open with GitHub <i class="fa fa-github"></i></button>
-</div>
 
 
+<body>
+    <div class="chat-container">
+      <div class="chat-log" id="chat-log"></div>
+      <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button id="send-button">Send</button>
+      </div>
+    </div>
+
+    <div class="github-link">
+      <button style="font-size:24px">Open with GitHub <i class="fa fa-github"></i></button>
+    </div>
+    <br>
+    <% if @role=="leader" %>
+      <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+      <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+    <% end %>
+    <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
 
 
-<script>
-    const chatLog = document.getElementById('chat-log');
-    const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
 
-    sendButton.addEventListener('click', sendMessage);
+        sendButton.addEventListener('click', sendMessage);
 
-    function sendMessage() {
-        const message = messageInput.value.trim();
-        if (message !== '') {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.textContent = message;
-            chatLog.appendChild(messageElement);
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.textContent = message;
+                chatLog.appendChild(messageElement);
 
-            // Clear the input field
-            messageInput.value = '';
-            /*
-            // Optionally, you can add a response from the bot
-            const botResponse = document.createElement('div');
-            botResponse.classList.add('bot-message');
-            botResponse.textContent = 'Bot: ' + getBotResponse(message);
-            chatLog.appendChild(botResponse);
-*/
-            // Scroll to the bottom of the chat log
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-    }
-/*
-    function getBotResponse(userMessage) {
-        // Here you can implement a function to generate a bot response based on user input
-        // For simplicity, let's just echo the user's message for now
-        return userMessage;
-    }
+                // Clear the input field
+                messageInput.value = '';
+                /*
+                // Optionally, you can add a response from the bot
+                const botResponse = document.createElement('div');
+                botResponse.classList.add('bot-message');
+                botResponse.textContent = 'Bot: ' + getBotResponse(message);
+                chatLog.appendChild(botResponse);
     */
-</script>
+                // Scroll to the bottom of the chat log
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }
+        }
+    /*
+        function getBotResponse(userMessage) {
+            // Here you can implement a function to generate a bot response based on user input
+            // For simplicity, let's just echo the user's message for now
+            return userMessage;
+        }
+        */
+    </script>
 
-<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
+
+
+
 </body>
 </html>
 

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ edit update destroy show_my_project]
   before_action :set_user, only: %i[ edit update destroy my_projects show_my_project ]
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
-  before_action :is_leader?, only: %i[ edit update destroy ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
 
 
   def is_member?
@@ -105,6 +105,7 @@ class ProjectsController < ApplicationController
     project_id = params[:project_id]
     project_id ||= params[:id] # se nella uri l'id del progetto è passato in params[:id] anziché in params[:project_id]
     @project = Project.find(project_id)
+    @role = UserProject.find_by(user_id: current_user.id, project_id: @project.id).role
   end
 
 
@@ -119,5 +120,10 @@ class ProjectsController < ApplicationController
   def show_my_project
   end
 
+  def close_requests
+  end
+
+  def close_project
+  end
 
 end
