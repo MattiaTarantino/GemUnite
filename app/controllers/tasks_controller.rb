@@ -61,6 +61,8 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+      @checkpoint = Checkpoint.find(@task.checkpoint_id)
+      @project = Project.find(@checkpoint.project_id)
     end
 
     # Only allow a list of trusted parameters through.

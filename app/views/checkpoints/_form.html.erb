@@ -1,4 +1,4 @@
-<%= form_with(model: checkpoint) do |form| %>
+<%= form_with(model: checkpoint, url: project_checkpoint_path) do |form| %>
   <% if checkpoint.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(checkpoint.errors.count, "error") %> prohibited this checkpoint from being saved:</h2>

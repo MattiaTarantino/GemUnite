@@ -74,14 +74,13 @@
 
 
   </style>
-</head>
 <body>
 <h2>QUI</h2>
 <% if @project.checkpoints.present? %>
   <% @project.checkpoints.each do |checkpoint| %>
     <tr>
       <td><%= checkpoint.nome %></td>
-     <td> <%= link_to "Show this checkpoint", checkpoint %> </td>
+     <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
     </tr>
 
 
@@ -108,6 +107,12 @@
     <div class="github-link">
       <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
     </div>
+    <br>
+    <% if @role=="leader" %>
+      <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+      <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+    <% end %>
+    <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
   </div>
 </div>
 

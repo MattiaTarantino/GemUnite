@@ -1,7 +1,27 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy show_my_project]
+  before_action :set_project, only: %i[ edit update destroy show_my_project]
+  before_action :set_user, only: %i[ edit update destroy my_projects show_my_project ]
+  before_action :is_member?, only: %i[ edit update destroy show_my_project ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
 
 
+  def is_member?
+    @user = current_user
+    @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
+    if @user_project.nil?
+      redirect_to my_projects_projects_path
+      flash[:notice] = "Non sei membro di questo progetto"
+    else
+      @role = @user_project.role
+    end
+  end
+
+  def is_leader?
+    if @user_project.role != "leader"
+      redirect_to my_projects_projects_path
+      flash[:notice] = "Non sei il leader di questo progetto"
+    end
+  end
   # GET /progettos or /progettos.json
   def index
     @projects = Project.all
@@ -9,19 +29,27 @@ class ProjectsController < ApplicationController
 
   # GET /progettos/1 or /progettos/1.json
   def show
+    @project = Project.find(params[:id])
   end
 
   # GET /progettos/new
   def new
     @project = Project.new
+    @fields = Field.all
   end
 
   # GET /progettos/1/edit
   def edit
+    @fields = @project.fields
   end
 
   def create
-    @project = Project.new(project_params)
+    parameters = project_params.except(:ambiti)
+    @project = Project.new(parameters)
+    id_ambiti = params[:project][:ambiti].drop(1)
+    id_ambiti.each do |ambito|
+      @project.fields << Field.find(ambito)
+    end
 
     respond_to do |format|
       if @project.save
@@ -62,25 +90,42 @@ class ProjectsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-  def set_project
+  def set_user
+    @user = current_user
+    @projects_member = []
+    UserProject.where(user_id: @user.id, role: "member").each do |user_project|
+      @projects_member << Project.find(user_project.project_id)
+    end
 
-    @project = Project.find(params[:id])
+    @projects_leader = []
+    UserProject.where(user_id: @user.id, role: "leader").each do |user_project|
+      @projects_leader << Project.find(user_project.project_id)
+    end
   end
+
+  def set_project
+    project_id = params[:project_id]
+    project_id ||= params[:id] # se nella uri l'id del progetto è passato in params[:id] anziché in params[:project_id]
+    @project = Project.find(project_id)
+  end
+
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione)
+      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :ambiti => [])
     end
   def my_projects
-    @user = current_user
-    @projects = @user.projects
 
   end
 
   def show_my_project
     @checkpoints = @project.checkpoints
-
   end
 
+  def close_requests
+  end
+
+  def close_project
+  end
 
 end
