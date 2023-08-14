@@ -55,6 +55,8 @@
     <%= link_to "New task",  new_project_checkpoint_task_path(project_id: @project.id, checkpoint_id: @checkpoint.id) %>
   </div>
 </div>
+<%= link_to "Torna al progetto", project_show_my_project_path(project_id: @project.id), class: "btn btn-primary" %>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

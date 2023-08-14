@@ -9,6 +9,7 @@ class CheckpointsController < ApplicationController
 
   def new
     @checkpoint = Checkpoint.new
+    @project = Project.find(params[:project_id])
   end
 
   def edit
@@ -18,10 +19,11 @@ class CheckpointsController < ApplicationController
 
   def create
     @checkpoint = Checkpoint.new(checkpoint_params)
+    @project = Project.find(params[:project_id])
     @project.checkpoints << @checkpoint
     respond_to do |format|
       if @checkpoint.save
-        format.html { redirect_to checkpoint_url(@project), notice: "Checkpoint was successfully created." }
+        format.html { redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Checkpoint was successfully created." }
         format.json { render :show, status: :created, location: @checkpoint }
       else
         format.html { render :new, status: :unprocessable_entity }

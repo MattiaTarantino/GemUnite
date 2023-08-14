@@ -75,13 +75,14 @@
 
   </style>
 <body>
-<h2>QUI</h2>
+<h1><%= @project.name %></h1>
 <% if @project.checkpoints.present? %>
   <% @project.checkpoints.each do |checkpoint| %>
     <tr>
       <td><%= checkpoint.nome %></td>
      <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
     </tr>
+    <br>
 
 
 <% end %>
@@ -89,6 +90,10 @@
   <tr>
     <td colspan="4">No checkpoints available.</td>
   </tr>
+<% end %>
+<% if @role == "leader" %>
+    <br>
+  <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
 <% end %>
 
 <div class="chat-project">
