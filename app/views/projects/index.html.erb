@@ -1,98 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<style>
-
-    /* Add borders to the table */
-    table {
-        border-collapse: collapse;
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-
-    /* Add borders to the table cells */
-    th, td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    /* Add custom style for the "New project" button */
-    .btn-custom-center {
-        display: block;
-        margin: 0 auto;
-        background-color:#c3d9ff;
-        color: white;
-        border-radius: 4px;
-        padding: 10px 20px;
-        font-size: 16px;
-        text-decoration: none;
-    }
-
-    .btn-custom-center:hover {
-        background-color: lightblue;
-    }
-    /* Style for "Show this project" link */
-    .project-link {
-        display: inline-block;
-        background-color: #c3d9ff;
-        color: white;
-        border: 1px solid;
-        border-radius: 4px;
-        padding: 8px 15px;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-    }
-
-    .project-link:hover {
-        background-color: lightblue;
-    }
-</style>
-<div id="open projects">
-  <table>
-    <caption style="caption-side: top">Progetti aperti:</caption>
-    <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Descrizione</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @projects.each do |project| %>
-      <% if project.stato == "aperto" %>
-        <tr>
-          <td><%= project.name %></td>
-          <td><%= project.descrizione %></td>
-          <td>Numero membri: <%= UserProject.where(:project_id => project.id).count %></td>
-          <td>Ambito:
-            <% project.fields.each do |field| %>
-               <%= field.nome %>
-            <% end %>
-          </td>
-          <td><%= link_to "Show this project", project, class: "project-link" %> </td>
-        </tr>
-      <% end %>
-    <% end %>
-    </tbody>
-  </table>
+<h1>Progetti aperti</h1>
+<div data-controller="project-sort">
+  <label for="sort_by">Ordina per:</label>
+    <select name="sort_by" id="sort_by" data-action="project-sort#update" data-project-sort-target="select">
+      <option value="time_posted" <%= 'selected' if params[:sort_by] == 'time_posted' %> >Più recenti</option>
+      <option value="time_posted_reverse" <%= 'selected' if params[:sort_by] == 'time_posted_reverse' %> >Meno recenti</option>
+      <option value="members" <%= 'selected' if params[:sort_by] == 'members' %> >Numero membri (crescente)</option>
+      <option value="members_reverse" <%= 'selected' if params[:sort_by] == 'members_reverse' %> >Numero membri (decrescente)</option>
+    </select>
 </div>
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
--->
-</body>
-</html>
+ <div data-controller="project-filter">
+  <label for="filter_by">Filtra per ambito:</label>
+  <select name="filter_by" id="filter_by" data-action="project-filter#update" data-project-filter-target="select">
+    <option></option>
+    <option value="Cybersecurity" <%= 'selected' if params[:filter_by] == 'Cybersecurity' %> >Cybersecurity</option>
+    <option value="Machine Learning" <%= 'selected' if params[:filter_by] == 'Machine Learning' %> >Machine Learning</option>
+    <option value="Iot" <%= 'selected' if params[:filter_by] == 'Iot' %> >Iot</option>
+  </select>
+</div>-->
+<%= render "projects" %>
 

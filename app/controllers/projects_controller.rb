@@ -2,21 +2,41 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy show_my_project]
 
 
-  # GET /progettos or /progettos.json
+  # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = case params[:sort_by]
+             when 'members'
+               Project.order(dimensione: :desc)
+             when 'members_reverse'
+               Project.order(dimensione: :asc)
+             when 'time_posted_reverse'
+               Project.order(created_at: :asc)
+             when 'time_posted'
+               Project.order(created_at: :desc)
+             else
+               Project.order(created_at: :desc)
+                end
+
+    # TODO: filter by category
+
+
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
-  # GET /progettos/1 or /progettos/1.json
+  # GET /projects/1 or /projects/1.json
   def show
   end
 
-  # GET /progettos/new
+  # GET /projects/new
   def new
     @project = Project.new
   end
 
-  # GET /progettos/1/edit
+  # GET /projects/1/edit
   def edit
   end
 
@@ -36,7 +56,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /progettos/1 or /progettos/1.json
+  # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -49,7 +69,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /progettos/1 or /progettos/1.json
+  # DELETE /projects/1 or /projects/1.json
   def destroy
     @project.destroy
 
