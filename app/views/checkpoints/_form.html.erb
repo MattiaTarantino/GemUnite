@@ -13,18 +13,14 @@
 
   <div>
     <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
+    <%= form.text_field :nome, required: :true %>
   </div>
 
   <div>
     <%= form.label :descrizione, style: "display: block" %>
-    <%= form.text_field :descrizione %>
+    <%= form.text_field :descrizione, required: :true %>
   </div>
 
-  <div>
-    <%= form.label :completato, style: "display: block" %>
-    <%= form.text_field :completato %>
-  </div>
 
   <div>
     <%= form.submit %>

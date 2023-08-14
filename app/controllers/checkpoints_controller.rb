@@ -1,5 +1,25 @@
 class CheckpointsController < ApplicationController
   before_action :set_variables, only: %i[ show edit ]
+  before_action :is_member?
+  before_action :is_leader?, only: %i[ new edit update destroy  ]
+
+
+  def is_member?
+    @user_project = UserProject.where(user_id: current_user.id, project_id: params[:project_id]).first
+    if @user_project.nil?
+      redirect_to my_projects_projects_path
+      flash[:notice] = "Non sei membro di questo progetto"
+    else
+      @role = @user_project.role
+    end
+  end
+
+  def is_leader?
+    if @user_project.role != "leader"
+      redirect_to my_projects_projects_path
+      flash[:notice] = "Non sei il leader di questo progetto"
+    end
+  end
   def index
     @checkpoints = Checkpoint.all
   end
@@ -10,6 +30,7 @@ class CheckpointsController < ApplicationController
   def new
     @checkpoint = Checkpoint.new
     @project = Project.find(params[:project_id])
+    @user = current_user
   end
 
   def edit
@@ -33,9 +54,11 @@ class CheckpointsController < ApplicationController
   end
 
   def set_variables
+    @user = current_user
     @checkpoint = Checkpoint.find(params[:id])
     @tasks = @checkpoint.tasks
     @project = Project.find(@checkpoint.project_id)
+    @role = UserProject.where(user_id: current_user.id, project_id: @project.id).first.role
   end
 
   private
