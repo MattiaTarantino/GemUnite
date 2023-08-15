@@ -113,9 +113,16 @@
       <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
     </div>
     <br>
-    <% if @role=="leader" %>
-      <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
-      <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+    <% if @role == "leader" %>
+
+      <% if @project.stato == "aperto" %>
+        <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+      <% end %>
+
+      <% if @project.stato != "chiuso" %>
+        <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+      <% end %>
+
     <% end %>
     <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
   </div>
@@ -161,6 +168,7 @@
         }
         */
 
+/*
     var app = new Vue({
         el: '#app',
 
@@ -228,6 +236,7 @@
             }
         }
     })
+*/
 </script>
 </body>
 </html>

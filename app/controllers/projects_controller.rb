@@ -1,12 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ edit update destroy show_my_project]
-  before_action :set_user, only: %i[ edit update destroy my_projects show_my_project ]
+  before_action :set_project, except: %i[ index new create my_projects ]
+  before_action :set_user
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
   before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
 
 
   def is_member?
-    @user = current_user
     @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
     if @user_project.nil?
       redirect_to my_projects_projects_path
@@ -17,6 +16,7 @@ class ProjectsController < ApplicationController
   end
 
   def is_leader?
+    @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
     if @user_project.role != "leader"
       redirect_to my_projects_projects_path
       flash[:notice] = "Non sei il leader di questo progetto"
@@ -67,7 +67,20 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /progettos/1 or /progettos/1.json
   def update
     respond_to do |format|
-      if @project.update(project_params)
+      parameters = project_params.except(:ambiti)
+      id_ambiti = params[:project][:ambiti].drop(1)
+      if @project.update(parameters)
+        id_ambiti.each do |ambito|
+          field = Field.find(ambito)
+          if not @project.fields.include? field
+            @project.fields << field
+          end
+        end
+        @project.fields.each do |field|
+          if not id_ambiti.include? field.id.to_s
+            @project.fields.delete(field)
+          end
+        end
         format.html { redirect_to project_url(@project), notice: "Progetto was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -85,6 +98,22 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: "Progetto was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def close_requests
+    @requests = Request.where(project_id: @project.id)
+    @requests.each do |request|
+      request.destroy
+    end
+    @project.stato = "iniziato"
+    @project.save!
+    redirect_to project_show_my_project_path(@project)
+  end
+
+  def close_project
+    @project.stato = "chiuso"
+    @project.save!
+    redirect_to my_projects_projects_path
   end
 
 
@@ -122,10 +151,7 @@ class ProjectsController < ApplicationController
     @checkpoints = @project.checkpoints
   end
 
-  def close_requests
-  end
 
-  def close_project
-  end
+
 
 end

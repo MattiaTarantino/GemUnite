@@ -1,5 +1,5 @@
 class CheckpointsController < ApplicationController
-  before_action :set_variables, only: %i[ show edit ]
+  before_action :set_variables, only: %i[ show edit update destroy ]
   before_action :is_member?
   before_action :is_leader?, only: %i[ new edit update destroy  ]
 
@@ -52,6 +52,28 @@ class CheckpointsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @checkpoint.destroy
+
+    respond_to do |format|
+      format.html { redirect_to project_show_my_project_path(project_id: @project.id), notice: "Checkpoint was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @checkpoint.update(checkpoint_params)
+        format.html { redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Progetto was successfully updated." }
+        format.json { render :show, status: :ok, location: @checkpoint }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @checkpoint.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   def set_variables
     @user = current_user
