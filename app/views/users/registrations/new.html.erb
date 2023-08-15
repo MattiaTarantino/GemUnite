@@ -5,22 +5,22 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
     <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :username, autofocus: true, required: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
     <%= f.label :nome %><br />
-    <%= f.text_field :firstname, autofocus: true, autocomplete: "nome" %>
+    <%= f.text_field :firstname, autofocus: true, required: true, autocomplete: "nome" %>
   </div>
 
   <div class="field">
     <%= f.label :cognome %><br />
-    <%= f.text_field :lastname, autofocus: true, autocomplete: "cognome" %>
+    <%= f.text_field :lastname, autofocus: true, required: true, autocomplete: "cognome" %>
   </div>
 
   <div class="field">
