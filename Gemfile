@@ -91,3 +91,11 @@ gem "news-api"
 # OAuth con Github
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
+
+gem 'bootstrap-sass'
+
+
+# GEMMA PER VISUALIZZARE LE TABELLE DEL DB IN RAILS CONSOLE:
+# >> require 'table_print'
+# >> tp Table.all
+gem 'table_print'

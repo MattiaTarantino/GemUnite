@@ -7,6 +7,15 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -25,6 +34,7 @@
         <div class="navbar-nav">
           <% if user_signed_in? %>
 
+            <%= link_to "Home ", root_path, { :class=>"nav-link" } %>
             <%= link_to "I miei progetti", my_projects_projects_path, class: "nav-link" %>
             <%= link_to "Notizie ", latest_news_index_path, { :class=>"nav-link" } %>
             <%= link_to "Profilo ", edit_user_registration_path, { :class=>"nav-link" } %>
@@ -37,6 +47,11 @@
       </div>
     </div>
   </nav>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-info">
+      <%= msg %>
+    </div>
+  <% end %>
   <%= yield %>
   </body>
 

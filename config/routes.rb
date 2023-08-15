@@ -1,19 +1,14 @@
 Rails.application.routes.draw do
   resources :projects do
     get 'my_projects', on: :collection
+    get 'show_my_project'
+    put 'close_requests'
+    put 'close_project'
     resources :requests
     resources :checkpoints do
       resources :tasks
     end
   end
-
-  resources :projects do
-  member do
-    get 'show_my_project'
-  end
-  end
-
-
 
   resources :latest_news
   resources :fields

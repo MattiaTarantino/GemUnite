@@ -13,6 +13,8 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @checkpoint = Checkpoint.find(params[:checkpoint_id])
+    @project = Project.find(@checkpoint.project_id)
   end
 
   # GET /tasks/1/edit
@@ -22,10 +24,11 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @checkpoint = Checkpoint.find(params[:checkpoint_id])
+    @checkpoint.tasks << @task
     respond_to do |format|
       if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+        format.html { redirect_to project_checkpoint_path(project_id: params[:project_id], id: @checkpoint.id), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -61,6 +64,8 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+      @checkpoint = Checkpoint.find(@task.checkpoint_id)
+      @project = Project.find(@checkpoint.project_id)
     end
 
     # Only allow a list of trusted parameters through.
