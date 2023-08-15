@@ -7174,3 +7174,108 @@ Processing by ProjectsController#index as HTML
 Completed 200 OK in 136ms (Views: 95.9ms | ActiveRecord: 17.2ms | Allocations: 12461)
 
 
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-15 20:12:53 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 401 Unauthorized in 83ms (ActiveRecord: 0.0ms | Allocations: 5442)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-08-15 20:12:54 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 1.3ms | Allocations: 1030)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 153.6ms | Allocations: 4868)
+Started GET "/" for 127.0.0.1 at 2023-08-15 20:13:00 +0200
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 8.6ms | Allocations: 132)
+  Rendered layout layouts/application.html.erb (Duration: 6712.8ms | Allocations: 375175)
+Completed 200 OK in 6928ms (Views: 6857.9ms | ActiveRecord: 8.0ms | Allocations: 388107)
+
+
+  Rendered layout layouts/application.html.erb (Duration: 1662.3ms | Allocations: 195275)
+Completed 200 OK in 1702ms (Views: 1668.3ms | ActiveRecord: 0.0ms | Allocations: 196160)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-08-15 20:13:08 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 348)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.6ms | Allocations: 1421)
+  Rendered layout layouts/application.html.erb (Duration: 87.0ms | Allocations: 5875)
+Completed 200 OK in 107ms (Views: 87.9ms | ActiveRecord: 0.0ms | Allocations: 6564)
+
+
+Started POST "/users/auth/github" for 127.0.0.1 at 2023-08-15 20:13:09 +0200
+Started GET "/users/auth/github/callback?code=3b76ffa9c2e5354c1cb5&state=c3ef22338a8a82af6f3091f8c215b29aa80f74d165c670f0" for 127.0.0.1 at 2023-08-15 20:13:10 +0200
+Processing by Users::OmniauthCallbacksController#github as HTML
+  Parameters: {"code"=>"3b76ffa9c2e5354c1cb5", "state"=>"c3ef22338a8a82af6f3091f8c215b29aa80f74d165c670f0"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "github"], ["uid", "116977547"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `from_omniauth'
+Redirected to http://127.0.0.1:3000/projects/1
+Completed 302 Found in 42ms (ActiveRecord: 1.9ms | Allocations: 3333)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-15 20:13:11 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mProject Load (1.9ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:138:in `set_project'
+  [1m[36mUserProject Load (1.5ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:125:in `set_user'
+  [1m[36mUserProject Load (1.6ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:130:in `set_user'
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:32:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 26.0ms | Allocations: 2445)
+  Rendered layout layouts/application.html.erb (Duration: 27.0ms | Allocations: 2534)
+Completed 500 Internal Server Error in 127ms (ActiveRecord: 17.2ms | Allocations: 13159)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    56:     <h1><%= @project.name %></h1>
+    57:     <h2> Membri del Progetto </h2>
+    58:     <ul>
+    59:       <% @members.each do |member| %>
+    60:         <li><%= member.email %></li>
+    61:       <% end %>
+    62:     </ul>
+  
+app/views/projects/show.html.erb:59
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-15 20:13:29 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mProject Load (1.8ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:139:in `set_project'
+  [1m[36mUserProject Load (1.9ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:126:in `set_user'
+  [1m[36mUserProject Load (1.7ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:131:in `set_user'
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:32:in `show'
+  [1m[36mUserProject Load (1.9ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mField Load (1.8ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/show.html.erb:71
+  Rendered projects/show.html.erb within layouts/application (Duration: 97.6ms | Allocations: 12038)
+  Rendered layout layouts/application.html.erb (Duration: 416.0ms | Allocations: 31807)
+Completed 200 OK in 690ms (Views: 405.0ms | ActiveRecord: 51.0ms | Allocations: 57680)
+
+

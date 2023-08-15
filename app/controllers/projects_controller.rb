@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
   # GET /progettos/1 or /progettos/1.json
   def show
     @project = Project.find(params[:id])
+    @members = @project.user_projects.map(&:user)
   end
 
   # GET /progettos/new
