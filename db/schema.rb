@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_122917) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_135320) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_122917) do
   create_table "checkpoints", force: :cascade do |t|
     t.string "nome"
     t.string "descrizione"
-    t.string "completato"
+    t.boolean "completato", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "project_id", null: false
@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_122917) do
   create_table "tasks", force: :cascade do |t|
     t.string "nome"
     t.string "descrizione"
-    t.string "completato"
+    t.boolean "completato", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "checkpoint_id", null: false

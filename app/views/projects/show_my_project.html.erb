@@ -1,97 +1,165 @@
-<h1> <%=@project.name %></h1>
-<title>Chat Example</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    .chat-container {
-        max-width: 400px;
-        margin: 0 auto;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-    }
-
-    .chat-log {
-        height: 300px;
-        overflow-y: scroll;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .chat-input {
-        display: flex;
-    }
-
-    #message-input {
-        flex: 1;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    #send-button {
-        padding: 5px 10px;
-        border: none;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-</style>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Chat Example</title>
+  <style>
+      /* Colori definiti come variabili */
+      :root {
+          --gray:  #E5E5E5;
+          --gray2: #808080;
+          --blue:  #2183DD;
+          --green: #009900;
+          --white: #FFFFFF;
+      }
+
+      body {
+          font-family: Arial, sans-serif;
+      }
+
+      .chat-project {
+          display: flex;
+          justify-content: space-between;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      .chat-container {
+          max-width: 400px;
+          margin: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 10px;
+          border-radius: 30px;
+      }
+
+      .project-container {
+          border-radius: 30px;
+      }
+
+      .chat-log {
+          height: 300px;
+          overflow-y: scroll;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 10px;
+          margin-bottom: 10px;
+      }
+
+      .chat-input {
+          display: flex;
+      }
+
+      #message-input {
+          flex: 1;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+
+      #send-button {
+          padding: 5px 10px;
+          border: none;
+          background-color: #007bff;
+          color: white;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+
+  </style>
 <body>
-    <div class="chat-container">
-      <div class="chat-log" id="chat-log"></div>
-      <div class="chat-input">
-        <input type="text" id="message-input" placeholder="Type your message...">
-        <button id="send-button">Send</button>
-      </div>
-    </div>
+<h1><%= @project.name %></h1>
+<% if @project.checkpoints.present? %>
+  <% @project.checkpoints.each do |checkpoint| %>
+    <tr>
+      <td><%= checkpoint.nome %></td>
+     <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+    </tr>
+    <br>
 
+
+<% end %>
+<% else %>
+  <tr>
+    <td colspan="4">No checkpoints available.</td>
+  </tr>
+<% end %>
+<% if @role == "leader" %>
+    <br>
+  <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
+<% end %>
+
+<div class="chat-project">
+  <div class="chat-container">
+    <div class="chat-log" id="chat-log"></div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+
+  <div class="project-container bg-light p-4">
+    <h2 class="mb-3">Project Infos</h2>
+    <p><%=@project.descrizione %></p>
+    <p><%=@project.stato %></p>
     <div class="github-link">
-      <button style="font-size:24px">Open with GitHub <i class="fa fa-github"></i></button>
+      <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
     </div>
     <br>
-    <% if @role=="leader" %>
-      <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
-      <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+    <% if @role == "leader" %>
+
+      <% if @project.stato == "aperto" %>
+        <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+      <% end %>
+
+      <% if @project.stato != "chiuso" %>
+        <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+      <% end %>
+
     <% end %>
     <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
+  </div>
+</div>
+
+<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
 
 
-    <script>
-        const chatLog = document.getElementById('chat-log');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
 
-        sendButton.addEventListener('click', sendMessage);
+<script>
+    const chatLog = document.getElementById('chat-log');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
 
-        function sendMessage() {
-            const message = messageInput.value.trim();
-            if (message !== '') {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message');
-                messageElement.textContent = message;
-                chatLog.appendChild(messageElement);
+    sendButton.addEventListener('click', sendMessage);
 
-                // Clear the input field
-                messageInput.value = '';
-                /*
-                // Optionally, you can add a response from the bot
-                const botResponse = document.createElement('div');
-                botResponse.classList.add('bot-message');
-                botResponse.textContent = 'Bot: ' + getBotResponse(message);
-                chatLog.appendChild(botResponse);
-    */
-                // Scroll to the bottom of the chat log
-                chatLog.scrollTop = chatLog.scrollHeight;
-            }
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message !== '') {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.textContent = message;
+            chatLog.appendChild(messageElement);
+
+            // Clear the input field
+            messageInput.value = '';
+            /*
+            // Optionally, you can add a response from the bot
+            const botResponse = document.createElement('div');
+            botResponse.classList.add('bot-message');
+            botResponse.textContent = 'Bot: ' + getBotResponse(message);
+            chatLog.appendChild(botResponse);
+*/
+            // Scroll to the bottom of the chat log
+            chatLog.scrollTop = chatLog.scrollHeight;
         }
+    }
     /*
         function getBotResponse(userMessage) {
             // Here you can implement a function to generate a bot response based on user input
@@ -99,11 +167,77 @@
             return userMessage;
         }
         */
-    </script>
 
+/*
+    var app = new Vue({
+        el: '#app',
 
+        data: {
+            currentStep: null,
+            steps: [
+                {"label": "one"},
+                {"label": "two"},
+                {"label": "three"},
+                {"label": "complete"}
+            ]
+        },
 
+        methods: {
+            nextStep(next=true) {
+                const steps = this.steps
+                const currentStep = this.currentStep
+                const currentIndex = steps.indexOf(currentStep)
 
+                // handle back
+                if (!next) {
+                    if (currentStep && currentStep.label === 'complete') {
+                        return this.currentStep = steps[steps.length - 1]
+                    }
+
+                    if (steps[currentIndex - 1]) {
+                        return this.currentStep = steps[currentIndex - 1]
+                    }
+
+                    return this.currentStep = { "label": "start" }
+                }
+
+                // handle next
+                if (this.currentStep && this.currentStep.label === 'complete') {
+                    return this.currentStep = { "label": "start" }
+                }
+
+                if (steps[currentIndex + 1]) {
+                    return this.currentStep = steps[currentIndex + 1]
+                }
+
+                this.currentStep = { "label": "complete" }
+            },
+
+            stepClasses(index) {
+                let result = `progress__step progress__step--${index + 1} `
+                if (this.currentStep && this.currentStep.label === 'complete' ||
+                  index < this.steps.indexOf(this.currentStep)) {
+                    return result += 'progress__step--complete'
+                }
+                if (index === this.steps.indexOf(this.currentStep)) {
+                    return result += 'progress__step--active'
+                }
+                return result
+            }
+        },
+
+        computed: {
+            progressClasses() {
+                let result = 'progress '
+                if (this.currentStep && this.currentStep.label === 'complete') {
+                    return result += 'progress--complete'
+                }
+                return result += `progress--${this.steps.indexOf(this.currentStep) + 1}`
+            }
+        }
+    })
+*/
+</script>
 </body>
 </html>
 

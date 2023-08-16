@@ -5,6 +5,5 @@
 <br>
 
 <div>
-  <%= link_to "Show this checkpoint", @checkpoint %> |
-  <%= link_to "Back to checkpoints", checkpoints_path %>
+  <%= link_to "Indietro", project_checkpoint_path(project_id: @project.id, id: @checkpoint.id) %>
 </div>

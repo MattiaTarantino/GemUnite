@@ -5,6 +5,11 @@ class Project < ApplicationRecord
   has_many :checkpoints, dependent: :destroy
   has_many :tasks, through: :checkpoints
   has_and_belongs_to_many :fields
+
+  validates :descrizione, presence: true
+  validates :dimensione, presence: true
+  validates :info_leader, presence: true
+  validates :name, presence: true
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "descrizione", "dimensione", "id", "info_leader", "stato", "updated_at"]
   end

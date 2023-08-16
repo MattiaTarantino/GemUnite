@@ -13,23 +13,28 @@
 
   <div>
     <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: :true %>
   </div>
 
   <div>
     <%= form.label :dimensione, style: "display: block" %>
-    <%= form.collection_select(:dimensione, [2, 3, 4, 5, 6], :itself, :itself) %>
+    <%= form.collection_select(:dimensione, [2, 3, 4, 5, 6], :itself, :itself, {}, { required: :true }) %>
   </div>
 
   <div>
     <%= form.label :info_leader, style: "display: block" %>
-    <%= form.text_field :info_leader %>
+    <%= form.text_field :info_leader, required: :true %>
   </div>
 
 
   <div>
     <%= form.label :descrizione, style: "display: block" %>
-    <%= form.text_field :descrizione %>
+    <%= form.text_field :descrizione, required: :true %>
+  </div>
+
+  <div>
+    <%= form.label :ambiti, style: "display: block" %>
+    <%= form.collection_select(:ambiti, @fields, :id, :nome, {}, {multiple: :true, required: :true}) %>
   </div>
 
   <div>
