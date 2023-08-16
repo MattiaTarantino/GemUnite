@@ -22,6 +22,10 @@
     <%= f.label :cognome %><br />
     <%= f.text_field :lastname, autofocus: true, required: true, autocomplete: "cognome" %>
   </div>
+   <div class="field">
+    <label for="user_field_ids">Select Fields:</label>
+    <%= f.collection_check_boxes :field_ids, Field.all, :id, :nome %>
+  </div>
 
   <div class="field">
     <%= f.label :password %>
