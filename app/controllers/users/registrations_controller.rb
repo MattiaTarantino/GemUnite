@@ -11,19 +11,35 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-     super
+    super do |user|
+      if params[:user][:field_ids].present?
+        selected_field_ids = params[:user][:field_ids].reject(&:blank?)
+  
+        if selected_field_ids.any?
+          user.fields = Field.where(id: selected_field_ids)
+        end
+      end
+    end
   end
+  
 
   # GET /resource/edit
   # def edit
   #   super
   # end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
+  def update
+    super do |user|
+      selected_field_ids = params[:user][:field_ids] || []
+      current_field_ids = user.field_ids
+  
+      fields_to_add = Field.where(id: selected_field_ids - current_field_ids)
+      fields_to_remove = user.fields.where.not(id: selected_field_ids)
+  
+      user.fields << fields_to_add
+      user.fields.delete(fields_to_remove)
+    end
+  end
   # DELETE /resource
   # def destroy
   #   super
@@ -42,7 +58,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :firstname, :lastname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :firstname, :lastname,field_ids: []])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
