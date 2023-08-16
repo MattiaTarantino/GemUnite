@@ -7279,3 +7279,356 @@ Processing by ProjectsController#show as HTML
 Completed 200 OK in 690ms (Views: 405.0ms | ActiveRecord: 51.0ms | Allocations: 57680)
 
 
+Started GET "/" for ::1 at 2023-08-16 13:26:24 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 23.8ms | Allocations: 459)
+  Rendered layout layouts/application.html.erb (Duration: 6653.3ms | Allocations: 235387)
+Completed 200 OK in 6864ms (Views: 6716.2ms | ActiveRecord: 0.0ms | Allocations: 240913)
+
+
+Started GET "/users/sign_in" for ::1 at 2023-08-16 13:26:35 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 3.1ms | Allocations: 1019)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 165.7ms | Allocations: 4919)
+  Rendered layout layouts/application.html.erb (Duration: 263.5ms | Allocations: 9445)
+Completed 200 OK in 360ms (Views: 274.3ms | ActiveRecord: 8.9ms | Allocations: 19633)
+
+
+Started GET "/users/sign_up" for ::1 at 2023-08-16 13:26:39 +0200
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/registrations/new.html.erb within layouts/application
+  Rendered users/shared/_error_messages.html.erb (Duration: 8.1ms | Allocations: 239)
+  Rendered users/shared/_links.html.erb (Duration: 9.2ms | Allocations: 809)
+  Rendered users/registrations/new.html.erb within layouts/application (Duration: 43.5ms | Allocations: 3802)
+  Rendered layout layouts/application.html.erb (Duration: 126.2ms | Allocations: 8352)
+Completed 200 OK in 158ms (Views: 139.1ms | ActiveRecord: 0.0ms | Allocations: 9738)
+
+
+Started GET "/users/sign_in" for ::1 at 2023-08-16 13:26:46 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 0.8ms | Allocations: 348)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 3.3ms | Allocations: 1421)
+  Rendered layout layouts/application.html.erb (Duration: 93.1ms | Allocations: 5856)
+Completed 200 OK in 113ms (Views: 94.1ms | ActiveRecord: 0.0ms | Allocations: 6538)
+
+
+Started POST "/users/auth/github" for ::1 at 2023-08-16 13:26:47 +0200
+Started GET "/users/auth/github/callback?error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&error_uri=https%3A%2F%2Fdocs.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&state=87cce5fd0fde6d75d7d4d63791f7b1a6fe9b92e01fbbe314" for 127.0.0.1 at 2023-08-16 13:26:48 +0200
+Processing by Users::OmniauthCallbacksController#failure as HTML
+  Parameters: {"error"=>"redirect_uri_mismatch", "error_description"=>"The redirect_uri MUST match the registered callback URL for this application.", "error_uri"=>"https://docs.github.com/apps/managing-oauth-apps/troubleshooting-authorization-request-errors/#redirect-uri-mismatch", "state"=>"87cce5fd0fde6d75d7d4d63791f7b1a6fe9b92e01fbbe314"}
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 20ms (ActiveRecord: 0.0ms | Allocations: 374)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-16 13:26:49 +0200
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 79.9ms | Allocations: 4481)
+Completed 200 OK in 98ms (Views: 80.8ms | ActiveRecord: 0.0ms | Allocations: 4802)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-08-16 13:26:56 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 348)
+  Rendered /usr/share/rvm/gems/ruby-3.2.2/gems/devise-4.9.2/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 1.5ms | Allocations: 1422)
+  Rendered layout layouts/application.html.erb (Duration: 82.3ms | Allocations: 5856)
+Completed 200 OK in 102ms (Views: 83.2ms | ActiveRecord: 0.0ms | Allocations: 6542)
+
+
+Started POST "/users/auth/github" for 127.0.0.1 at 2023-08-16 13:26:59 +0200
+Started GET "/users/auth/github/callback?code=ea9d4272633bb6afe5d5&state=7cefec5f40a2a704d96f440f0a6ed27d8ec26867b05920c6" for 127.0.0.1 at 2023-08-16 13:27:00 +0200
+Processing by Users::OmniauthCallbacksController#github as HTML
+  Parameters: {"code"=>"ea9d4272633bb6afe5d5", "state"=>"7cefec5f40a2a704d96f440f0a6ed27d8ec26867b05920c6"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "github"], ["uid", "116977547"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `from_omniauth'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 130ms (ActiveRecord: 1.7ms | Allocations: 6445)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-16 13:27:01 +0200
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  [1m[36mUserProject Load (1.9ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:126:in `set_user'
+  [1m[36mUserProject Load (1.7ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:131:in `set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (2.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/views/projects/index.html.erb:68
+  [1m[36mUserProject Count (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/index.html.erb:73
+  [1m[36mField Load (1.8ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/index.html.erb:75
+  [1m[36mUserProject Count (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/index.html.erb:73
+  [1m[36mField Load (1.6ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/index.html.erb:75
+  [1m[36mUserProject Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 5]]
+  ↳ app/views/projects/index.html.erb:73
+  [1m[36mField Load (1.7ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 5]]
+  ↳ app/views/projects/index.html.erb:75
+  Rendered projects/index.html.erb within layouts/application (Duration: 253.4ms | Allocations: 24997)
+  Rendered layout layouts/application.html.erb (Duration: 342.0ms | Allocations: 29643)
+Completed 200 OK in 423ms (Views: 317.6ms | ActiveRecord: 36.3ms | Allocations: 33310)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-16 13:27:17 +0200
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mProject Load (1.6ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:139:in `set_project'
+  [1m[36mUserProject Load (1.5ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:126:in `set_user'
+  [1m[36mUserProject Load (1.6ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:131:in `set_user'
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:32:in `show'
+  [1m[36mUserProject Load (1.9ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  Rendered projects/show.html.erb within layouts/application (Duration: 22.7ms | Allocations: 2469)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | Allocations: 2557)
+Completed 500 Internal Server Error in 120ms (ActiveRecord: 16.0ms | Allocations: 15854)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <!DOCTYPE html>
+<html>
+<head>
+  <title>Cool Project View</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          padding: 20px;
+      }
+      .project-container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+      }
+      .project-title {
+          font-size: 24px;
+          color: #2E2F30;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+      .project-description {
+          font-size: 16px;
+          color: #2E2F30;
+          margin-bottom: 10px;
+      }
+      h3 {
+          font-weight: 600;
+          color: slategray;
+      }
+      .back-button {
+
+          display: inline-block;
+          background-color: white;
+          color: white;
+          font-size: 16px;
+          padding: 10px 20px;
+          border-radius: 4px;
+          text-decoration: none;
+          margin-top: 20px;
+          transition: background-color 0.3s ease;
+      }
+      .back-button:hover {
+          background-color: lightblue;
+      }
+      /* Style for "Partecipa" link */
+    .project-link {
+        display: inline-block;
+        background-color: #c3d9ff;
+        color: white;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 8px 15px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .project-link:hover {
+        background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+
+<div class="project-container">
+
+  <% if @project %>
+    <h1><%= @project.name %></h1>
+    <h2>Membri del Progetto</h2>
+    <ul class="project-description">
+      <% @members.each do |member| %>
+        <li><%= member.username %></li>
+      <% end %>
+    </ul>
+   <%= button_to "Informazioni Leader" action: "" %>
+    <p class="project_description"><%= @project.info_leader %></p>
+    <h2>Informazioni sul Progetto</h2>
+    <h3>Ambiti</h3>
+    <p class="project-description">
+      <% @project.fields.each do |field|%>
+        <%= field.nome %> <br>
+      <% end %>
+    </p>
+    <h3>Obiettivo/ Descrizione</h3>
+    <p class="project-description"><%= @project.descrizione %></p>
+    <h3>Persone richieste per il progetto</h3>
+    <p class="project-description"><%= @project.dimensione - @members.count %></p>
+    <%= link_to "Partecipa", "#", class:"project-link" %>   
+  <% else %>
+    <p class="project-description">No project found.</p>
+  <% end %>
+</div>
+
+<%= link_to "Back to projects", projects_path, class: "back-button" %>
+
+<!-- Admin Only
+  <%= link_to "Edit this project", edit_project_path(@project) %> |
+  <%= button_to "Destroy this project", @project, method: :delete %>
+  -->
+
+</body>
+</html>
+
+):
+1:    <!DOCTYPE html>
+2:    <html>
+3:    <head>
+4:      <title>Cool Project View</title>
+5:      <style>
+6:          body {
+7:              font-family: Arial, sans-serif;
+8:              background-color: #f0f0f0;
+9:              padding: 20px;
+10:          }
+11:          .project-container {
+12:              max-width: 600px;
+13:              margin: 0 auto;
+14:              background-color: #fff;
+15:              border-radius: 8px;
+16:              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+17:              padding: 20px;
+18:          }
+19:          .project-title {
+20:              font-size: 24px;
+21:              color: #2E2F30;
+22:              font-weight: bold;
+23:              margin-bottom: 10px;
+24:          }
+25:          .project-description {
+26:              font-size: 16px;
+27:              color: #2E2F30;
+28:              margin-bottom: 10px;
+29:          }
+30:          h3 {
+31:              font-weight: 600;
+32:              color: slategray;
+33:          }
+34:          .back-button {
+35:    
+36:              display: inline-block;
+37:              background-color: white;
+38:              color: white;
+39:              font-size: 16px;
+40:              padding: 10px 20px;
+41:              border-radius: 4px;
+42:              text-decoration: none;
+43:              margin-top: 20px;
+44:              transition: background-color 0.3s ease;
+45:          }
+46:          .back-button:hover {
+47:              background-color: lightblue;
+48:          }
+49:          /* Style for "Partecipa" link */
+50:        .project-link {
+51:            display: inline-block;
+52:            background-color: #c3d9ff;
+53:            color: white;
+54:            border: 1px solid;
+55:            border-radius: 4px;
+56:            padding: 8px 15px;
+57:            text-decoration: none;
+58:            transition: background-color 0.3s ease;
+59:        }
+60:    
+61:        .project-link:hover {
+62:            background-color: lightblue;
+63:        }
+64:      </style>
+65:    </head>
+66:    <body>
+67:    
+68:    <div class="project-container">
+69:    
+70:      <% if @project %>
+71:        <h1><%= @project.name %></h1>
+72:        <h2>Membri del Progetto</h2>
+73:        <ul class="project-description">
+74:          <% @members.each do |member| %>
+75:            <li><%= member.username %></li>
+76:          <% end %>
+77:        </ul>
+78:       <%= button_to "Informazioni Leader" action: "" %>
+79:        <p class="project_description"><%= @project.info_leader %></p>
+80:        <h2>Informazioni sul Progetto</h2>
+81:        <h3>Ambiti</h3>
+82:        <p class="project-description">
+83:          <% @project.fields.each do |field|%>
+84:            <%= field.nome %> <br>
+85:          <% end %>
+86:        </p>
+87:        <h3>Obiettivo/ Descrizione</h3>
+88:        <p class="project-description"><%= @project.descrizione %></p>
+89:        <h3>Persone richieste per il progetto</h3>
+90:        <p class="project-description"><%= @project.dimensione - @members.count %></p>
+91:        <%= link_to "Partecipa", "#", class:"project-link" %>   
+92:      <% else %>
+93:        <p class="project-description">No project found.</p>
+94:      <% end %>
+95:    </div>
+96:    
+97:    <%= link_to "Back to projects", projects_path, class: "back-button" %>
+98:    
+99:    <!-- Admin Only
+100:      <%= link_to "Edit this project", edit_project_path(@project) %> |
+101:      <%= button_to "Destroy this project", @project, method: :delete %>
+102:      -->
+103:    
+104:    </body>
+105:    </html>
+  
+app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
+app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
+app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
+app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
+app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
+app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'

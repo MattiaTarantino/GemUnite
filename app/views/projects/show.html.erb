@@ -75,10 +75,7 @@
         <li><%= member.username %></li>
       <% end %>
     </ul>
-   <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="popover" data-bs-title="Informazioni Leader" data-bs-placement="right" data-bs-content="<%= @project.info_leader %>">Informazioni Leader</button>
-    <div class="project-description info-leader">
-      <span class="project-leader"><%= @project.info_leader %></span>
-    </div>
+    <p><%= button_tag "Informazioni Leader" %></p>
     <h2>Informazioni sul Progetto</h2>
     <h3>Ambiti</h3>
     <p class="project-description">
@@ -89,7 +86,7 @@
     <h3>Obiettivo/ Descrizione</h3>
     <p class="project-description"><%= @project.descrizione %></p>
     <h3>Persone richieste per il progetto</h3>
-    <p class="project-description"><%= @project.dimensione - @members.count%></p>
+    <p class="project-description"><%= @project.dimensione - @members.count %></p>
     <%= link_to "Partecipa", "#", class:"project-link" %>   
   <% else %>
     <p class="project-description">No project found.</p>
