@@ -7632,3 +7632,33 @@ app/views/projects/show.html.erb:78: syntax error, unexpected local variable or 
 app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
 app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
 app/views/projects/show.html.erb:78: syntax error, unexpected local variable or method, expecting ')'
+Started GET "/projects/1" for 127.0.0.1 at 2023-08-16 14:41:25 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mProject Load (1.5ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:139:in `set_project'
+  [1m[36mUserProject Load (1.5ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:126:in `set_user'
+  [1m[36mUserProject Load (1.5ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 6], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:131:in `set_user'
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:32:in `show'
+  [1m[36mUserProject Load (1.9ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:33:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mField Load (1.7ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 1]]
+  ↳ app/views/projects/show.html.erb:105
+  Rendered projects/show.html.erb within layouts/application (Duration: 80.7ms | Allocations: 12249)
+  Rendered layout layouts/application.html.erb (Duration: 2260.3ms | Allocations: 74337)
+Completed 200 OK in 2498ms (Views: 2272.0ms | ActiveRecord: 45.6ms | Allocations: 107120)
+
+
