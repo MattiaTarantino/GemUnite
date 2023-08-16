@@ -1,86 +1,30 @@
 
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Chat Example</title>
-  <style>
-      /* Colori definiti come variabili */
-      :root {
-          --gray:  #E5E5E5;
-          --gray2: #808080;
-          --blue:  #2183DD;
-          --green: #009900;
-          --white: #FFFFFF;
-      }
 
-      body {
-          font-family: Arial, sans-serif;
-      }
-
-      .chat-project {
-          display: flex;
-          justify-content: space-between;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-      }
-
-      .chat-container {
-          max-width: 400px;
-          margin: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          padding: 10px;
-          border-radius: 30px;
-      }
-
-      .project-container {
-          border-radius: 30px;
-      }
-
-      .chat-log {
-          height: 300px;
-          overflow-y: scroll;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          padding: 10px;
-          margin-bottom: 10px;
-      }
-
-      .chat-input {
-          display: flex;
-      }
-
-      #message-input {
-          flex: 1;
-          padding: 5px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-      }
-
-      #send-button {
-          padding: 5px 10px;
-          border: none;
-          background-color: #007bff;
-          color: white;
-          border-radius: 5px;
-          cursor: pointer;
-      }
-
-
-  </style>
 <body>
 <h1><%= @project.name %></h1>
 <% if @project.checkpoints.present? %>
   <% @project.checkpoints.each do |checkpoint| %>
     <tr>
       <td><%= checkpoint.nome %></td>
-     <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+      <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+      <% if @role == "leader" %>
+        <td>
+          <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
+                        method: :put,
+                        class: "btn btn-outline-primary btn-sm",
+                        data: { confirm: "Are you sure?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+            </svg>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
     <br>
 
@@ -119,7 +63,7 @@
         <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
       <% end %>
 
-      <% if @project.stato != "chiuso" %>
+      <% if @project.stato == "iniziato" %>
         <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
       <% end %>
 
@@ -128,7 +72,6 @@
   </div>
 </div>
 
-<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
 
 
 
@@ -141,11 +84,11 @@
 
     function sendMessage() {
         const message = messageInput.value.trim();
-        if (message !== '') {
+        if (message != '') {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message');
             messageElement.textContent = message;
-            chatLog.appendChild(messageElement);
+            chatLog.appendChild( messageElement);
 
             // Clear the input field
             messageInput.value = '';
