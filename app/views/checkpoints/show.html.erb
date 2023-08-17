@@ -32,6 +32,7 @@
           <th>Nome</th>
           <th>Descrizione</th>
           <th>Stato</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -45,6 +46,20 @@
                   <%= "non completato" %>
                 <% end %>
             </td>
+            <td>
+              <% if @project.stato == "aperto" and not task.completato %>
+                <%= button_to "Segna come completato", project_checkpoint_task_change_state_path(project_id: @project.id, checkpoint_id: @checkpoint.id, task_id: task.id), method: :put, class: "btn", data: { confirm: "Are you sure?" } %>
+              <% elsif task.completato %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                </svg>
+              <% else %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                </svg>
+              <% end %>
+
+            </td>
           </tr>
         <% end %>
         </tbody>
@@ -55,11 +70,13 @@
   <% end %>
 
   <div class="d-flex justify-content-between align-items-center mt-3">
-    <% if @role == "leader" %>
-      <%= link_to "Edit this checkpoint", edit_project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), class: "btn btn-primary" %>
-      <%= button_to "Destroy this checkpoint", project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+    <% if @project.stato == "aperto" %>
+      <% if @role == "leader" %>
+        <%= link_to "Modifica checkpoint", edit_project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), class: "btn btn-primary" %>
+        <%= button_to "Elimina checkpoint", project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      <% end %>
+      <%= link_to "Nuovo task",  new_project_checkpoint_task_path(project_id: @project.id, checkpoint_id: @checkpoint.id) %>
     <% end %>
-    <%= link_to "New task",  new_project_checkpoint_task_path(project_id: @project.id, checkpoint_id: @checkpoint.id) %>
   </div>
 </div>
 <%= link_to "Torna al progetto", project_show_my_project_path(project_id: @project.id), class: "btn btn-primary" %>

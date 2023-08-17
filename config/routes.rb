@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     put 'close_project'
     resources :requests
     resources :checkpoints do
-      resources :tasks
+      put 'change_state'
+      resources :tasks do
+        put 'change_state'
+      end
     end
   end
 

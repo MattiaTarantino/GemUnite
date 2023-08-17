@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_variables, only: %i[ show edit update destroy change_state]
+  before_action :is_member?
+  before_action :project_started?, only: %i[ new edit update destroy create change_state ]
 
   # GET /tasks or /tasks.json
   def index
@@ -60,12 +62,47 @@ class TasksController < ApplicationController
     end
   end
 
+  def change_state
+    if @task.completato == true
+      redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Task già completato"
+    end
+    @task.completato = true
+    @task.save
+    redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
+    def set_variables
+      parameter = params[:id] || params[:task_id]
+      @task = Task.find(parameter)
       @checkpoint = Checkpoint.find(@task.checkpoint_id)
       @project = Project.find(@checkpoint.project_id)
+    end
+
+    def is_member?
+      @user_project = UserProject.where(user_id: current_user.id, project_id: params[:project_id]).first
+      if @user_project.nil?
+        redirect_to my_projects_projects_path
+        flash[:notice] = "Non sei membro di questo progetto"
+      else
+        @role = @user_project.role
+      end
+    end
+
+    def project_started?
+      @project = Project.find(params[:project_id])
+      if @project.stato == "aperto"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto non è ancora iniziato"
+        return
+      end
+
+      if @project.stato == "chiuso"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto è chiuso"
+        return
+      end
     end
 
     # Only allow a list of trusted parameters through.
