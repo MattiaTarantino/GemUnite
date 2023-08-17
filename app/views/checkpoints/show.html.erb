@@ -47,7 +47,7 @@
                 <% end %>
             </td>
             <td>
-              <% if @project.stato == "aperto" and not task.completato %>
+              <% if @project.stato == "iniziato" and not task.completato %>
                 <%= button_to "Segna come completato", project_checkpoint_task_change_state_path(project_id: @project.id, checkpoint_id: @checkpoint.id, task_id: task.id), method: :put, class: "btn", data: { confirm: "Are you sure?" } %>
               <% elsif task.completato %>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
@@ -70,7 +70,7 @@
   <% end %>
 
   <div class="d-flex justify-content-between align-items-center mt-3">
-    <% if @project.stato == "aperto" %>
+    <% if @project.stato == "iniziato" %>
       <% if @role == "leader" %>
         <%= link_to "Modifica checkpoint", edit_project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), class: "btn btn-primary" %>
         <%= button_to "Elimina checkpoint", project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>

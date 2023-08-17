@@ -13,7 +13,7 @@
     <tr>
       <td><%= checkpoint.nome %></td>
       <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
-      <% if @role == "leader" and @project.stato == "aperto" and !checkpoint.completato %>
+      <% if @role == "leader" and @project.stato == "iniziato" and !checkpoint.completato %>
         <td>
           <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
                         method: :put,
@@ -36,7 +36,7 @@
     <td colspan="4">No checkpoints available.</td>
   </tr>
 <% end %>
-<% if @role == "leader" %>
+<% if @role == "leader" and @project.stato == "iniziato"%>
     <br>
   <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
 <% end %>
