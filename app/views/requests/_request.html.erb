@@ -1,28 +1,27 @@
 <div id="<%= dom_id request %>">
-  <% if request.stato_accettazione == "aperta" %>
-    <p>
-      <strong>Request:</strong>
-      <%= request.id %>
-    </p>
+  <p>
+    <strong>Request:</strong>
+    <%= request.id %>
+  </p>
 
-    <p>
-      <strong>Utente:</strong>
-      <%= request.user.username %>
-    </p>
+  <p>
+    <strong>Utente:</strong>
+    <%= request.user.username %>
+  </p>
 
-    <p>
-      <strong>Note:</strong>
-      <%= request.note %>
-    </p>
+  <p>
+    <strong>Note:</strong>
+    <%= request.note %>
+  </p>
 
-    <p>
-      <strong>Stato accettazione:</strong>
-      <%= request.stato_accettazione %>
-    </p>
+  <p>
+    <strong>Stato accettazione:</strong>
+    <%= request.stato_accettazione %>
+  </p>
 
-    <p>
-      <%= button_to "Accetta richiesta", project_request_accept_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success" %>
-      <%= button_to "Rifiuta richiesta", project_request_decline_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger" %>
-    </p>
-  <% end %>
+  <p>
+    <%= button_to "Accetta richiesta", project_request_accept_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success" %>
+    <%= button_to "Rifiuta richiesta", project_request_decline_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger" %>
+  </p>
+
 </div>
