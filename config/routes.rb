@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     get 'show_my_project'
     put 'close_requests'
     put 'close_project'
-    resources :requests
+    resources :requests do
+        put 'accept'
+        put 'decline'
+    end
     resources :checkpoints do
       resources :tasks
     end
