@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_133357) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_153720) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -47,8 +47,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_133357) do
     t.index ["project_id"], name: "index_checkpoints_on_project_id"
   end
 
+  create_table "field_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fields", force: :cascade do |t|
     t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fields_projects", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "field_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,13 +69,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_133357) do
     t.integer "user_id", null: false
     t.integer "field_id", null: false
     t.index ["user_id", "field_id"], name: "index_fields_users_on_user_id_and_field_id"
-  end
-
-  create_table "project_regards", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "field_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "projects", force: :cascade do |t|

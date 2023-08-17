@@ -1,22 +1,17 @@
-<h1>Progetti aperti</h1>
+<h1>Progetti aperti riguardo i tuoi ambiti d’interesse</h1>
 <div data-controller="project-sort">
   <label for="sort_by">Ordina per:</label>
     <select name="sort_by" id="sort_by" data-action="project-sort#update" data-project-sort-target="select">
+      <option></option>
       <option value="time_posted" <%= 'selected' if params[:sort_by] == 'time_posted' %> >Più recenti</option>
       <option value="time_posted_reverse" <%= 'selected' if params[:sort_by] == 'time_posted_reverse' %> >Meno recenti</option>
       <option value="members" <%= 'selected' if params[:sort_by] == 'members' %> >Numero membri (crescente)</option>
       <option value="members_reverse" <%= 'selected' if params[:sort_by] == 'members_reverse' %> >Numero membri (decrescente)</option>
     </select>
 </div>
-<!--
- <div data-controller="project-filter">
-  <label for="filter_by">Filtra per ambito:</label>
-  <select name="filter_by" id="filter_by" data-action="project-filter#update" data-project-filter-target="select">
-    <option></option>
-    <option value="Cybersecurity" <%= 'selected' if params[:filter_by] == 'Cybersecurity' %> >Cybersecurity</option>
-    <option value="Machine Learning" <%= 'selected' if params[:filter_by] == 'Machine Learning' %> >Machine Learning</option>
-    <option value="Iot" <%= 'selected' if params[:filter_by] == 'Iot' %> >Iot</option>
-  </select>
-</div>-->
-<%= render "projects" %>
+<%= form_with url: projects_path do |form| %>
+  <%= form.label "Filtra per ambito" %>
+  <%= form.select :field, options_for_select(Field.all.map { |fie| [fie.nome, fie.id] }.insert(0, nil)) %>
+<% end %>
+<%= render "projects/projects", projects: @projects %>
 

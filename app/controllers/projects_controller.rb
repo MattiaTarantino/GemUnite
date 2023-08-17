@@ -4,22 +4,49 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = case params[:sort_by]
+=begin
+    @all_fields = Field.all.ids
+    if params[:field] == nil
+      if session[:field] == nil
+        @selected_fields = @all_fields
+      else
+        @selected_fields = session[:field]
+      end
+    elsif params[:field] != nil
+      @selected_fields = params[:field]
+    else
+      @selected_fields = @all_fields
+    end
+
+    base = Project.where(id: FieldsProject.where(field_id: params[:field]).ids)
+
+    base = case params[:sort_by]
              when 'members'
-               Project.order(dimensione: :desc)
+               base.order(dimensione: :desc)
              when 'members_reverse'
-               Project.order(dimensione: :asc)
+               base.order(dimensione: :asc)
              when 'time_posted_reverse'
-               Project.order(created_at: :asc)
+               base.order(created_at: :asc)
              when 'time_posted'
-               Project.order(created_at: :desc)
+               base.order(created_at: :desc)
              else
-               Project.order(created_at: :desc)
+               base.order(created_at: :desc)
+           end
+
+    @project = base.all
+=end
+    @projects = case params[:sort_by]
+                when 'members'
+                  Project.order(dimensione: :desc)
+                when 'members_reverse'
+                  Project.order(dimensione: :asc)
+                when 'time_posted_reverse'
+                  Project.order(created_at: :asc)
+                when 'time_posted'
+                  Project.order(created_at: :desc)
+                else
+                  Project.order(created_at: :desc)
                 end
-
-    # TODO: filter by category
-
-
 
     respond_to do |format|
       format.html
@@ -89,7 +116,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione)
+      params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :field_id)
     end
   def my_projects
     @user = current_user
