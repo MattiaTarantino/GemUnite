@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_variables, only: %i[ show edit update destroy change_state]
   before_action :is_member?
+  before_action :project_started?, only: %i[ new edit update destroy create change_state ]
 
   # GET /tasks or /tasks.json
   def index
@@ -62,6 +63,9 @@ class TasksController < ApplicationController
   end
 
   def change_state
+    if @task.completato == true
+      redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Task già completato"
+    end
     @task.completato = true
     @task.save
     redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id)
@@ -83,6 +87,21 @@ class TasksController < ApplicationController
         flash[:notice] = "Non sei membro di questo progetto"
       else
         @role = @user_project.role
+      end
+    end
+
+    def project_started?
+      @project = Project.find(params[:project_id])
+      if @project.stato == "aperto"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto non è ancora iniziato"
+        return
+      end
+
+      if @project.stato == "chiuso"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto è chiuso"
+        return
       end
     end
 

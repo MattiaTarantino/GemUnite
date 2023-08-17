@@ -2,6 +2,7 @@ class CheckpointsController < ApplicationController
   before_action :set_variables, only: %i[ show edit update destroy change_state]
   before_action :is_member?
   before_action :is_leader?, only: %i[ new edit update destroy  ]
+  before_action :project_started?, only: %i[ new edit update destroy create change_state ]
 
 
 
@@ -14,7 +15,6 @@ class CheckpointsController < ApplicationController
 
   def new
     @checkpoint = Checkpoint.new
-    @project = Project.find(params[:project_id])
     @user = current_user
   end
 
@@ -61,6 +61,9 @@ class CheckpointsController < ApplicationController
 
 
   def change_state
+    if @checkpoint.completato == true
+      redirect_to project_show_my_project_path(project_id: @project.id), notice: "Checkpoint già completato"
+    end
     completati = true
     @checkpoint.tasks.each do |task|
       if task.completato == false
@@ -105,6 +108,21 @@ class CheckpointsController < ApplicationController
       if @user_project.role != "leader"
         redirect_to my_projects_projects_path
         flash[:notice] = "Non sei il leader di questo progetto"
+      end
+    end
+
+    def project_started?
+      @project = Project.find(params[:project_id])
+      if @project.stato == "aperto"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto non è ancora iniziato"
+        return
+      end
+
+      if @project.stato == "chiuso"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto è chiuso"
+        return
       end
     end
 
