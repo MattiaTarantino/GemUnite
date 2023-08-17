@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
 a:link { text-decoration: none; }
 
@@ -24,3 +25,74 @@ a:hover { text-decoration: none; }
 
 
 a:active { text-decoration: none; }
+
+/* Colori definiti come variabili */
+:root {
+    --gray:  #E5E5E5;
+    --gray2: #808080;
+    --blue:  #2183DD;
+    --green: #009900;
+    --white: #FFFFFF;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.chat-project {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.chat-container {
+    max-width: 400px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.project-container {
+    border-radius: 30px;
+}
+
+.chat-log {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-input {
+    display: flex;
+}
+
+#message-input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#send-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

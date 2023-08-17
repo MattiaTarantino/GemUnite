@@ -1,73 +1,76 @@
 
-
-
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <h1> <%=@project.name %></h1>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Chat Example</title>
-</head>
 
 <body>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    .chat-container {
-        max-width: 400px;
-        margin: 0 auto;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-    }
-
-    .chat-log {
-        height: 300px;
-        overflow-y: scroll;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .chat-input {
-        display: flex;
-    }
-
-    #message-input {
-        flex: 1;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    #send-button {
-        padding: 5px 10px;
-        border: none;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+<h1><%= @project.name %></h1>
+<% if @project.checkpoints.present? %>
+  <% @project.checkpoints.each do |checkpoint| %>
+    <tr>
+      <td><%= checkpoint.nome %></td>
+      <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+      <% if @role == "leader" and @project.stato == "iniziato" and !checkpoint.completato %>
+        <td>
+          <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
+                        method: :put,
+                        class: "btn btn-outline-primary btn-sm",
+                        title: "Segna come completato",
+                        data: { confirm: "Are you sure?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+            </svg>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+    <br>
 
 
-</style>
-<div class="chat-container">
-  <div class="chat-log" id="chat-log"></div>
-  <div class="chat-input">
-    <input type="text" id="message-input" placeholder="Type your message...">
-    <button id="send-button">Send</button>
+<% end %>
+<% else %>
+  <tr>
+    <td colspan="4">No checkpoints available.</td>
+  </tr>
+<% end %>
+<% if @role == "leader" and @project.stato == "iniziato"%>
+    <br>
+  <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
+<% end %>
+
+<div class="chat-project">
+  <div class="chat-container">
+    <div class="chat-log" id="chat-log"></div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button id="send-button">Send</button>
+    </div>
   </div>
-</div>
 
-<div class="github-link">
+  <div class="project-container bg-light p-4">
+    <h2 class="mb-3">Project Infos</h2>
+    <p><%=@project.descrizione %></p>
+    <p><%=@project.stato %></p>
+    <div class="github-link">
+      <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
+    </div>
+    <br>
+    <% if @role == "leader" %>
 
-  <button style="font-size:24px">Open with GitHub <i class="fa fa-github"></i></button>
+      <% if @project.stato == "aperto" %>
+        <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+      <% end %>
+
+      <% if @project.stato == "iniziato" %>
+        <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+      <% end %>
+
+    <% end %>
+    <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
+  </div>
 </div>
 
 
@@ -82,11 +85,11 @@
 
     function sendMessage() {
         const message = messageInput.value.trim();
-        if (message !== '') {
+        if (message != '') {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message');
             messageElement.textContent = message;
-            chatLog.appendChild(messageElement);
+            chatLog.appendChild( messageElement);
 
             // Clear the input field
             messageInput.value = '';
@@ -101,16 +104,84 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
     }
-/*
-    function getBotResponse(userMessage) {
-        // Here you can implement a function to generate a bot response based on user input
-        // For simplicity, let's just echo the user's message for now
-        return userMessage;
-    }
-    */
-</script>
+    /*
+        function getBotResponse(userMessage) {
+            // Here you can implement a function to generate a bot response based on user input
+            // For simplicity, let's just echo the user's message for now
+            return userMessage;
+        }
+        */
 
-<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
+/*
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            currentStep: null,
+            steps: [
+                {"label": "one"},
+                {"label": "two"},
+                {"label": "three"},
+                {"label": "complete"}
+            ]
+        },
+
+        methods: {
+            nextStep(next=true) {
+                const steps = this.steps
+                const currentStep = this.currentStep
+                const currentIndex = steps.indexOf(currentStep)
+
+                // handle back
+                if (!next) {
+                    if (currentStep && currentStep.label === 'complete') {
+                        return this.currentStep = steps[steps.length - 1]
+                    }
+
+                    if (steps[currentIndex - 1]) {
+                        return this.currentStep = steps[currentIndex - 1]
+                    }
+
+                    return this.currentStep = { "label": "start" }
+                }
+
+                // handle next
+                if (this.currentStep && this.currentStep.label === 'complete') {
+                    return this.currentStep = { "label": "start" }
+                }
+
+                if (steps[currentIndex + 1]) {
+                    return this.currentStep = steps[currentIndex + 1]
+                }
+
+                this.currentStep = { "label": "complete" }
+            },
+
+            stepClasses(index) {
+                let result = `progress__step progress__step--${index + 1} `
+                if (this.currentStep && this.currentStep.label === 'complete' ||
+                  index < this.steps.indexOf(this.currentStep)) {
+                    return result += 'progress__step--complete'
+                }
+                if (index === this.steps.indexOf(this.currentStep)) {
+                    return result += 'progress__step--active'
+                }
+                return result
+            }
+        },
+
+        computed: {
+            progressClasses() {
+                let result = 'progress '
+                if (this.currentStep && this.currentStep.label === 'complete') {
+                    return result += 'progress--complete'
+                }
+                return result += `progress--${this.steps.indexOf(this.currentStep) + 1}`
+            }
+        }
+    })
+*/
+</script>
 </body>
 </html>
 

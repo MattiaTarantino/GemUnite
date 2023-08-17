@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_variables, only: %i[ show edit update destroy change_state]
+  before_action :is_member?
+  before_action :project_started?, only: %i[ new edit update destroy create change_state ]
 
   # GET /tasks or /tasks.json
   def index
@@ -13,6 +15,8 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @checkpoint = Checkpoint.find(params[:checkpoint_id])
+    @project = Project.find(@checkpoint.project_id)
   end
 
   # GET /tasks/1/edit
@@ -22,10 +26,11 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @checkpoint = Checkpoint.find(params[:checkpoint_id])
+    @checkpoint.tasks << @task
     respond_to do |format|
       if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+        format.html { redirect_to project_checkpoint_path(project_id: params[:project_id], id: @checkpoint.id), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -57,10 +62,47 @@ class TasksController < ApplicationController
     end
   end
 
+  def change_state
+    if @task.completato == true
+      redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Task già completato"
+    end
+    @task.completato = true
+    @task.save
+    redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
+    def set_variables
+      parameter = params[:id] || params[:task_id]
+      @task = Task.find(parameter)
+      @checkpoint = Checkpoint.find(@task.checkpoint_id)
+      @project = Project.find(@checkpoint.project_id)
+    end
+
+    def is_member?
+      @user_project = UserProject.where(user_id: current_user.id, project_id: params[:project_id]).first
+      if @user_project.nil?
+        redirect_to my_projects_projects_path
+        flash[:notice] = "Non sei membro di questo progetto"
+      else
+        @role = @user_project.role
+      end
+    end
+
+    def project_started?
+      @project = Project.find(params[:project_id])
+      if @project.stato == "aperto"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto non è ancora iniziato"
+        return
+      end
+
+      if @project.stato == "chiuso"
+        redirect_to project_show_my_project_path(project_id: @project.id)
+        flash[:notice] = "Il progetto è chiuso"
+        return
+      end
     end
 
     # Only allow a list of trusted parameters through.

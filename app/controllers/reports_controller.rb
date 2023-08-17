@@ -1,4 +1,4 @@
-class ReportsController < InheritedResources::Base
+class ReportsController < ApplicationController
 
   private
 

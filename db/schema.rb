@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_153720) do
   create_table "checkpoints", force: :cascade do |t|
     t.string "nome"
     t.string "descrizione"
-    t.string "completato"
+    t.boolean "completato", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "project_id", null: false
@@ -103,7 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_153720) do
   create_table "tasks", force: :cascade do |t|
     t.string "nome"
     t.string "descrizione"
-    t.string "completato"
+    t.boolean "completato", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "checkpoint_id", null: false
@@ -138,10 +138,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_153720) do
   end
 
   add_foreign_key "checkpoints", "projects"
+  add_foreign_key "fields_projects", "fields", on_delete: :cascade
+  add_foreign_key "fields_projects", "projects", on_delete: :cascade
+  add_foreign_key "fields_users", "fields", on_delete: :cascade
+  add_foreign_key "fields_users", "users", on_delete: :cascade
   add_foreign_key "reports", "users"
-  add_foreign_key "requests", "projects"
-  add_foreign_key "requests", "users"
+  add_foreign_key "requests", "projects", on_delete: :cascade
+  add_foreign_key "requests", "users", on_delete: :cascade
   add_foreign_key "tasks", "checkpoints"
-  add_foreign_key "user_projects", "projects"
-  add_foreign_key "user_projects", "users"
+  add_foreign_key "user_projects", "projects", on_delete: :cascade
+  add_foreign_key "user_projects", "users", on_delete: :cascade
 end

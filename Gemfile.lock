@@ -90,10 +90,15 @@ GEM
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
+    autoprefixer-rails (10.4.13.0)
+      execjs (~> 2)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    bootstrap-sass (3.4.1)
+      autoprefixer-rails (>= 5.2.1)
+      sassc (>= 2.0.0)
     builder (3.2.4)
     capybara (3.39.2)
       addressable
@@ -125,6 +130,7 @@ GEM
       faraday (~> 1)
       multi_json
     erubi (1.12.0)
+    execjs (2.8.1)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     faraday (1.2.0)
@@ -328,6 +334,7 @@ GEM
     sqlite3 (1.6.3-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    table_print (1.5.7)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
@@ -365,6 +372,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 3.0)
   bootsnap
+  bootstrap-sass
   capybara
   debug
   devise (~> 4.9)
@@ -386,6 +394,7 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
+  table_print
   turbo-rails
   tzinfo-data
   web-console
