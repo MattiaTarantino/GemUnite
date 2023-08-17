@@ -41,6 +41,11 @@ body {
     padding: 20px;
 }
 
+img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
 .chat-project {
     display: flex;
     justify-content: space-between;
