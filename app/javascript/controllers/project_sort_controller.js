@@ -12,9 +12,7 @@ export default class extends Controller {
         const url = `/projects?sort_by=${sortBy}`;
 
         // Refresh the page
-        // Turbo.visit(url);
-
-        this.doTurboRequest(url);
+        Turbo.visit(url);
     }
     doTurboRequest(url) {
         fetch(url, {
