@@ -13,6 +13,10 @@ class LatestNewsController < ApplicationController
     current_date = Time.now.strftime("%Y-%m-%d")
     from_date = (Time.now - 1.month + 1.day).strftime("%Y-%m-%d")
 
+    if topics == ""
+      topics = "IT"
+    end
+
     @all_articles = newsapi.get_everything(q: topics,
                                            from: from_date,
                                            to: current_date,
