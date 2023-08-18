@@ -5,7 +5,6 @@ class ProjectsController < ApplicationController
   before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
 
 
-  # GET /projects or /projects.json
   def is_member?
     @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
     if @user_project.nil?
@@ -23,56 +22,54 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Non sei il leader di questo progetto"
     end
   end
-  # GET /progettos or /progettos.json
+
+  # GET /projects or /projects.json
   def index
-=begin
+
     @all_fields = Field.all.ids
-    if params[:field] == nil
-      if session[:field] == nil
+
+    if !params[:filter_by].present?
+      if !session[:filter_by].present?
         @selected_fields = @all_fields
       else
-        @selected_fields = session[:field]
+        if session[:filter_by] == "all"
+          @selected_fields = @all_fields
+        else
+          @selected_fields = session[:filter_by]
+        end
       end
-    elsif params[:field] != nil
-      @selected_fields = params[:field]
+    elsif params[:filter_by].present?
+      if params[:filter_by] == "all"
+        @selected_fields = @all_fields
+      else
+      @selected_fields = params[:filter_by]
+      end
     else
       @selected_fields = @all_fields
     end
 
-    base = Project.where(id: FieldsProject.where(field_id: params[:field]).ids)
 
-    base = case params[:sort_by]
-             when 'members'
-               base.order(dimensione: :desc)
-             when 'members_reverse'
-               base.order(dimensione: :asc)
-             when 'time_posted_reverse'
-               base.order(created_at: :asc)
-             when 'time_posted'
-               base.order(created_at: :desc)
-             else
-               base.order(created_at: :desc)
-           end
+    session[:filter_by] = @selected_fields
 
-    @project = base.all
-=end
-    @projects = case params[:sort_by]
+    base = Project.joins(:fields).where(fields: {id: @selected_fields}).distinct
+
+    sorting = params[:sort_by] || session[:sort_by]
+
+    base = case sorting
                 when 'members'
-                  Project.order(dimensione: :desc)
+                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id)')
                 when 'members_reverse'
-                  Project.order(dimensione: :asc)
+                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id) DESC')
                 when 'time_posted_reverse'
-                  Project.order(created_at: :asc)
+                  base.order(created_at: :asc)
                 when 'time_posted'
-                  Project.order(created_at: :desc)
+                  base.order(created_at: :desc)
                 else
-                  Project.order(created_at: :desc)
+                  base.order(created_at: :desc)
                 end
+    session[:sort_by] = sorting
+    @projects = base.all
 
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
   end
 
   # GET /projects/1 or /projects/1.json

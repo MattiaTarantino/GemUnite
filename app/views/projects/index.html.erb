@@ -9,9 +9,10 @@
       <option value="members_reverse" <%= 'selected' if params[:sort_by] == 'members_reverse' %> >Numero membri (decrescente)</option>
     </select>
 </div>
-<%= form_with url: projects_path do |form| %>
-  <%= form.label "Filtra per ambito" %>
-  <%= form.select :field, options_for_select(Field.all.map { |fie| [fie.nome, fie.id] }.insert(0, nil)) %>
+<%= form_tag(projects_path, method: :get) do %>
+  <%= label_tag :filter_by, "Seleziona un campo:" %>
+  <%= select_tag :filter_by, options_for_select([["Tutti", "all"]] + Field.all.map { |fie| [fie.nome, fie.id] }) %>
+  <%= submit_tag "Filtra" %>
 <% end %>
 <%= render "projects/projects", projects: @projects %>
 
