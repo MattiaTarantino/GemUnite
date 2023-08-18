@@ -22,23 +22,68 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Non sei il leader di questo progetto"
     end
   end
-  # GET /progettos or /progettos.json
+
+  # GET /projects or /projects.json
   def index
-    @projects = Project.all
+
+    @all_fields = Field.all.ids
+
+    if !params[:filter_by].present?
+      if !session[:filter_by].present?
+        @selected_fields = @all_fields
+      else
+        if session[:filter_by] == "all"
+          @selected_fields = @all_fields
+        else
+          @selected_fields = session[:filter_by]
+        end
+      end
+    elsif params[:filter_by].present?
+      if params[:filter_by] == "all"
+        @selected_fields = @all_fields
+      else
+      @selected_fields = params[:filter_by]
+      end
+    else
+      @selected_fields = @all_fields
+    end
+
+
+    session[:filter_by] = @selected_fields
+
+    base = Project.joins(:fields).where(fields: {id: @selected_fields}).distinct
+
+    sorting = params[:sort_by] || session[:sort_by]
+
+    base = case sorting
+                when 'members'
+                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id)')
+                when 'members_reverse'
+                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id) DESC')
+                when 'time_posted_reverse'
+                  base.order(created_at: :asc)
+                when 'time_posted'
+                  base.order(created_at: :desc)
+                else
+                  base.order(created_at: :desc)
+                end
+    session[:sort_by] = sorting
+    @projects = base.all
+
   end
 
-  # GET /progettos/1 or /progettos/1.json
+  # GET /projects/1 or /projects/1.json
   def show
     @project = Project.find(params[:id])
   end
 
-  # GET /progettos/new
+  # GET /projects/new
   def new
     @project = Project.new
     @fields = Field.all
   end
 
-  # GET /progettos/1/edit
+  # GET /projects/1/edit
   def edit
     @fields = @project.fields
   end
@@ -64,7 +109,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /progettos/1 or /progettos/1.json
+  # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
       parameters = project_params.except(:ambiti)
@@ -90,7 +135,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /progettos/1 or /progettos/1.json
+  # DELETE /projects/1 or /projects/1.json
   def destroy
     @project.destroy
 
