@@ -15,4 +15,8 @@
   <%= submit_tag "Filtra" %>
 <% end %>
 <%= render "projects/projects", projects: @projects %>
+<div id="segnalazione">
+  <%= link_to "Manda una segnalazione", new_report_path%>
+</div>
+
 
