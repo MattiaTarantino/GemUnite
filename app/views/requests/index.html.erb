@@ -1,14 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Requests</h1>
+<h1></h1>
 
-<div id="requests">
-  <% @requests.each do |request| %>
-    <%= render request %>
-    <p>
-      <%= link_to "Show this request", request %>
-    </p>
-  <% end %>
-</div>
+<%= render "request", request: @requests %>
 
-<%= link_to "New request", new_request_path %>

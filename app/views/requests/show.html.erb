@@ -3,8 +3,8 @@
 <%= render @request %>
 
 <div>
-  <%= link_to "Edit this request", edit_request_path(@request) %> |
-  <%= link_to "Back to requests", requests_path %>
+  <%= link_to "Edit this request", edit_project_request_path(@request) %> |
+  <%= link_to "Back to requests", project_request_path %>
 
-  <%= button_to "Destroy this request", @request, method: :delete %>
+  <%= button_to "Cancella la tua richiesta", @request, method: :delete %>
 </div>

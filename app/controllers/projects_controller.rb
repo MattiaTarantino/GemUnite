@@ -48,7 +48,6 @@ class ProjectsController < ApplicationController
       @selected_fields = @all_fields
     end
 
-
     session[:filter_by] = @selected_fields
 
     base = Project.joins(:fields).where(fields: {id: @selected_fields}).distinct

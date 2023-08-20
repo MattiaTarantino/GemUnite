@@ -16,6 +16,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :requests, only: [:my_request] do
+    collection do
+      get 'my_requests'
+    end
+  end
+
+
   resources :latest_news
   resources :fields
   resources :reports
