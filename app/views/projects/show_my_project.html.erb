@@ -43,11 +43,18 @@
 
 <div class="chat-project">
   <div class="chat-container">
-    <div class="chat-log" id="chat-log"></div>
-    <div class="chat-input">
-      <input type="text" id="message-input" placeholder="Type your message...">
-      <button id="send-button">Send</button>
+    <div class="chat-log" id="chat-log">
+      <% @messages.each do |message| %>
+        <div class="message">
+          <%= User.find(message.user_id).username %>: <%= message.content %>
+        </div>
+      <% end %>
     </div>
+    <%= form_with model: [ @project, @chat, Message.new ], local: false, id: "ajax-form" do |form| %>
+      <%= form.text_field :content, id: 'message-input', placeholder: 'Type your message...' %>
+      <%= form.submit 'Send', id: 'send-button' %>
+    <% end %>
+
   </div>
 
   <div class="project-container bg-light p-4">
@@ -77,111 +84,9 @@
 
 
 <script>
-    const chatLog = document.getElementById('chat-log');
-    const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
-
-    sendButton.addEventListener('click', sendMessage);
-
-    function sendMessage() {
-        const message = messageInput.value.trim();
-        if (message != '') {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.textContent = message;
-            chatLog.appendChild( messageElement);
-
-            // Clear the input field
-            messageInput.value = '';
-            /*
-            // Optionally, you can add a response from the bot
-            const botResponse = document.createElement('div');
-            botResponse.classList.add('bot-message');
-            botResponse.textContent = 'Bot: ' + getBotResponse(message);
-            chatLog.appendChild(botResponse);
-*/
-            // Scroll to the bottom of the chat log
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-    }
-    /*
-        function getBotResponse(userMessage) {
-            // Here you can implement a function to generate a bot response based on user input
-            // For simplicity, let's just echo the user's message for now
-            return userMessage;
-        }
-        */
-
-/*
-    var app = new Vue({
-        el: '#app',
-
-        data: {
-            currentStep: null,
-            steps: [
-                {"label": "one"},
-                {"label": "two"},
-                {"label": "three"},
-                {"label": "complete"}
-            ]
-        },
-
-        methods: {
-            nextStep(next=true) {
-                const steps = this.steps
-                const currentStep = this.currentStep
-                const currentIndex = steps.indexOf(currentStep)
-
-                // handle back
-                if (!next) {
-                    if (currentStep && currentStep.label === 'complete') {
-                        return this.currentStep = steps[steps.length - 1]
-                    }
-
-                    if (steps[currentIndex - 1]) {
-                        return this.currentStep = steps[currentIndex - 1]
-                    }
-
-                    return this.currentStep = { "label": "start" }
-                }
-
-                // handle next
-                if (this.currentStep && this.currentStep.label === 'complete') {
-                    return this.currentStep = { "label": "start" }
-                }
-
-                if (steps[currentIndex + 1]) {
-                    return this.currentStep = steps[currentIndex + 1]
-                }
-
-                this.currentStep = { "label": "complete" }
-            },
-
-            stepClasses(index) {
-                let result = `progress__step progress__step--${index + 1} `
-                if (this.currentStep && this.currentStep.label === 'complete' ||
-                  index < this.steps.indexOf(this.currentStep)) {
-                    return result += 'progress__step--complete'
-                }
-                if (index === this.steps.indexOf(this.currentStep)) {
-                    return result += 'progress__step--active'
-                }
-                return result
-            }
-        },
-
-        computed: {
-            progressClasses() {
-                let result = 'progress '
-                if (this.currentStep && this.currentStep.label === 'complete') {
-                    return result += 'progress--complete'
-                }
-                return result += `progress--${this.steps.indexOf(this.currentStep) + 1}`
-            }
-        }
-    })
-*/
+    var objDiv = document.getElementById("chat-log");
+    objDiv.scrollTop = objDiv.scrollHeight;
 </script>
+
 </body>
-</html>
 
