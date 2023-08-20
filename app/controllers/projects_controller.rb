@@ -90,14 +90,17 @@ class ProjectsController < ApplicationController
   def create
     parameters = project_params.except(:ambiti)
     @project = Project.new(parameters)
-    id_ambiti = params[:project][:ambiti].drop(1)
+    id_ambiti = params[:project][:field_id].drop(1)
     id_ambiti.each do |ambito|
       @project.fields << Field.find(ambito)
     end
 
+
     respond_to do |format|
       if @project.save
         @user_project = UserProject.new(user_id: current_user.id, project_id: @project.id, role: "leader")
+        @chat = Chat.new(project_id: @project.id)
+        @chat.save
         @user_project.save
         format.html { redirect_to project_url(@project), notice: "Progetto was successfully created." }
         format.json { render :show, status: :created, location: @project }
@@ -160,6 +163,15 @@ class ProjectsController < ApplicationController
     redirect_to my_projects_projects_path
   end
 
+  def my_projects
+  end
+
+  def show_my_project
+    @checkpoints = @project.checkpoints
+    @chat = @project.chat # attenzione che alcuni non ce l'hanno
+    @messages = @chat.messages
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -187,13 +199,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :ambiti => [])
     end
-  def my_projects
 
-  end
-
-  def show_my_project
-    @checkpoints = @project.checkpoints
-  end
 
 
 

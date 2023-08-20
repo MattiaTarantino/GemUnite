@@ -34,7 +34,7 @@
 
   <div>
     <%= form.label :field, style: "display: block" %>
-    <%= form.select :field_id, options_for_select(Field.all.map{|fie| [fie.nome, fie.id]})%>
+    <%= form.select :field_id, options_for_select(Field.all.map{|fie| [fie.nome, fie.id]}), {}, { multiple: true } %>
   </div>
 
   <div>

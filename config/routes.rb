@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     get 'show_my_project'
     put 'close_requests'
     put 'close_project'
+    resources :chats, only: [] do
+      resources :messages, only: [:create]
+    end
     resources :requests
     resources :checkpoints do
       put 'change_state'
