@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @request %>
+
+<%= render "request", request: @request %>
 
 <div>
-  <%= link_to "Edit this request", edit_project_request_path(@request) %> |
-  <%= link_to "Back to requests", project_request_path %>
+  <%= link_to "Torna ai progetti", projects_path %>
 
-  <%= button_to "Cancella la tua richiesta", @request, method: :delete %>
 </div>

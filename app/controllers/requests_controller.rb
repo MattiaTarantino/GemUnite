@@ -27,13 +27,14 @@ class RequestsController < ApplicationController
   # POST /requests or /requests.json
   def create
     @request = Request.new(request_params)
-    @request.project_id = params[:project_id]
+    @project_id = params[:project_id]
+    @request.project_id = @project_id
     @request.user_id = current_user.id
     @request.stato_accettazione = "In attesa"
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to project_requests_url, notice: "Request was successfully created." }
+        format.html { redirect_to project_request_path(project_id: @project_id, id: @request.id), notice: "Request was successfully created." }
         format.json { render :show, status: :created, location: @request }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +47,7 @@ class RequestsController < ApplicationController
   def update
     respond_to do |format|
       if @request.update(request_params)
-        format.html { redirect_to request_url(@request), notice: "Request was successfully updated." }
+        format.html { redirect_to project_request_path(project_id: @project_id, id: @request.id), notice: "Request was successfully updated." }
         format.json { render :show, status: :ok, location: @request }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -68,6 +69,7 @@ class RequestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request
+      @project = Project.find(params[:project_id])
       @request = Request.find(params[:id])
     end
 
