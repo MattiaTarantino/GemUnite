@@ -16,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["fields", "projects", "reports", "requests"]
+    ["fields", "projects", "reports", "requests", "user_projects", "chats"]
   end
 
   def self.from_omniauth(auth)

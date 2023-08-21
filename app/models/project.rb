@@ -12,9 +12,9 @@ class Project < ApplicationRecord
   validates :info_leader, presence: true
   validates :name, presence: true
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "descrizione", "dimensione", "id", "info_leader", "stato", "updated_at"]
+    ["created_at", "descrizione", "dimensione", "id", "info_leader", "stato", "updated_at", "name"]
   end
   def self.ransackable_associations(auth_object = nil)
-    ["requests"]
+    ["requests", "user_projects", "users", "checkpoints", "tasks", "chat", "fields"]
   end
 end
