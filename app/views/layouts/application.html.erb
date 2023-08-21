@@ -26,7 +26,7 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <!-- <a class="navbar-brand" href="#">Projects</a> da aggiungere (diversa per ogni pagina) -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,16 +35,15 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <% if user_signed_in? %>
-
-            <%= link_to "Home ", root_path, { :class=>"nav-link" } %>
-            <%= link_to "I miei progetti", my_projects_projects_path, class: "nav-link" %>
-            <%= link_to "Le mie richieste", my_requests_requests_path, class: "nav-link" %>
-            <%= link_to "Notizie ", latest_news_index_path, { :class=>"nav-link" } %>
-            <%= link_to "Profilo ", edit_user_registration_path, { :class=>"nav-link" } %>
-            <%= link_to "Log out ", destroy_user_session_path, { :class=>"nav-link" } %>
+            <%= link_to "Home", root_path, class: "nav-link text-dark" %>
+            <%= link_to "I miei progetti", my_projects_projects_path, class: "nav-link text-dark" %>
+            <%= link_to "Le mie richieste", my_requests_requests_path, class: "nav-link text-dark" %>
+            <%= link_to "Notizie", latest_news_index_path, class: "nav-link text-dark" %>
+            <%= link_to "Profilo", edit_user_registration_path, class: "nav-link text-dark" %>
+            <%= link_to "Log out", destroy_user_session_path, class: "nav-link text-dark", method: :delete %>
           <% else %>
-            <%= link_to "Accedi ", new_user_session_path, { :class=>"nav-link" } %>
-            <%= link_to "Registrati", new_user_registration_path, { :class=>"nav-link" } %>
+            <%= link_to "Accedi", new_user_session_path, class: "nav-link text-dark" %>
+            <%= link_to "Registrati", new_user_registration_path, class: "nav-link text-dark" %>
           <% end %>
         </div>
       </div>

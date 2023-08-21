@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, except: %i[ index new create my_projects ]
   before_action :set_user
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
-  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro ]
 
 
   def is_member?
@@ -52,9 +52,9 @@ class ProjectsController < ApplicationController
 
     base = Project.joins(:fields).where(fields: {id: @selected_fields}).distinct
 
-    sorting = params[:sort_by] || session[:sort_by]
+    @sorting = params[:sort_by] || session[:sort_by]
 
-    base = case sorting
+    base = case @sorting
                 when 'members'
                   base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id)')
                 when 'members_reverse'
@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
                 else
                   base.order(created_at: :desc)
                 end
-    session[:sort_by] = sorting
+    session[:sort_by] = @sorting
     @projects = base.all
 
   end
@@ -168,8 +168,17 @@ class ProjectsController < ApplicationController
 
   def show_my_project
     @checkpoints = @project.checkpoints
+    @members = @project.users
     @chat = @project.chat # attenzione che alcuni non ce l'hanno
     @messages = @chat.messages
+  end
+
+  def espelli_membro
+    @user_project = UserProject.find_by(user_id: params[:member_id], project_id: @project.id)
+    if @user_project
+      @user_project.destroy
+    end
+    redirect_to project_show_my_project_path(@project)
   end
 
 

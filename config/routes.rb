@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'show_my_project'
     put 'close_requests'
     put 'close_project'
+    put 'espelli_membro'
     resources :chats, only: [] do
       resources :messages, only: [:create]
     end
@@ -22,9 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
-
-  resources :latest_news
-  resources :fields
+  resources :latest_news, only: [:index]
+  # resources :fields
   resources :reports
   devise_for :users, :controllers => { registrations: 'users/registrations' , omniauth_callbacks: 'users/omniauth_callbacks'  } # per collegare il controller customizzato a devise
   resource :profile, only: [:show, :edit, :update]

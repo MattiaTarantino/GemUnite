@@ -75,7 +75,7 @@ class CheckpointsController < ApplicationController
       @checkpoint.save
       redirect_to project_show_my_project_path(project_id: @project.id)
     else
-      redirect_to project_show_my_project_path(project_id: @project.id), notice: "Non puoi completare il checkpoint se non hai completato tutti i task"
+      redirect_to project_show_my_project_path(project_id: @project.id), notice: "Non puoi completare il checkpoint se non hai completato tutti i task del checkpoint"
     end
   end
 
