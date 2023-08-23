@@ -1,0 +1,78 @@
+<h1>Le tue richieste</h1>
+<div id="requests">
+  <% current_user_requests = @requests.where(:user_id => current_user.id) %>
+  <% if current_user_requests.where(:stato_accettazione => "Accettata").exists? %>
+<h2>Richieste accettate</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Progetto</th>
+      <th>Note</th>
+      <th>Stato</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% current_user_requests.where(:stato_accettazione => "Accettata").each do |request|  %>
+      <tr>
+        <td>
+          <%= request.project.name %>
+        </td>
+        <td><%= request.note %></td>
+        <td><%= request.stato_accettazione %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  <% if current_user_requests.where(:stato_accettazione => "In attesa").exists? %>
+  <h2>Richieste in attesa</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Progetto</th>
+      <th>Note</th>
+      <th>Stato</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% current_user_requests.where(:stato_accettazione => "In attesa").each do |request|  %>
+    <tr>
+        <td>
+          <%= request.project.name %>
+        </td>
+        <td><%= request.note %></td>
+        <td><%= request.stato_accettazione %></td>
+        <td> <%= link_to 'Elimina', project_request_path(request.project_id, request.id),
+                         data: {turbo_method: :delete, turbo_confirm: 'Sei sicuro?'} %> </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  <% if current_user_requests.where(:stato_accettazione => "Rifiutata").exists? %>
+  <h2>Richieste rifiutate</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Progetto</th>
+      <th>Note</th>
+      <th>Stato</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% current_user_requests.where(:stato_accettazione => "Rifiutata").each do |request|  %>
+      <tr>
+        <td>
+          <%= request.project.name %>
+        </td>
+        <td><%= request.note %></td>
+        <td><%= request.stato_accettazione %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  <%= link_to "Ritorna alla home", projects_path %>
+</div>
+

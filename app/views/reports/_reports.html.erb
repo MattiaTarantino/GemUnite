@@ -1,0 +1,18 @@
+<div id="reports">
+  <% current_user_reports = @reports.where(:user_id => current_user.id) %>
+  <table>
+    <thead>
+    <tr>
+    </tr>
+    </thead>
+    <tbody>
+    <% current_user_reports.each do |report|  %>
+        <tr>
+          <td><%= report.descrizione %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Ritorna alla home", projects_path %>
+</div>
+

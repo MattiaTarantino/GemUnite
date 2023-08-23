@@ -1,86 +1,31 @@
 
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Chat Example</title>
-  <style>
-      /* Colori definiti come variabili */
-      :root {
-          --gray:  #E5E5E5;
-          --gray2: #808080;
-          --blue:  #2183DD;
-          --green: #009900;
-          --white: #FFFFFF;
-      }
 
-      body {
-          font-family: Arial, sans-serif;
-      }
-
-      .chat-project {
-          display: flex;
-          justify-content: space-between;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-      }
-
-      .chat-container {
-          max-width: 400px;
-          margin: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          padding: 10px;
-          border-radius: 30px;
-      }
-
-      .project-container {
-          border-radius: 30px;
-      }
-
-      .chat-log {
-          height: 300px;
-          overflow-y: scroll;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          padding: 10px;
-          margin-bottom: 10px;
-      }
-
-      .chat-input {
-          display: flex;
-      }
-
-      #message-input {
-          flex: 1;
-          padding: 5px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-      }
-
-      #send-button {
-          padding: 5px 10px;
-          border: none;
-          background-color: #007bff;
-          color: white;
-          border-radius: 5px;
-          cursor: pointer;
-      }
-
-
-  </style>
 <body>
 <h1><%= @project.name %></h1>
 <% if @project.checkpoints.present? %>
   <% @project.checkpoints.each do |checkpoint| %>
     <tr>
       <td><%= checkpoint.nome %></td>
-     <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+      <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+      <% if @role == "leader" and @project.stato == "iniziato" and !checkpoint.completato %>
+        <td>
+          <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
+                        method: :put,
+                        class: "btn btn-outline-primary btn-sm",
+                        title: "Segna come completato",
+                        data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+            </svg>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
     <br>
 
@@ -91,18 +36,25 @@
     <td colspan="4">No checkpoints available.</td>
   </tr>
 <% end %>
-<% if @role == "leader" %>
+<% if @role == "leader" and @project.stato == "iniziato"%>
     <br>
   <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
 <% end %>
 
 <div class="chat-project">
   <div class="chat-container">
-    <div class="chat-log" id="chat-log"></div>
-    <div class="chat-input">
-      <input type="text" id="message-input" placeholder="Type your message...">
-      <button id="send-button">Send</button>
+    <div class="chat-log" id="chat-log">
+      <% @messages.each do |message| %>
+        <div class="message">
+          <%= User.find(message.user_id).username %>: <%= message.content %>
+        </div>
+      <% end %>
     </div>
+    <%= form_with model: [ @project, @chat, Message.new ], local: false, id: "ajax-form" do |form| %>
+      <%= form.text_field :content, id: 'message-input', placeholder: 'Type your message...' %>
+      <%= form.submit 'Send', id: 'send-button' %>
+    <% end %>
+
   </div>
 
   <div class="project-container bg-light p-4">
@@ -119,7 +71,7 @@
         <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
       <% end %>
 
-      <% if @project.stato != "chiuso" %>
+      <% if @project.stato == "iniziato" %>
         <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
       <% end %>
 
@@ -128,116 +80,33 @@
   </div>
 </div>
 
-<%= link_to "Back to My Projects", my_projects_projects_path, class: "btn btn-custom-center" %>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Membri del Progetto</h2>
+      <ul class="list-group">
+        <% @members.each do |member| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= member.email %>
+            <% if @role == "leader" and member.id != current_user.id %>
+              <%= button_to "Espelli", project_espelli_membro_path(project_id: @project.id, member_id: member.id), method: :put, data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di voler espellere questo membro?" } %>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 
 <script>
-    const chatLog = document.getElementById('chat-log');
-    const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
-
-    sendButton.addEventListener('click', sendMessage);
-
-    function sendMessage() {
-        const message = messageInput.value.trim();
-        if (message !== '') {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.textContent = message;
-            chatLog.appendChild(messageElement);
-
-            // Clear the input field
-            messageInput.value = '';
-            /*
-            // Optionally, you can add a response from the bot
-            const botResponse = document.createElement('div');
-            botResponse.classList.add('bot-message');
-            botResponse.textContent = 'Bot: ' + getBotResponse(message);
-            chatLog.appendChild(botResponse);
-*/
-            // Scroll to the bottom of the chat log
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-    }
-    /*
-        function getBotResponse(userMessage) {
-            // Here you can implement a function to generate a bot response based on user input
-            // For simplicity, let's just echo the user's message for now
-            return userMessage;
-        }
-        */
-
-/*
-    var app = new Vue({
-        el: '#app',
-
-        data: {
-            currentStep: null,
-            steps: [
-                {"label": "one"},
-                {"label": "two"},
-                {"label": "three"},
-                {"label": "complete"}
-            ]
-        },
-
-        methods: {
-            nextStep(next=true) {
-                const steps = this.steps
-                const currentStep = this.currentStep
-                const currentIndex = steps.indexOf(currentStep)
-
-                // handle back
-                if (!next) {
-                    if (currentStep && currentStep.label === 'complete') {
-                        return this.currentStep = steps[steps.length - 1]
-                    }
-
-                    if (steps[currentIndex - 1]) {
-                        return this.currentStep = steps[currentIndex - 1]
-                    }
-
-                    return this.currentStep = { "label": "start" }
-                }
-
-                // handle next
-                if (this.currentStep && this.currentStep.label === 'complete') {
-                    return this.currentStep = { "label": "start" }
-                }
-
-                if (steps[currentIndex + 1]) {
-                    return this.currentStep = steps[currentIndex + 1]
-                }
-
-                this.currentStep = { "label": "complete" }
-            },
-
-            stepClasses(index) {
-                let result = `progress__step progress__step--${index + 1} `
-                if (this.currentStep && this.currentStep.label === 'complete' ||
-                  index < this.steps.indexOf(this.currentStep)) {
-                    return result += 'progress__step--complete'
-                }
-                if (index === this.steps.indexOf(this.currentStep)) {
-                    return result += 'progress__step--active'
-                }
-                return result
-            }
-        },
-
-        computed: {
-            progressClasses() {
-                let result = 'progress '
-                if (this.currentStep && this.currentStep.label === 'complete') {
-                    return result += 'progress--complete'
-                }
-                return result += `progress--${this.steps.indexOf(this.currentStep) + 1}`
-            }
-        }
-    })
-*/
+    var objDiv = document.getElementById("chat-log");
+    objDiv.scrollTop = objDiv.scrollHeight;
 </script>
+
 </body>
-</html>
 

@@ -33,10 +33,9 @@
   </div>
 
   <div>
-    <%= form.label :ambiti, style: "display: block" %>
-    <%= form.collection_select(:ambiti, @fields, :id, :nome, {}, {multiple: :true, required: :true}) %>
+    <%= form.label :field, style: "display: block" %>
+    <%= form.select :field_id, options_for_select(Field.all.map{|fie| [fie.nome, fie.id]}), {}, { multiple: true } %>
   </div>
-
 
   <div>
     <%= form.submit %>

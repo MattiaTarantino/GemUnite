@@ -1,0 +1,46 @@
+<div id="projects">
+  <% current_user_fields = current_user.fields.pluck(:nome) %>
+  <% project_ids_user_is_member = UserProject.where(user_id: current_user.id).pluck(:project_id) %>
+
+  <% projects_with_common_fields = @projects.select do |project|
+    (project.fields.pluck(:nome) & current_user_fields).any?
+  end %>
+
+  <% projects_not_member = projects_with_common_fields.reject do |project|
+    project_ids_user_is_member.include?(project.id)
+  end %>
+  <table>
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrizione</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% projects_not_member.each do |project|  %>
+      <% if project.stato == "aperto"%>
+        <tr>
+          <td><%= project.name %></td>
+          <td><%= project.descrizione %></td>
+          <td>Numero membri:
+            <%= UserProject.where(:project_id => project.id).count %></td>
+          <td>Ambito:
+            <% project.fields.each do |field| %>
+              <%= field.nome %>
+            <% end %>
+          </td>
+          <td> Leader:
+            <% project.user_projects.each do |user_project| %>
+              <% if user_project.role == "leader" %>
+              <%= user_project.user.username %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= link_to "Show this project", project, class: "project-link" %> </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

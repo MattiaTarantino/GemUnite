@@ -31,8 +31,7 @@
           font-weight: 600;
           color: slategray;
       }
-      .back-button {
-
+      .back-button {         
           display: inline-block;
           background-color: white;
           color: white;
@@ -91,6 +90,7 @@
   <% else %>
     <p class="project-description">No project found.</p>
   <% end %>
+  <%= link_to "Richiedi di partecipare", new_project_request_path(@project) %>
 </div>
 
 <%= link_to "Back to projects", projects_path, class: "back-button" %>

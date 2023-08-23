@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, except: %i[ index new create my_projects ]
   before_action :set_user
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
-  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro ]
 
 
   def is_member?
@@ -22,24 +22,68 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Non sei il leader di questo progetto"
     end
   end
-  # GET /progettos or /progettos.json
+
+  # GET /projects or /projects.json
   def index
-    @projects = Project.all
+
+    @all_fields = Field.all.ids
+
+    if !params[:filter_by].present?
+      if !session[:filter_by].present?
+        @selected_fields = @all_fields
+      else
+        if session[:filter_by] == "all"
+          @selected_fields = @all_fields
+        else
+          @selected_fields = session[:filter_by]
+        end
+      end
+    elsif params[:filter_by].present?
+      if params[:filter_by] == "all"
+        @selected_fields = @all_fields
+      else
+      @selected_fields = params[:filter_by]
+      end
+    else
+      @selected_fields = @all_fields
+    end
+
+    session[:filter_by] = @selected_fields
+
+    base = Project.joins(:fields).where(fields: {id: @selected_fields}).distinct
+
+    @sorting = params[:sort_by] || session[:sort_by]
+
+    base = case @sorting
+                when 'members'
+                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id)')
+                when 'members_reverse'
+                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id) DESC')
+                when 'time_posted_reverse'
+                  base.order(created_at: :asc)
+                when 'time_posted'
+                  base.order(created_at: :desc)
+                else
+                  base.order(created_at: :desc)
+                end
+    session[:sort_by] = @sorting
+    @projects = base.all
+
   end
 
-  # GET /progettos/1 or /progettos/1.json
+  # GET /projects/1 or /projects/1.json
   def show
     @project = Project.find(params[:id])
     @members = @project.user_projects.map(&:user)
   end
 
-  # GET /progettos/new
+  # GET /projects/new
   def new
     @project = Project.new
     @fields = Field.all
   end
 
-  # GET /progettos/1/edit
+  # GET /projects/1/edit
   def edit
     @fields = @project.fields
   end
@@ -47,14 +91,17 @@ class ProjectsController < ApplicationController
   def create
     parameters = project_params.except(:ambiti)
     @project = Project.new(parameters)
-    id_ambiti = params[:project][:ambiti].drop(1)
+    id_ambiti = params[:project][:field_id].drop(1)
     id_ambiti.each do |ambito|
       @project.fields << Field.find(ambito)
     end
 
+
     respond_to do |format|
       if @project.save
         @user_project = UserProject.new(user_id: current_user.id, project_id: @project.id, role: "leader")
+        @chat = Chat.new(project_id: @project.id)
+        @chat.save
         @user_project.save
         format.html { redirect_to project_url(@project), notice: "Progetto was successfully created." }
         format.json { render :show, status: :created, location: @project }
@@ -65,7 +112,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /progettos/1 or /progettos/1.json
+  # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
       parameters = project_params.except(:ambiti)
@@ -91,7 +138,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /progettos/1 or /progettos/1.json
+  # DELETE /projects/1 or /projects/1.json
   def destroy
     @project.destroy
 
@@ -115,6 +162,24 @@ class ProjectsController < ApplicationController
     @project.stato = "chiuso"
     @project.save!
     redirect_to my_projects_projects_path
+  end
+
+  def my_projects
+  end
+
+  def show_my_project
+    @checkpoints = @project.checkpoints
+    @members = @project.users
+    @chat = @project.chat # attenzione che alcuni non ce l'hanno
+    @messages = @chat.messages
+  end
+
+  def espelli_membro
+    @user_project = UserProject.find_by(user_id: params[:member_id], project_id: @project.id)
+    if @user_project
+      @user_project.destroy
+    end
+    redirect_to project_show_my_project_path(@project)
   end
 
 
@@ -144,13 +209,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :info_leader, :dimensione, :descrizione, :ambiti => [])
     end
-  def my_projects
 
-  end
-
-  def show_my_project
-    @checkpoints = @project.checkpoints
-  end
 
 
 
