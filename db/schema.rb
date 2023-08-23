@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_135320) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_092100) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -37,6 +37,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_135320) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "project_id", null: false
+  end
+
   create_table "checkpoints", force: :cascade do |t|
     t.string "nome"
     t.string "descrizione"
@@ -45,6 +51,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_135320) do
     t.datetime "updated_at", null: false
     t.integer "project_id", null: false
     t.index ["project_id"], name: "index_checkpoints_on_project_id"
+  end
+
+  create_table "field_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fields", force: :cascade do |t|
@@ -64,6 +75,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_135320) do
     t.integer "user_id", null: false
     t.integer "field_id", null: false
     t.index ["user_id", "field_id"], name: "index_fields_users_on_user_id_and_field_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "content", limit: 50, null: false
+    t.integer "user_id", null: false
+    t.integer "chat_id", null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -132,11 +151,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_135320) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chats", "projects"
   add_foreign_key "checkpoints", "projects"
   add_foreign_key "fields_projects", "fields", on_delete: :cascade
   add_foreign_key "fields_projects", "projects", on_delete: :cascade
   add_foreign_key "fields_users", "fields", on_delete: :cascade
   add_foreign_key "fields_users", "users", on_delete: :cascade
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "reports", "users"
   add_foreign_key "requests", "projects", on_delete: :cascade
   add_foreign_key "requests", "users", on_delete: :cascade

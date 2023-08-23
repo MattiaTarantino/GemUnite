@@ -125,10 +125,9 @@ GEM
     execjs (2.8.1)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.10)
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (1.2.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
     ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -191,6 +190,7 @@ GEM
     minitest (5.18.1)
     msgpack (1.7.2)
     multi_xml (0.6.0)
+    multipart-post (2.3.0)
     net-imap (0.3.6)
       date
       net-protocol

@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  has_many :reports
-  has_many :requests
+  has_many :reports, dependent: :destroy
+  has_many :requests, dependent: :destroy
   has_and_belongs_to_many :fields
   has_many :user_projects, dependent: :destroy
+  has_many :chats
   has_many :projects, through: :user_projects
 
   # Include default devise modules. Others available are:
@@ -15,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["fields", "projects", "reports", "requests"]
+    ["fields", "projects", "reports", "requests", "user_projects", "chats"]
   end
 
   def self.from_omniauth(auth)
