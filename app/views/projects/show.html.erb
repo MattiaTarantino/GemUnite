@@ -61,6 +61,12 @@
         background-color: lightblue;
     }
   </style>
+  <script> 
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      var popoverList = popoverTriggerList.map(function(popoverTrigger) { 
+        return new bootstrap.Popover(popoverTrigger); 
+      });
+  </script>
 </head>
 <body>
 
@@ -74,7 +80,7 @@
         <li><%= member.username %></li>
       <% end %>
     </ul>
-    <p><%= button_tag "Informazioni Leader" %></p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Informazioni Leader" data-bs-content='<%= @project.info_leader %>'>Mostra Info Leader</button>
     <h2>Informazioni sul Progetto</h2>
     <h3>Ambiti</h3>
     <p class="project-description">
