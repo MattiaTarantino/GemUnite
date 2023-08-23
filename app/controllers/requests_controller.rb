@@ -1,9 +1,29 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :set
+  before_action :is_leader?, only: %i[ show edit update destroy accept decline ]
+
+  def set
+    @project = Project.find(params[:project_id])
+    @user = current_user
+    @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
+  end
+
+  def is_leader?
+    if @user_project.role != "leader"
+      redirect_to root_path
+      flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
+    end
+  end
 
   # GET /requests or /requests.json
   def index
-    @requests = Request.all
+    if @user_project && @user_project.role == "leader"
+      @requests = @project.requests.where(stato_accettazione: "aperta")
+    else
+      redirect_to root_path
+      flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
+    end
   end
   # GET /requests/1 or /requests/1.json
   def show
@@ -64,6 +84,19 @@ class RequestsController < ApplicationController
       format.html { redirect_to my_requests_requests_path, notice: "Request was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def accept
+    @request = Request.find(params[:request_id])
+    @request.update(stato_accettazione: "accettata")
+    UserProject.create(user_id: @user.id, project_id: @project.id)
+    redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta accettata"
+  end
+
+  def decline
+    @request = Request.find(params[:request_id])
+    @request.update(stato_accettazione: "rifiutata")
+    redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta rifiutata"
   end
 
   private

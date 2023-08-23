@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :chats, only: [] do
       resources :messages, only: [:create]
     end
-    resources :requests
+    resources :requests do
+      put 'accept'
+      put 'decline'
+    end
     resources :checkpoints do
       put 'change_state'
       resources :tasks do
