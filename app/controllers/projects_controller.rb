@@ -74,6 +74,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1 or /projects/1.json
   def show
     @project = Project.find(params[:id])
+    @members = @project.user_projects.map(&:user)
   end
 
   # GET /projects/new
