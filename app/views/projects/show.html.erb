@@ -92,11 +92,10 @@
     <p class="project-description"><%= @project.descrizione %></p>
     <h3>Persone richieste per il progetto</h3>
     <p class="project-description"><%= @project.dimensione - @members.count %></p>
-    <%= link_to "Partecipa", "#", class:"project-link" %>   
+    <%= link_to "Partecipa", new_project_request_path(@project), class:"project-link" %>   
   <% else %>
     <p class="project-description">No project found.</p>
   <% end %>
-  <%= link_to "Richiedi di partecipare", new_project_request_path(@project) %>
 </div>
 
 <%= link_to "Back to projects", projects_path, class: "back-button" %>
