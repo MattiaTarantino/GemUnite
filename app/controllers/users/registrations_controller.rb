@@ -12,11 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |user|
-      if params[:user][:field_ids].present?
-        selected_field_ids = params[:user][:field_ids].reject(&:blank?)
+      Rails.logger.info("PARAMS: #{params.inspect}")
+      if params[:field_ids].present?
+        selected_field_ids = params[:field_ids].reject(&:blank?)
   
         if selected_field_ids.any?
           user.fields = Field.where(id: selected_field_ids)
+          user.save
         end
       end
     end
@@ -30,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     super do |user|
-      selected_field_ids = params[:user][:field_ids] || []
+      selected_field_ids = params[:field_ids] || []
       current_field_ids = user.field_ids
   
       fields_to_add = Field.where(id: selected_field_ids - current_field_ids)
