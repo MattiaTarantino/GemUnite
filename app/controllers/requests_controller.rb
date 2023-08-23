@@ -10,7 +10,7 @@ class RequestsController < ApplicationController
   end
 
   def is_leader?
-    if @user_project.role != "leader"
+    if @user_project && @user_project.role != "leader"
       redirect_to root_path
       flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
     end
