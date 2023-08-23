@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
 
   # GET /requests or /requests.json
   def index
-    if @user_project.role == "leader"
+    if @user_project && @user_project.role == "leader"
       @requests = @project.requests.where(stato_accettazione: "aperta")
     else
       redirect_to root_path
