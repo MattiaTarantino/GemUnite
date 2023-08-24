@@ -19,7 +19,7 @@ class RequestsController < ApplicationController
   # GET /requests or /requests.json
   def index
     if @user_project && @user_project.role == "leader"
-      @requests = @project.requests.where(stato_accettazione: "in attesa")
+      @requests = @project.requests.where(stato_accettazione: "In attesa")
     else
       redirect_to root_path
       flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
@@ -89,7 +89,7 @@ class RequestsController < ApplicationController
   def accept
     @request = Request.find(params[:request_id])
     @request.update(stato_accettazione: "accettata")
-    UserProject.create(user_id: @user.id, project_id: @project.id)
+    UserProject.create(user_id: @request.user_id, project_id: @project.id)
     redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta accettata"
   end
 
