@@ -61,11 +61,13 @@
         background-color: lightblue;
     }
   </style>
-  <script> 
+  <script>
+    $(document).ready(function () {
       var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
       var popoverList = popoverTriggerList.map(function(popoverTrigger) { 
         return new bootstrap.Popover(popoverTrigger); 
       });
+    });
   </script>
 </head>
 <body>
