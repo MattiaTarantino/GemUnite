@@ -20,6 +20,7 @@ class RequestsController < ApplicationController
   def index
     if @user_project && @user_project.role == "leader"
       @requests = @project.requests.where(stato_accettazione: "In attesa")
+      @owner = false
     else
       redirect_to root_path
       flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
@@ -27,6 +28,10 @@ class RequestsController < ApplicationController
   end
   # GET /requests/1 or /requests/1.json
   def show
+    @request = Request.find(params[:id])
+    if @user.id == @request.user_id
+      @owner = true
+    end
   end
 
   def my_requests

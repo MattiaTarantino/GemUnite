@@ -14,9 +14,11 @@
     <%= request.note %>
   </p>
 
+<% if @owner == false %>
   <p>
     <%= button_to "Accetta richiesta", project_request_accept_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success" %>
     <%= button_to "Rifiuta richiesta", project_request_decline_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger" %>
   </p>
+  <% end %>
 
 </div>
