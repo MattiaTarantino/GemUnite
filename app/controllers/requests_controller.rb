@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
-  before_action :set
+  before_action :set, except: %i{ my_requests }
   before_action :is_leader?, only: %i[ show edit update destroy accept decline ]
 
   def set

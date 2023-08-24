@@ -23,12 +23,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
     end
   end
-  
+
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+   def edit
+     if current_user.provider
+       render template: 'users/registrations/edit_oauth'
+     else
+       render :edit
+     end
+   end
 
   def update
     super do |user|
@@ -55,6 +59,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
 
   protected
 
