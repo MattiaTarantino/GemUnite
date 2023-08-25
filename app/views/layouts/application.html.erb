@@ -41,8 +41,10 @@
             <%= link_to "Profilo", edit_user_registration_path, class: "nav-link text-dark" %>
             <%= link_to "Log out", destroy_user_session_path, class: "nav-link text-dark", method: :delete %>
           <% else %>
-            <%= link_to "Accedi", new_user_session_path, class: "nav-link text-dark" %>
-            <%= link_to "Registrati", new_user_registration_path, class: "nav-link text-dark" %>
+            <% unless current_page?(root_path) %>
+              <%= link_to "Accedi", new_user_session_path, class: "nav-link text-dark" %>
+              <%= link_to "Registrati", new_user_registration_path, class: "nav-link text-dark" %>
+            <% end %>
           <% end %>
         </div>
       </div>
