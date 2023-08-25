@@ -35,15 +35,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
    end
 
   def update
-    super do |user|
-      selected_field_ids = params[:field_ids] || []
-      current_field_ids = user.field_ids
-  
-      fields_to_add = Field.where(id: selected_field_ids - current_field_ids)
-      fields_to_remove = user.fields.where.not(id: selected_field_ids)
-  
-      user.fields << fields_to_add
-      user.fields.delete(fields_to_remove)
+    @user = current_user
+    selected_field_ids = params[:field_ids] || []
+    current_field_ids = @user.field_ids
+
+    fields_to_add = Field.where(id: selected_field_ids - current_field_ids)
+    fields_to_remove = @user.fields.where.not(id: selected_field_ids)
+
+    @user.fields << fields_to_add
+    @user.fields.delete(fields_to_remove)
+
+    if current_user.provider
+      new_username = params[:username]
+      if @user.update(username: new_username)
+        redirect_to root_path, notice: 'Profile updated successfully'
+      else
+        redirect_to root_path, notice: "Errore nell'aggiornamento del profilo"
+      end
+    else
+      super
     end
   end
   # DELETE /resource

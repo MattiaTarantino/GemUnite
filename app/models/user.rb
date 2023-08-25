@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :chats
   has_many :projects, through: :user_projects
 
+  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
