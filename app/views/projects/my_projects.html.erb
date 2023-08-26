@@ -40,8 +40,9 @@
     <tr>
       <th>Nome</th>
       <th>Stato</th>
-      <th>Azioni</th>
-      <th></th>
+      <th>Accedi</th>
+      <th>Modifica</th>
+      <th>Richieste</th>
 
     </thead>
     <tbody>
@@ -55,6 +56,7 @@
 
           <td><%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "project-link" %></td>
           <td><%= link_to "Modifica progetto", edit_project_path(project), class: "project-link" %></td>
+          <td><%= link_to "Visualizza richieste", project_requests_path(project), class: "project-link" %></td>
         </tr>
       <% end %>
     <% else %>

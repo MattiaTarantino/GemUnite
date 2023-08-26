@@ -42,7 +42,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     fields_to_add = Field.where(id: selected_field_ids - current_field_ids)
     fields_to_remove = @user.fields.where.not(id: selected_field_ids)
 
-    @user.fields << fields_to_add
+    fields_to_add.each do |field|
+      @user.fields << field unless @user.fields.include?(field)
+    end
     @user.fields.delete(fields_to_remove)
 
     if current_user.provider

@@ -67,12 +67,12 @@
       </div>
 
       <div class="mb-3">
-        <%= f.label :password_confirmation, class: "form-label" %>
+        <%= f.label :conferma_password, class: "form-label" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
       </div>
 
       <div class="mb-3">
-        <%= f.label :current_password, class: "form-label" %> <i> (we need your current password to confirm your changes)</i>
+        <%= f.label :password_attuale, class: "form-label" %> <i> (Se vuoi modificare la password devi inserire quella precedente)</i>
         <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
       </div>
 

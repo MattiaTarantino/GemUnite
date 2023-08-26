@@ -1,14 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Requests</h1>
 
 <div id="requests">
-  <% @requests.each do |request| %>
-    <%= render request %>
-    <p>
-      <%= link_to "Show this request", project_request_path(request.project, request) %>
-    </p>
+  <% if @requests.empty? %>
+    <p>Non ci sono richieste di partecipazione in sospeso</p>
+  <% else %>
+    <% @requests.each do |request| %>
+      <%= render request %>
+      <p>
+        <%= link_to "Show this request", project_request_path(request.project, request) %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 
-<%= link_to "New request", new_project_request_path(project_id: @project.id) %>
