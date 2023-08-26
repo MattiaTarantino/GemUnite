@@ -1,14 +1,10 @@
 <h1>Requests</h1>
-
 <div id="requests">
   <% if @requests.empty? %>
     <p>Non ci sono richieste di partecipazione in sospeso</p>
   <% else %>
     <% @requests.each do |request| %>
       <%= render request %>
-      <p>
-        <%= link_to "Show this request", project_request_path(request.project, request) %>
-      </p>
     <% end %>
   <% end %>
 </div>

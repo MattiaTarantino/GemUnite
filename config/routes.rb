@@ -28,7 +28,8 @@ Rails.application.routes.draw do
 
   resources :latest_news, only: [:index]
   # resources :fields
-  resources :reports
+  resources :reports, only: [:index, :new, :create]
+
   devise_for :users, :controllers => { registrations: 'users/registrations' , omniauth_callbacks: 'users/omniauth_callbacks'  } # per collegare il controller customizzato a devise
   resource :profile, only: [:show, :edit, :update]
 

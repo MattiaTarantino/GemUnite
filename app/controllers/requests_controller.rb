@@ -1,7 +1,9 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :set_request, except: %i[ index new create my_requests ]
   before_action :set, except: %i{ my_requests }
   before_action :is_leader?, only: %i[ show edit update destroy accept decline ]
+  before_action :is_project_open?, except: %i[ index new create my_requests ]
+  before_action :is_owner?, only: %i[ show edit update ]
 
   def set
     @project = Project.find(params[:project_id])
@@ -16,6 +18,19 @@ class RequestsController < ApplicationController
     end
   end
 
+  def is_owner?
+    if @user.id != @request.user_id
+      redirect_to root_path
+      flash[:notice] = "Non puoi accedere a questa richiesta"
+    end
+  end
+
+  def is_project_open?
+    if @project.stato != "aperto"
+      redirect_to root_path
+      flash[:notice] = "Le richieste di questo progetto sono chiuse"
+    end
+  end
   # GET /requests or /requests.json
   def index
     if @user_project && @user_project.role == "leader"
@@ -108,7 +123,8 @@ class RequestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_request
       @project = Project.find(params[:project_id])
-      @request = Request.find(params[:id])
+      parameter = params[:id] || params[:request_id]
+      @request = Request.find(parameter)
     end
 
     # Only allow a list of trusted parameters through.
