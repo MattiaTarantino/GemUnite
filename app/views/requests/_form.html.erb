@@ -1,0 +1,11 @@
+<%= form_with(model: @request, :url=> {:action => :create}) do |form| %>
+
+  <div>
+    <%= form.label :note, style: "display: block" %>
+    <%= form.text_field :note %>
+  </div>
+
+  <div>
+    <%= form.submit "Invia richiesta" %>
+  </div>
+<% end %>

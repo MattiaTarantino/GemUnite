@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cool Project View</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          padding: 20px;
+      }
+      .project-container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+      }
+      .project-title {
+          font-size: 24px;
+          color: #2E2F30;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+      .project-description {
+          font-size: 16px;
+          color: #2E2F30;
+          margin-bottom: 10px;
+      }
+      h3 {
+          font-weight: 600;
+          color: slategray;
+      }
+      .back-button {         
+          display: inline-block;
+          background-color: white;
+          color: white;
+          font-size: 16px;
+          padding: 10px 20px;
+          border-radius: 4px;
+          text-decoration: none;
+          margin-top: 20px;
+          transition: background-color 0.3s ease;
+      }
+      .back-button:hover {
+          background-color: lightblue;
+      }
+      /* Style for "Partecipa" link */
+    .project-link {
+        display: inline-block;
+        background-color: #c3d9ff;
+        color: white;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 8px 15px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .project-link:hover {
+        background-color: lightblue;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      var popoverList = popoverTriggerList.map(function(popoverTrigger) { 
+        return new bootstrap.Popover(popoverTrigger); 
+      });
+    });
+  </script>
+</head>
+<body>
+
+<div class="project-container">
+
+  <% if @project %>
+    <h1><%= @project.name %></h1>
+    <h2>Membri del Progetto</h2>
+    <ul class="project-description">
+      <% @members.each do |member| %>
+        <li><%= member.username %></li>
+      <% end %>
+    </ul>
+    <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Informazioni Leader" data-bs-content='<%= @project.info_leader %>'>Mostra Info Leader</button>
+    <h2>Informazioni sul Progetto</h2>
+    <h3>Ambiti</h3>
+    <p class="project-description">
+      <% @project.fields.each do |field|%>
+        <%= field.nome %> <br>
+      <% end %>
+    </p>
+    <h3>Obiettivo/ Descrizione</h3>
+    <p class="project-description"><%= @project.descrizione %></p>
+    <h3>Persone richieste per il progetto</h3>
+    <p class="project-description"><%= @project.dimensione - @members.count %></p>
+    <%= link_to "Partecipa", new_project_request_path(@project), class:"project-link" %>   
+  <% else %>
+    <p class="project-description">No project found.</p>
+  <% end %>
+</div>
+
+<%= link_to "Back to projects", projects_path, class: "back-button" %>
+
+<!-- Admin Only
+  <%= link_to "Edit this project", edit_project_path(@project) %> |
+  <%= button_to "Destroy this project", @project, method: :delete %>
+  -->
+
+</body>
+</html>

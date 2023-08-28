@@ -1,0 +1,11 @@
+<%= form_with(model: @report) do |form| %>
+
+  <div>
+    <%= form.label :descrizione, style: "display: block" %>
+    <%= form.text_field :descrizione %>
+  </div>
+
+  <div>
+    <%= form.submit "Invia segnalazione" %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<h1>New checkpoint</h1>
+
+<%= render "form", checkpoint: @checkpoint %>
+
+<br>
+
+<div>
+  <%= link_to "Torna al progetto", project_show_my_project_path(project_id: @project.id), class: "btn btn-primary" %>
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit User</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+      /* Add any custom CSS styling here */
+      body {
+          margin: 20px;
+      }
+      .info-text {
+          font-size: 80%;
+          color: #777;
+      }
+      .cancel-btn {
+          margin-top: 15px;
+      }
+      .update-password {
+          margin-top: 15px;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "form") do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="mb-3">
+      <label class="form-label">User Name:</label>
+      <input type="text" class="form-control" name="username" value="<%= resource.username %>" >
+    </div>
+
+
+    <div class="mb-3">
+      <label class="form-label">Select Fields:</label>
+      <% Field.all.each do |field| %>
+        <label class="checkbox-label">
+          <input type="checkbox" name="field_ids[]" value="<%= field.id %>" <%= 'checked' if resource.fields.exists?(field.id) %>>
+          <%= field.nome %>
+        </label>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  <div class="d-flex justify-content-center">
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Sei sicuro di eliminare l'account?", turbo_confirm: "Sei sicuro di eliminare l'account?" }, method: :delete, class: "btn btn-danger mr-3" %>
+    <%= link_to "Back", :back, class: "btn btn-secondary" %>
+  </div>
+</div>
+</body>
+</html>

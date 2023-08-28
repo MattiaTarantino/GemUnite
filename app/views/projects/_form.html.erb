@@ -1,0 +1,43 @@
+<%= form_with(model: project) do |form| %>
+  <% if project.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome, style: "display: block" %>
+    <%= form.text_field :name, required: :true %>
+  </div>
+
+  <div>
+    <%= form.label :dimensione, style: "display: block" %>
+    <%= form.collection_select(:dimensione, [2, 3, 4, 5, 6], :itself, :itself, {}, { required: :true }) %>
+  </div>
+
+  <div>
+    <%= form.label :info_leader, style: "display: block" %>
+    <%= form.text_field :info_leader, required: :true %>
+  </div>
+
+
+  <div>
+    <%= form.label :descrizione, style: "display: block" %>
+    <%= form.text_field :descrizione, required: :true %>
+  </div>
+
+  <div>
+    <%= form.label :field, style: "display: block" %>
+    <%= form.select :field_id, options_for_select(Field.all.map{|fie| [fie.nome, fie.id]}), {}, { multiple: true } %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

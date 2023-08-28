@@ -1,0 +1,78 @@
+<h1>I miei progetti</h1>
+
+<div id="projects">
+  <table>
+    <caption style="caption-side: top">Progetti di cui sei membro:</caption>
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Stato</th>
+      <th>Azioni</th>
+
+    </thead>
+    <tbody>
+    <% if @projects_member.present? %>
+      <% @projects_member.each do |project| %>
+        <tr>
+          <td><%= project.name %></td>
+
+          <td><%= project.stato %></td>
+
+
+          <td><%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "project-link" %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4">Nessun progetto disponibile.</td>
+      </tr>
+    <% end %>
+    </tr>
+
+    </tbody>
+  </table>
+  <table>
+    <caption style="caption-side: top">Progetti di cui sei leader:</caption>
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Stato</th>
+      <th>Accedi</th>
+      <th>Modifica</th>
+      <th>Richieste</th>
+
+    </thead>
+    <tbody>
+    <% if @projects_leader.present? %>
+      <% @projects_leader.each do |project| %>
+        <tr>
+          <td><%= project.name %></td>
+
+          <td><%= project.stato %></td>
+
+
+          <td><%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "project-link" %></td>
+          <td><%= link_to "Modifica progetto", edit_project_path(project), class: "project-link" %></td>
+
+          <% if (project.stato == "aperto") %>
+            <td><%= link_to "Visualizza richieste", project_requests_path(project), class: "project-link" %></td>
+          <% else %>
+            <td>Richieste di partecipazione chiuse</td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4">Nessun progetto disponibile.</td>
+      </tr>
+    <% end %>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <div id="new-proj" style="text-align: center; margin-bottom: 5px; width: fit-content; margin-left: auto;margin-right: auto;">
+    <%= link_to "New project", new_project_path, class: "btn btn-custom-center" %>
+  </div>
+</div>
+
