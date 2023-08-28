@@ -1,23 +1,29 @@
-<h1>Progetti aperti riguardo i tuoi ambiti d’interesse</h1>
-<div data-controller="project-sort">
-  <label for="sort_by">Ordina per:</label>
-    <select name="sort_by" id="sort_by" data-action="project-sort#update" data-project-sort-target="select">
-      <option></option>
-      <option value="time_posted" <%= 'selected' if @sorting == 'time_posted' %> >Più recenti</option>
-      <option value="time_posted_reverse" <%= 'selected' if @sorting == 'time_posted_reverse' %> >Meno recenti</option>
-      <option value="members" <%= 'selected' if @sorting == 'members' %> >Numero membri (crescente)</option>
-      <option value="members_reverse" <%= 'selected' if @sorting == 'members_reverse' %> >Numero membri (decrescente)</option>
-    </select>
-</div>
-<%= form_tag(projects_path, method: :get) do %>
-  <%= label_tag :filter_by, "Seleziona un campo:" %>
-  <% all_fields = [["Tutti", "all"]] + Field.all.map { |fie| [fie.nome, fie.id.to_s] } %>
-  <%= select_tag :filter_by, options_for_select(all_fields, selected: (@selected_fields == 'all') ? 'all' : @selected_fields.to_s) %>
-  <%= submit_tag "Filtra" %>
-<% end %>
-<%= render "projects/projects", projects: @projects %>
-<div id="segnalazione">
-  <%= link_to "Manda una segnalazione", new_report_path%>
-</div>
 
+<body>
+<%= debug @github_user %>
+<div id="open-projects" class="container mt-5">
+  <h2 class="mb-4">Progetti aperti:</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <% @projects.each do |project| %>
+      <% if project.stato == "aperto" %>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= project.name %></h5>
+              <p class="card-text"><%= project.descrizione %></p>
+              <p class="card-text">Numero membri: <%= UserProject.where(:project_id => project.id).count %></p>
+              <p class="card-text">
+                <% project.fields.each do |field| %>
+                  <span class="badge bg-primary me-1"><%= field.nome %></span>
+                <% end %>
+              </p>
+              <a href="<%= project_path(project.id) %>" class="btn btn-primary">Show this project</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 

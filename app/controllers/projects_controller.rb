@@ -2,9 +2,9 @@ class ProjectsController < ApplicationController
   before_action :set_project, except: %i[ index new create my_projects ]
   before_action :set_user
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
-  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project ]
 
-
+  require 'octokit' # GitHub API
   def is_member?
     @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
     if @user_project.nil?
@@ -22,68 +22,23 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Non sei il leader di questo progetto"
     end
   end
-
-  # GET /projects or /projects.json
+  # GET /progettos or /progettos.json
   def index
-
-    @all_fields = Field.all.ids
-
-    if !params[:filter_by].present?
-      if !session[:filter_by].present?
-        @selected_fields = @all_fields
-      else
-        if session[:filter_by] == "all"
-          @selected_fields = @all_fields
-        else
-          @selected_fields = session[:filter_by]
-        end
-      end
-    elsif params[:filter_by].present?
-      if params[:filter_by] == "all"
-        @selected_fields = @all_fields
-      else
-      @selected_fields = params[:filter_by]
-      end
-    else
-      @selected_fields = @all_fields
-    end
-
-    session[:filter_by] = @selected_fields
-
-    base = Project.joins(:fields).where(fields: {id: @selected_fields}).distinct
-
-    @sorting = params[:sort_by] || session[:sort_by]
-
-    base = case @sorting
-                when 'members'
-                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id)')
-                when 'members_reverse'
-                  base.joins(:user_projects).group('projects.id').order('COUNT(user_projects.id) DESC')
-                when 'time_posted_reverse'
-                  base.order(created_at: :asc)
-                when 'time_posted'
-                  base.order(created_at: :desc)
-                else
-                  base.order(created_at: :desc)
-                end
-    session[:sort_by] = @sorting
-    @projects = base.all
-
+    @projects = Project.all
   end
 
-  # GET /projects/1 or /projects/1.json
+  # GET /progettos/1 or /progettos/1.json
   def show
     @project = Project.find(params[:id])
-    @members = @project.user_projects.map(&:user)
   end
 
-  # GET /projects/new
+  # GET /progettos/new
   def new
     @project = Project.new
     @fields = Field.all
   end
 
-  # GET /projects/1/edit
+  # GET /progettos/1/edit
   def edit
     @fields = @project.fields
   end
@@ -91,17 +46,14 @@ class ProjectsController < ApplicationController
   def create
     parameters = project_params.except(:ambiti)
     @project = Project.new(parameters)
-    id_ambiti = params[:project][:field_id].drop(1)
+    id_ambiti = params[:project][:ambiti].drop(1)
     id_ambiti.each do |ambito|
       @project.fields << Field.find(ambito)
     end
 
-
     respond_to do |format|
       if @project.save
         @user_project = UserProject.new(user_id: current_user.id, project_id: @project.id, role: "leader")
-        @chat = Chat.new(project_id: @project.id)
-        @chat.save
         @user_project.save
         format.html { redirect_to project_url(@project), notice: "Progetto was successfully created." }
         format.json { render :show, status: :created, location: @project }
@@ -112,7 +64,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
+  # PATCH/PUT /progettos/1 or /progettos/1.json
   def update
     respond_to do |format|
       parameters = project_params.except(:ambiti)
@@ -138,7 +90,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1 or /projects/1.json
+  # DELETE /progettos/1 or /progettos/1.json
   def destroy
     @project.destroy
 
@@ -165,21 +117,20 @@ class ProjectsController < ApplicationController
   end
 
   def my_projects
+    # Provide authentication credentials
+    @client = Octokit::Client.new(:access_token => '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')#
+
+    # You can still use the username/password syntax by replacing the password value with your PAT.
+    # client = Octokit::Client.new(:login => 'defunkt', :password => 'personal_access_token')
+
+    # Fetch the current user
+    @github_user = @client.user
+
+    @repos = @client.followers
   end
 
   def show_my_project
     @checkpoints = @project.checkpoints
-    @members = @project.users
-    @chat = @project.chat # attenzione che alcuni non ce l'hanno
-    @messages = @chat.messages
-  end
-
-  def espelli_membro
-    @user_project = UserProject.find_by(user_id: params[:member_id], project_id: @project.id)
-    if @user_project
-      @user_project.destroy
-    end
-    redirect_to project_show_my_project_path(@project)
   end
 
 

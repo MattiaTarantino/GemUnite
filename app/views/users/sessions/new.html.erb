@@ -22,6 +22,5 @@
   </div>
 <% end %>
 <br>
-<%= link_to "Sign in with Github", user_omniauth_authorize_path(:github) %>
-
+<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['github_client_ID'] %>">Login with GitHub</a>
 <%= render "users/shared/links" %>

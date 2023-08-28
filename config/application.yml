@@ -1,5 +1,8 @@
 # Add configuration values here
 
-github_client_ID: "5971ff01bab7265cf466"
-github_secret: "8b56d9e95c467c8b3d6695206efef2b575684cb3"
+ github_client_ID: "5971ff01bab7265cf466"
+ github_secret: "8b56d9e95c467c8b3d6695206efef2b575684cb3"
+
+#github_client_ID: "Iv1.a9c673e7da6556e5"
+#github_secret: "583f5d40716083c7a3710394d2105fc801277091"
 
