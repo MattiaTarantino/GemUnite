@@ -8,6 +8,7 @@
           background-color: #f0f0f0;
           padding: 20px;
       }
+
       .project-container {
           max-width: 600px;
           margin: 0 auto;
@@ -19,29 +20,34 @@
           border: 1px solid #e9e9b8;;
           margin-bottom: 50px;
       }
+
       .project-title {
           font-size: 24px;
           color: #2E2F30;
           font-weight: bold;
           margin-bottom: 10px;
       }
+
       .description {
           font-size: 16px;
           color: #2E2F30;
           margin-bottom: 10px;
-        
+
       }
-      .project-fields{
-        margin-left:auto;
-        font-size:12px;
-        display: flex;
-        align-items: baseline;
+
+      .project-fields {
+          margin-left: auto;
+          font-size: 12px;
+          display: flex;
+          align-items: baseline;
       }
+
       h3 {
           font-weight: 600;
           color: slategray;
       }
-      .back-button {         
+
+      .back-button {
           display: inline-block;
           background-color: white;
           color: white;
@@ -52,163 +58,175 @@
           margin-top: 20px;
           transition: background-color 0.3s ease;
       }
+
       .back-button:hover {
           background-color: lightblue;
       }
+
       /* Style for "Partecipa" link */
-    .project-link {
-        display: inline-block;
-        background-color: #c3d9ff;
-        color: white;
-        border: 1px solid;
-        border-radius: 4px;
-        padding: 8px 15px;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-    }
+      .project-link {
+          display: inline-block;
+          background-color: #c3d9ff;
+          color: white;
+          border: 1px solid;
+          border-radius: 4px;
+          padding: 8px 15px;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+      }
 
-    .project-link:hover {
-        background-color: lightblue;
-    }
-    .project-header {
-  display: flex;
-  align-items: baseline;
-}
-    .project-footer {
-  display: flex;
-  align-items: baseline;
-}
-.project-header h1 {
-  margin-right: 20px; /* Adjust this value as needed */
-}
-.field-item {
-    margin-right: 10px;
-    border: 1px solid #5bb95c;
-    padding: 5px;
-    border-radius: 5px;
-}
-.project-header h1 {
-    margin-right: 20px;
-    color: black;
-    border: 2px solid #8cabd7;
-    padding: 10px;
-    border-radius: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-.btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 15px;
-    border: 1px solid #897f7f;
-    color: #3b3636;
-    background: white;
-    text-align: center;
-  
-}
-.project-members {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1.5px solid #f3e1db;
-  margin-top: 30px; /* Adjust this value as needed */
-  background:aliceblue;
-}
-.project-members h2 {
-  margin-top: 20px;
-}
+      .project-link:hover {
+          background-color: lightblue;
+      }
 
-.project-members th,
-.project-members td {
-  padding: 8px;
-  border: 1px solid #ccc;
-}
+      .project-header {
+          display: flex;
+          align-items: baseline;
+      }
 
-.project-members th {
-  background-color: #fcfdfe;
-  font-weight: bold;
-  text-align: left;
-}
-.button-container {
-  text-align: center;
-  margin-top: 20px; /* Adjust this value as needed */
-}
+      .project-footer {
+          display: flex;
+          align-items: baseline;
+      }
+
+      .project-header h1 {
+          margin-right: 20px; /* Adjust this value as needed */
+      }
+
+      .field-item {
+          margin-right: 10px;
+          border: 1px solid #5bb95c;
+          padding: 5px;
+          border-radius: 5px;
+      }
+
+      .project-header h1 {
+          margin-right: 20px;
+          color: black;
+          border: 2px solid #8cabd7;
+          padding: 10px;
+          border-radius: 15px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+      }
+
+      .btn:not(:disabled):not(.disabled) {
+          cursor: pointer;
+          border-radius: 5px;
+          font-size: 15px;
+          border: 1px solid #897f7f;
+          color: #3b3636;
+          background: white;
+          text-align: center;
+
+      }
+
+      .project-members {
+          width: 100%;
+          border-collapse: collapse;
+          border: 1.5px solid #f3e1db;
+          margin-top: 30px; /* Adjust this value as needed */
+          background: aliceblue;
+      }
+
+      .project-members h2 {
+          margin-top: 20px;
+      }
+
+      .project-members th,
+      .project-members td {
+          padding: 8px;
+          border: 1px solid #ccc;
+      }
+
+      .project-members th {
+          background-color: #fcfdfe;
+          font-weight: bold;
+          text-align: left;
+      }
+
+      .button-container {
+          text-align: center;
+          margin-top: 20px; /* Adjust this value as needed */
+      }
 
 
-
-h3 {
-    font-weight: normal;
-    color: #5E6469;
-    margin-top: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 15px;
-    font-weight: bold;  
-}
+      h3 {
+          font-weight: normal;
+          color: #5E6469;
+          margin-top: 20px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 15px;
+          font-weight: bold;
+      }
 
 
   </style>
   <script>
-    $(document).ready(function () {
-      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-      var popoverList = popoverTriggerList.map(function(popoverTrigger) { 
-        return new bootstrap.Popover(popoverTrigger); 
+      $(document).ready(function () {
+          var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+          var popoverList = popoverTriggerList.map(function (popoverTrigger) {
+              return new bootstrap.Popover(popoverTrigger);
+          });
       });
-    });
   </script>
 </head>
 <body>
 
 <div class="project-container">
 
-<% if @project %>
-  <div class="project-header">
-    <h1><%= @project.name %></h1>
-    <p class="project-fields">
-      <% @project.fields.each do |field| %>
-        <span class="field-item"><%= field.nome %></span>
-      <% end %>
-    </p>
-  </div>
+  <% if @project %>
+    <div class="project-header">
+      <h1><%= @project.name %></h1>
+      <p class="project-fields">
+        <% @project.fields.each do |field| %>
+          <span class="field-item"><%= field.nome %></span>
+        <% end %>
+      </p>
+    </div>
 
-  <div class="project-description">
-    <h3>Descrizione Progetto</h3>
-    <p ><%= @project.descrizione %></p>
-   <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Informazioni Leader" data-bs-content='<%= @project.info_leader %>'>Mostra Info Leader</button>
-   <div>
-         
-<table class="project-members">
-<h3>Membri del Progetto</h3>
-  <thead>
-    <tr>
-      <th>Username</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @members.each do |member| %>
-      <tr>
-        <td><%= member.username %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-    <p class="project-description">Persone richieste per il progetto: <%= @project.dimensione - @members.count %></p>
-    
-    <div class="button-container">
-  <%= link_to "Partecipa", new_project_request_path(@project), class: "project-link" %>
-</div>
+    <div class="project-description">
+      <h3>Descrizione Progetto</h3>
+      <p><%= @project.descrizione %></p>
+      <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Informazioni Leader" data-bs-content='<%= @project.info_leader %>'>Mostra
+        Info Leader
+      </button>
+      <table class="project-members">
+        <h3>Membri del Progetto</h3>
+        <thead>
+        <tr>
+          <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <td><%= member.username %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <p class="project-description">Persone richieste per il
+        progetto: <%= @project.dimensione - @members.count %></p>
+
+      <div class="button-container">
+        <% if not UserProject.where(user_id: current_user.id, project_id: @project.id).first %>
+          <%= link_to "Partecipa", new_project_request_path(@project), class: "project-link" %>
+        <% end %>
+      </div>
   <% else %>
     <p class="project-description">No project found.</p>
   <% end %>
+  </div>
 
-  
 </div>
 
 <%= link_to "Back to projects", projects_path, class: "back-button" %>
 
-<!-- Admin Only
+<!-- Leader Only
   <%= link_to "Edit this project", edit_project_path(@project) %> |
   <%= button_to "Destroy this project", @project, method: :delete %>
   -->
-
 </body>
 </html>

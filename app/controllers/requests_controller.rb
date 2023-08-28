@@ -31,6 +31,7 @@ class RequestsController < ApplicationController
       flash[:notice] = "Le richieste di questo progetto sono chiuse"
     end
   end
+
   # GET /requests or /requests.json
   def index
     if @user_project && @user_project.role == "leader"
@@ -41,6 +42,7 @@ class RequestsController < ApplicationController
       flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
     end
   end
+
   # GET /requests/1 or /requests/1.json
   def show
     @request = Request.find(params[:id])
@@ -55,8 +57,11 @@ class RequestsController < ApplicationController
 
   # GET /requests/new
   def new
-    @request = Request.new
     @project = Project.where(id: params[:project_id]).first
+    if UserProject.where(user_id: current_user.id, project_id: @project.id).first
+      redirect_to root_path, notice: "Fai già parte di questo progetto"
+    end
+    @request = Request.new
   end
 
   # GET /requests/1/edit
@@ -109,8 +114,12 @@ class RequestsController < ApplicationController
   def accept
     @request = Request.find(params[:request_id])
     @request.update(stato_accettazione: "Accettata")
-    UserProject.create(user_id: @request.user_id, project_id: @project.id)
-    redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta accettata"
+    if UserProject.where(user_id: current_user.id, project_id: @project.id).first
+      redirect_to project_requests_path(project_id: @project.id), notice: "L'utente fa già parte del progetto"
+    else
+      UserProject.create(user_id: @request.user_id, project_id: @project.id)
+      redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta accettata"
+    end
   end
 
   def decline
@@ -120,15 +129,16 @@ class RequestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_request
-      @project = Project.find(params[:project_id])
-      parameter = params[:id] || params[:request_id]
-      @request = Request.find(parameter)
-    end
 
-    # Only allow a list of trusted parameters through.
-    def request_params
-      params.require(:request).permit(:request_id, :note, :stato_accettazione)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_request
+    @project = Project.find(params[:project_id])
+    parameter = params[:id] || params[:request_id]
+    @request = Request.find(parameter)
+  end
+
+  # Only allow a list of trusted parameters through.
+  def request_params
+    params.require(:request).permit(:request_id, :note, :stato_accettazione)
+  end
 end
