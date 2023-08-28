@@ -183,3 +183,9 @@ h3 {
 .back-button:hover {
     background-color: lightblue;
 }
+
+.list-inline-item{
+    border: 2px solid #c3d9ff;
+    border-radius: 4px;
+    background-color: #c3d9ff
+}

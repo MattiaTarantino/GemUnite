@@ -10,15 +10,6 @@
     project_ids_user_is_member.include?(project.id)
   end %>
 
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Descrizione</th>
-      </tr>
-      </thead>
-      <tbody>
       <% if projects_not_member.empty? %>
         <tr>
           <td colspan="2">
@@ -30,30 +21,38 @@
         <% projects_not_member.each do |project| %>
           <% members = UserProject.where(project_id: project.id).count %>
           <% if project.stato == "aperto" and project.dimensione > members %>
-            <tr>
-              <td><%= project.name %></td>
-              <td><%= project.descrizione %></td>
-              <td>Numero membri: <%= members %></td>
-              <td>Ambito:
-                <% project.fields.each do |field| %>
-                  <%= field.nome %>
-                <% end %>
-              </td>
-              <td>Leader:
-                <% project.user_projects.each do |user_project| %>
-                  <% if user_project.role == "leader" %>
-                    <%= user_project.user.username %>
-                  <% end %>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to "Mostra questo progetto", project, class: "btn btn-primary" %>
-              </td>
-            </tr>
-          <% end %>
+
+        <div class="card border-dark mb-3">
+          <h2 class="card-header"><%= project.name %></h2>
+          <div class="card-body">
+            <h5 class="card-title">Ambito:</h5>
+            <ul class="list-inline">
+              <% project.fields.each do |field| %>
+                <li class="list-inline-item"><%= field.nome %></li>
+              <% end %>
+            </ul>
+            <p class="card-text"><%= project.descrizione %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+              </div>
+              <div>
+                <%= link_to "Mostra questo progetto", project, class: "btn btn-info" %>
+                <p class="card-text">
+                  <small class="text-muted">
+                    <%= members == 1 ? "#{members} membro attuale" : "#{members} membri attuali" %>
+                  </small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<% end %>
         <% end %>
       <% end %>
-      </tbody>
-    </table>
-  </div>
+
+
 </div>
