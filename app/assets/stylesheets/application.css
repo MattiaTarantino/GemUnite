@@ -189,3 +189,29 @@ h3 {
     border-radius: 4px;
     background-color: #c3d9ff
 }
+
+
+/* Homepage */
+.home-title {
+    font-weight: 700;
+    font-size: 5rem;
+    color: var(--bs-emphasis-color);
+}
+
+.btn-home-text {
+    color: #fff;
+}
+
+.btn-home-login {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-home-login:hover {
+    color: #fff;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
+  }
+  
+  
+    
