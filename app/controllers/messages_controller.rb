@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
         format.html { redirect_to project_show_my_project_path(project_id: @project.id) }
         format.json { render json: { data: "Some data fetched from server" } }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to project_show_my_project_path(project_id: @project.id) }
         format.json { render json: @message.errors, status: :unprocessable_entity }
 
       end
