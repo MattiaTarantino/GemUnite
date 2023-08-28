@@ -6,8 +6,26 @@ class User < ApplicationRecord
   has_many :chats
   has_many :projects, through: :user_projects
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 5, maximum: 20 }
   validates_presence_of :email
+  validate :password_complexity
+  validate :custom_validations
+
+  def password_complexity
+    if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
+      errors.add :password, "deve includere almeno una lettera minuscola, una maiuscola e un numero"
+    end
+  end
+
+  def custom_validations
+    pattern = /\A[a-zA-Z]+\z/
+    if firstname.present? and not firstname.match(pattern)
+      errors.add :firstname, "deve contenere solo lettere"
+    end
+    if lastname.present? and not lastname.match(pattern)
+      errors.add :lastname, "deve contenere solo lettere"
+    end
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
