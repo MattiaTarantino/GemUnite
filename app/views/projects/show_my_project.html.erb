@@ -6,31 +6,68 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Chat Example</title>
 
+  <style>
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    /* padding: 20px; */
+    /* margin-top: 30px; */
+    /* text-align: left; */
+    padding: 0px; */
+     margin-top: 3px;
+   
+}
+  h2{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top:30px;
+  }
+  h1{
+    margin-top:30px;
+  }
+  </style>
+
 <body>
 <h1><%= @project.name %></h1>
 <% if @project.checkpoints.present? %>
-  <% @project.checkpoints.each do |checkpoint| %>
-    <tr>
-      <td><%= checkpoint.nome %></td>
-      <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
-      <% if @role == "leader" and @project.stato == "iniziato" and !checkpoint.completato %>
-        <td>
-          <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
-                        method: :put,
-                        class: "btn btn-outline-primary btn-sm",
-                        title: "Segna come completato",
-                        data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
-            </svg>
+  <table class="checkpoint-table">
+    <thead>
+      <tr>
+        <th>Checkpoint Name</th>
+        <th>Actions</th>
+        <% if @role == "leader" && @project.stato == "iniziato" %>
+          <th>Mark Complete</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @project.checkpoints.each do |checkpoint| %>
+        <tr>
+          <td><%= checkpoint.nome %></td>
+          <td><%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %></td>
+          <% if @role == "leader" && @project.stato == "iniziato" && !checkpoint.completato %>
+            <td>
+              <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
+                            method: :put,
+                            class: "btn btn-outline-primary btn-sm",
+                            title: "Segna come completato",
+                            data: { confirm: "Are you sure?", turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                </svg>
+              <% end %>
+            </td>
           <% end %>
-        </td>
+        </tr>
       <% end %>
+    </tbody>
+  </table>
+
     </tr>
     <br>
 
-
-<% end %>
 <% else %>
   <tr>
     <td colspan="4">No checkpoints available.</td>
@@ -43,6 +80,7 @@
 
 <div class="chat-project">
   <div class="chat-container">
+  <h2> CHAT GROUP </h2>
     <div class="chat-log" id="chat-log">
       <% @messages.each do |message| %>
         <div class="message">
@@ -58,12 +96,14 @@
   </div>
 
   <div class="project-container bg-light p-4">
-    <h2 class="mb-3">Project Infos</h2>
+    <h2 class="mb-3">Informazioni Progetto</h2>
     <p><%=@project.descrizione %></p>
     <p><%=@project.stato %></p>
+   <!--
     <div class="github-link">
       <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
     </div>
+    -->
     <br>
     <% if @role == "leader" %>
 
@@ -76,7 +116,6 @@
       <% end %>
 
     <% end %>
-    <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
   </div>
 </div>
 
@@ -96,10 +135,12 @@
       </ul>
     </div>
   </div>
+
 </div>
 
 
 
+      <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
 
 
 
