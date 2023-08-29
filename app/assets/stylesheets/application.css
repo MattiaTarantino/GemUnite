@@ -197,3 +197,24 @@ h3 {
     --bs-text-opacity: 1;
     color: var(--bs-secondary-color) !important;
 }
+/* Homepage */
+.home-title {
+    font-weight: 700;
+    font-size: 5rem;
+    color: var(--bs-emphasis-color);
+}
+
+.btn-home-text {
+    color: #fff;
+}
+
+.btn-home-login {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-home-login:hover {
+    color: #fff;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
+  }
