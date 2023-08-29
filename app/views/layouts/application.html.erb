@@ -35,9 +35,9 @@
         <div class="navbar-nav">
           <% if user_signed_in? %>
             <%= link_to "Home", root_path, class: "nav-link text-dark" %>
-            <%= link_to "I miei progetti", my_projects_projects_path, class: "nav-link text-dark" %>
-            <%= link_to "Le mie richieste", my_requests_requests_path, class: "nav-link text-dark" %>
-            <%= link_to "Notizie", latest_news_index_path, class: "nav-link text-dark" %>
+            <%= link_to "I miei progetti", my_projects_user_projects_path(user_id: current_user.id), class: "nav-link text-dark" %>
+            <%= link_to "Le mie richieste", my_requests_user_requests_path(user_id: current_user.id), class: "nav-link text-dark" %>
+            <%= link_to "Notizie", user_latest_news_index_path(user_id: current_user.id), class: "nav-link text-dark" %>
             <%= link_to "Profilo", edit_user_registration_path, class: "nav-link text-dark" %>
             <%= link_to "Log out", destroy_user_session_path, class: "nav-link text-dark", method: :delete %>
           <% else %>

@@ -3,10 +3,10 @@
 <%= render "request", request: @request %>
 
 <div>
-  <%= link_to "Edit this request", edit_project_request_path(project_id: @project.id, id: @request.id) %> |
-  <%= link_to "Back to requests", project_requests_path(project_id: @project.id) %>
+  <%= link_to "Edit this request", edit_user_project_request_path(user_id: @user.id, project_id: @project.id, id: @request.id) %> |
+  <%= link_to "Back to requests", user_project_requests_path(user_id: @user.id, project_id: @project.id) %>
 
-  <%= button_to "Destroy this request", project_requests_path(project_id: @project.id), method: :delete %>
-  <%= link_to "Torna ai progetti", projects_path %>
+  <%= button_to "Destroy this request", user_project_requests_path(user_id: @user.id, project_id: @project.id), method: :delete %>
+  <%= link_to "Torna ai progetti", user_projects_path(user_id: @user.id) %>
 
 </div>

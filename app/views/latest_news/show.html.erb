@@ -6,5 +6,5 @@
   <%= link_to "Edit this latest news", edit_latest_news_path(@latest_news) %> |
   <%= link_to "Back to latest news", latest_news_index_path %>
 
-  <%= button_to "Destroy this latest news", @latest_news, method: :delete %>
+  <%= button_to "Destroy this latest news", [@user, @latest_news], method: :delete %>
 </div>

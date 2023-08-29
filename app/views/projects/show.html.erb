@@ -212,7 +212,7 @@
 
       <div class="button-container">
         <% if not UserProject.where(user_id: current_user.id, project_id: @project.id).first %>
-          <%= link_to "Partecipa", new_project_request_path(@project), class: "project-link" %>
+          <%= link_to "Partecipa", new_user_project_request_path(@user, @project), class: "project-link" %>
         <% end %>
       </div>
   <% else %>
@@ -222,11 +222,11 @@
 
 </div>
 
-<%= link_to "Back to projects", projects_path, class: "back-button" %>
+<%= link_to "Back to projects", user_projects_path(user_id: @user.id), class: "back-button" %>
 
 <!-- Leader Only
-  <%= link_to "Edit this project", edit_project_path(@project) %> |
-  <%= button_to "Destroy this project", @project, method: :delete %>
+  <%= link_to "Edit this project", edit_user_project_path(@user, @project) %> |
+  <%= button_to "Destroy this project", [@user, @project], method: :delete %>
   -->
 </body>
 </html>

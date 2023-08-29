@@ -3,7 +3,7 @@
 <% if !Request.where(:user_id => current_user.id, :project_id => @project.id).exists? %>
   <%= render "form", request: @request %>
 
-<% elsif @project.dimensione <= UserProject.where(project_id: project.id).count %>
+<% elsif @project.dimensione <= UserProject.where(project_id: @project.id).count %>
   <p>Il progetto è già al completo</p>
 
 <% else %>
@@ -12,5 +12,5 @@
 <br>
 
 <div>
-  <%= link_to "Ritorna alla pagina del progetto", project_path(@project.id) %>
+  <%= link_to "Ritorna alla pagina del progetto", user_project_path(@user, @project) %>
 </div>

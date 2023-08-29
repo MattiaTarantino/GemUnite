@@ -73,7 +73,7 @@
                             <%else%>
                                 <p class="card-text"style="color: red;">Status: <%= project.stato %></p>
                             <%end%>
-                                <%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "btn btn-sm btn-primary" %>
+                                <%= link_to "Accedi al progetto", user_project_show_my_project_path(@user, project), class: "btn btn-sm btn-primary" %>
                             </div>
                         </div>
                     </div>
@@ -104,10 +104,10 @@
                             <%else%>
                                 <p class="card-text"style="color: red;">Status: <%= project.stato %></p>
                             <%end%>
-                                <%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "btn btn-sm btn-primary" %>
-                                <%= link_to "Modifica progetto", edit_project_path(project), class: "btn btn-sm btn-secondary" %>
+                                <%= link_to "Accedi al progetto", user_project_show_my_project_path(@user, project), class: "btn btn-sm btn-primary" %>
+                                <%= link_to "Modifica progetto", edit_user_project_path(@user, project), class: "btn btn-sm btn-secondary" %>
                                 <% if project.stato == "aperto" %>
-                                    <%= link_to "Visualizza richieste", project_requests_path(project), class: "btn btn-sm btn-info" %>
+                                    <%= link_to "Visualizza richieste", user_project_requests_path(@user, project), class: "btn btn-sm btn-info" %>
                                 <% else %>
                                     <p style="color: red;  margin-top: 10px;">Richieste di partecipazione chiuse</p>
                                 <% end %>
@@ -123,7 +123,7 @@
         </div>
     </div>
   <div id="new-proj" style="text-align: center; margin-bottom: 5px; width: fit-content; margin-left: auto;margin-right: auto;">
-    <%= link_to "New project", new_project_path, class: "btn btn-custom-center" %>
+    <%= link_to "New project", new_user_project_path(user_id: @user.id), class: "btn btn-custom-center" %>
   </div>
 </div>
 
