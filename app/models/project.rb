@@ -11,7 +11,7 @@ class Project < ApplicationRecord
   validates :dimensione, presence: true
   validates :info_leader, presence: true
   validates :name, presence: true
-  validates_presence_of :fields
+  # validates_presence_of :fields
   validate :custom_validations
 
   def custom_validations

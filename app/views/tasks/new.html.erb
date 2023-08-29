@@ -49,5 +49,5 @@ label {
 <br>
 
 <div>
-  <%= link_to "Back to tasks", project_checkpoint_path(project_id: params[:project_id], id: params[:checkpoint_id]) %>
+  <%= link_to "Back to tasks", user_project_checkpoint_path(user_id: @user.id, project_id: params[:project_id], id: params[:checkpoint_id]) %>
 </div>

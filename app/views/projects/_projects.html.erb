@@ -36,7 +36,7 @@
               <div>
               </div>
               <div>
-                <%= link_to "Mostra questo progetto", project, class: "btn btn-info" %>
+                <%= link_to "Mostra questo progetto", [@user, project] , class: "btn btn-info" %>
                 <p class="card-text">
                   <small class="text-muted">
                     <%= members == 1 ? "#{members} membro attuale" : "#{members} membri attuali" %>

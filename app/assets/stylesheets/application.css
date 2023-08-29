@@ -41,6 +41,9 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     padding: 20px;
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
 }
 
 img {
@@ -192,7 +195,10 @@ h3 {
     background-color: #c3d9ff
 }
 
-
+.text-muted {
+    --bs-text-opacity: 1;
+    color: var(--bs-secondary-color) !important;
+}
 /* Homepage */
 .home-title {
     font-weight: 700;
@@ -231,7 +237,7 @@ h3 {
 }
 label {
     display: inline-block;
-   
+
     font-weight: bold;
 }
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {

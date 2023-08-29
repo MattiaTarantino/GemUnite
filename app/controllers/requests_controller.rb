@@ -79,7 +79,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to project_request_path(project_id: @project_id, id: @request.id), notice: "Request was successfully created." }
+        format.html { redirect_to user_project_request_path(user_id: @user.id, project_id: @project_id, id: @request.id), notice: "Request was successfully created." }
         format.json { render :show, status: :created, location: @request }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -92,7 +92,7 @@ class RequestsController < ApplicationController
   def update
     respond_to do |format|
       if @request.update(request_params)
-        format.html { redirect_to project_request_path(project_id: @project_id, id: @request.id), notice: "Request was successfully updated." }
+        format.html { redirect_to user_project_request_path(user_id: @user.id, project_id: @project_id, id: @request.id), notice: "Request was successfully updated." }
         format.json { render :show, status: :ok, location: @request }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -106,7 +106,7 @@ class RequestsController < ApplicationController
     @request.destroy
 
     respond_to do |format|
-      format.html { redirect_to my_requests_requests_path, notice: "Request was successfully destroyed." }
+      format.html { redirect_to my_requests_user_requests_path @user, notice: "Request was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -114,18 +114,18 @@ class RequestsController < ApplicationController
   def accept
     @request = Request.find(params[:request_id])
     @request.update(stato_accettazione: "Accettata")
-    if UserProject.where(user_id: current_user.id, project_id: @project.id).first
-      redirect_to project_requests_path(project_id: @project.id), notice: "L'utente fa già parte del progetto"
+    if UserProject.where(user_id: @request.user.id, project_id: @project.id).first
+      redirect_to user_project_requests_path(user_id: @user.id,project_id: @project.id), notice: "L'utente fa già parte del progetto"
     else
       UserProject.create(user_id: @request.user_id, project_id: @project.id)
-      redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta accettata"
+      redirect_to user_project_requests_path(user_id: @user.id,project_id: @project.id), notice: "Richiesta accettata"
     end
   end
 
   def decline
     @request = Request.find(params[:request_id])
     @request.update(stato_accettazione: "Rifiutata")
-    redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta rifiutata"
+    redirect_to user_project_requests_path(user_id: @user.id,project_id: @project.id), notice: "Richiesta rifiutata"
   end
 
   private

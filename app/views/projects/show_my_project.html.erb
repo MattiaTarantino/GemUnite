@@ -15,7 +15,7 @@
     /* text-align: left; */
     padding: 0px; */
      margin-top: 3px;
-   
+
 }
   h2{
   text-transform: uppercase;
@@ -32,42 +32,28 @@
 <body>
 <h1><%= @project.name %></h1>
 <% if @project.checkpoints.present? %>
-  <table class="checkpoint-table">
-    <thead>
-      <tr>
-        <th>Checkpoint Name</th>
-        <th>Actions</th>
-        <% if @role == "leader" && @project.stato == "iniziato" %>
-          <th>Mark Complete</th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @project.checkpoints.each do |checkpoint| %>
-        <tr>
-          <td><%= checkpoint.nome %></td>
-          <td><%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %></td>
-          <% if @role == "leader" && @project.stato == "iniziato" && !checkpoint.completato %>
-            <td>
-              <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
-                            method: :put,
-                            class: "btn btn-outline-primary btn-sm",
-                            title: "Segna come completato",
-                            data: { confirm: "Are you sure?", turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } do %>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
-                </svg>
-              <% end %>
-            </td>
+  <% @project.checkpoints.each do |checkpoint| %>
+    <tr>
+      <td><%= checkpoint.nome %></td>
+      <td> <%= link_to "Show this checkpoint", user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: checkpoint.id) %> </td>
+      <% if @role == "leader" and @project.stato == "iniziato" and !checkpoint.completato %>
+        <td>
+          <%= button_to user_project_checkpoint_change_state_path(user_id: @user.id, project_id: @project.id, checkpoint_id: checkpoint.id),
+                        method: :put,
+                        class: "btn btn-outline-primary btn-sm",
+                        title: "Segna come completato",
+                        data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+            </svg>
           <% end %>
-        </tr>
+        </td>
       <% end %>
-    </tbody>
-  </table>
-
     </tr>
     <br>
 
+
+<% end %>
 <% else %>
   <tr>
     <td colspan="4">No checkpoints available.</td>
@@ -75,12 +61,12 @@
 <% end %>
 <% if @role == "leader" and @project.stato == "iniziato"%>
     <br>
-  <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
+  <%= link_to "Add a new checkpoint", new_user_project_checkpoint_path(user_id: @user.id, project_id: @project.id), class: "btn btn-custom-center" %>
 <% end %>
 
 <div class="chat-project">
   <div class="chat-container">
-  <h2> CHAT GROUP </h2>
+  <h2> Chat di gruppo </h2>
     <div class="chat-log" id="chat-log">
       <% @messages.each do |message| %>
         <div class="message">
@@ -88,7 +74,7 @@
         </div>
       <% end %>
     </div>
-    <%= form_with model: [ @project, @chat, Message.new ], local: false, id: "ajax-form" do |form| %>
+    <%= form_with model: [@user, @project, @chat, Message.new ], local: false, id: "ajax-form" do |form| %>
       <%= form.text_field :content, id: 'message-input', placeholder: 'Type your message...' %>
       <%= form.submit 'Send', id: 'send-button' %>
     <% end %>
@@ -108,14 +94,15 @@
     <% if @role == "leader" %>
 
       <% if @project.stato == "aperto" %>
-        <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+        <%= button_to "Chiudi richieste di partecipazione", user_project_close_requests_path, method: :put, data: { turbo_confirm: "Sei sicuro di voler chiudere le richieste di partecipazione?" } %> <br>
       <% end %>
 
       <% if @project.stato == "iniziato" %>
-        <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+        <%= button_to "Chiudi progetto", user_project_close_project_path, method: :put, data: { turbo_confirm: "Sei sicuro di voler chiudere questo progetto?" }  %> <br>
       <% end %>
 
     <% end %>
+    <%= link_to "Torna ai miei progetti", my_projects_user_projects_path, class: "btn btn-custom-center" %>
   </div>
 </div>
 
@@ -128,8 +115,8 @@
         <% @members.each do |member| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <%= member.email %>
-            <% if @role == "leader" and member.id != current_user.id %>
-              <%= button_to "Espelli", project_espelli_membro_path(project_id: @project.id, member_id: member.id), method: :put, data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di voler espellere questo membro?" } %>
+            <% if @role == "leader" and member.id != current_user.id and @project.stato != "chiuso" %>
+              <%= button_to "Espelli", user_project_espelli_membro_path(user_id: @user.id, project_id: @project.id, member_id: member.id), method: :put, data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di voler espellere questo membro?" } %>
             <% end %>
         <% end %>
       </ul>
@@ -140,7 +127,6 @@
 
 
 
-      <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
 
 
 
