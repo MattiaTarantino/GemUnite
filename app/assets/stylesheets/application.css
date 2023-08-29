@@ -319,23 +319,36 @@ label {
 }
 
 .btn-login-login {
+    color: white !important;
     background-color: #3763f4 !important;
     border-color: #3763f4 !important;
+    height: 40px;
 }
 
 .btn-login-login:active {
-    background-color: #3763f4 !important;
-    border-color: #3763f4 !important;
+    background-color: #3763f4;
+    border-color: #3763f4;
 }
 
 .btn-login-login:focus {
-    background-color: #3763f4 !important;
-    border-color: #3763f4 !important;
+    background-color: #3763f4;
+    border-color: #3763f4;
 }
 
 .btn-login-login:hover {
-    color: white;
     background-color: #2f54cf !important;
     border-color: #2c4fc3 !important;
+}
+
+.btn-signup {
+    color: white !important;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+    height: 40px;
+}
+
+.btn-signup:hover {
+    background-color: #07889b !important;
+    border-color: #07889b !important;
 }
 
