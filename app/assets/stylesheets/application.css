@@ -268,3 +268,74 @@ label {
     cursor: pointer;
     border: 1px solid green;
 }
+
+/* Log in, Sign up */
+.login-title {
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.card {
+    display: flex;
+    border-radius: 20px;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+.bs-icon {
+    --bs-icon-size: 2.5rem;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--bs-icon-size);
+    width: calc(var(--bs-icon-size)*2);
+    height: calc(var(--bs-icon-size)*2);
+}
+
+.bs-icon.bs-icon-circle {
+    border-radius: 50%;
+}
+      
+.bs-icon.bs-icon-color {
+    color: var(--bs-white);
+    background: var(--bs-primary);
+}
+
+.form-text {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.form-field {
+    display: center;
+    width: 300px !important;
+    border-radius: 50px !important;
+}
+
+.btn-login-login {
+    background-color: #3763f4 !important;
+    border-color: #3763f4 !important;
+}
+
+.btn-login-login:active {
+    background-color: #3763f4 !important;
+    border-color: #3763f4 !important;
+}
+
+.btn-login-login:focus {
+    background-color: #3763f4 !important;
+    border-color: #3763f4 !important;
+}
+
+.btn-login-login:hover {
+    color: white;
+    background-color: #2f54cf !important;
+    border-color: #2c4fc3 !important;
+}
+
