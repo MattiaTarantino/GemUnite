@@ -6,6 +6,26 @@ class User < ApplicationRecord
   has_many :chats
   has_many :projects, through: :user_projects
 
+  validates :username, presence: true, uniqueness: true, length: { minimum: 5, maximum: 20 }
+  validates_presence_of :email
+  validate :password_complexity
+  validate :custom_validations
+
+  def password_complexity
+    if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
+      errors.add :password, "deve includere almeno una lettera minuscola, una maiuscola e un numero"
+    end
+  end
+
+  def custom_validations
+    pattern = /\A[a-zA-Z]+\z/
+    if firstname.present? and not firstname.match(pattern)
+      errors.add :firstname, "deve contenere solo lettere"
+    end
+    if lastname.present? and not lastname.match(pattern)
+      errors.add :lastname, "deve contenere solo lettere"
+    end
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -33,5 +53,26 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def update_with_password(params, *options)
+    current_password = params.delete(:current_password)
+
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+
+    result = if params[:password].blank? || valid_password?(current_password)
+               update(params, *options)
+             else
+               self.assign_attributes(params, *options)
+               self.valid?
+               self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+               false
+             end
+
+    clean_up_passwords
+    result
   end
 end

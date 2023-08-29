@@ -1,3 +1,47 @@
+<style>
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top : 30px;
+    text-align: left;
+}
+body{
+  text-align:center;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    border-radius: 7px;
+    color: #4a4545;
+    background: #9aaede;
+    background-color: #9aaede;
+    margin-top: 20px;
+    font-weight: normal;
+}
+h1{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top:30px;
+
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    font-weight: normal;
+    margin-top: 50px;
+    background-color: aliceblue;
+    text-align:left;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+</style>
+
 <h1>New task</h1>
 
 <%= render "form", task: @task %>
@@ -5,5 +49,5 @@
 <br>
 
 <div>
-  <%= link_to "Back to tasks", project_checkpoint_path(project_id: params[:project_id], id: params[:checkpoint_id]) %>
+  <%= link_to "Back to tasks", user_project_checkpoint_path(user_id: @user.id, project_id: params[:project_id], id: params[:checkpoint_id]) %>
 </div>

@@ -4,27 +4,18 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
     static targets = ["select"];
     connect() {
-        console.log("Hello, Stimulus!", this.element);
-        console.log(this.selectTarget.value);
+
     }
     sortProjects() {
         const sortBy = this.selectTarget.value;
-        const url = `/projects?sort_by=${sortBy}`;
+        var selectElement = document.getElementById("sort_by");
+        var userId = selectElement.getAttribute("data-user-id");
+        const url = `/users/${userId}/projects?sort_by=${sortBy}`;
 
         // Refresh the page
         Turbo.visit(url);
     }
-    doTurboRequest(url) {
-        fetch(url, {
-            headers: {
-                Accept: "text/vnd.turbo-stream.html",
-            },
-        })
-            .then((response) => response.text())
-            .then((html) => {
-                Turbo.renderStreamMessage(html);
-            });
-    }
+
     update() {
         console.log("update");
         this.sortProjects();

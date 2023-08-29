@@ -1,74 +1,132 @@
+<body>
+    <style>
+        .btn-group-sm > .btn,
+        .btn-sm {
+            padding: 0.35rem 0.5rem;
+            font-size: 9.0px;
+            line-height: 1.5;
+            border-radius: 1.2rem;
+        }
+        .btn-secondary {
+            color: #fff;
+            background-color: #b3c7d9;
++
+        }
+        .btn-primary{
+          background-color: #7ac680;
++
+        }
+        .btn-info{
+          background-color:#de8a6b;
++
+        }
+        
+        .section-heading {
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        /* Customize card colors */
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: none;
+        }
+        .card-body {
+            background-color: #fff;
+            padding: 1.25rem; /* Adjust padding to make card body bigger */
+        }
+        .card-text {
+            font-size: 0.875rem;
+        }
+        .card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+    font-size: large;
+    font-weight: 500;
+        }
+        
+    </style>
 
-<h1>I miei progetti</h1>
 
 <div id="projects">
-  <table>
-    <caption style="caption-side: top">Progetti di cui sei membro:</caption>
-    <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Stato</th>
-      <th>Azioni</th>
-      <th></th>
+ <div class="container mt-5">
+             <h2 class="section-heading">Progetti di cui sono membro</h2>
 
-    </thead>
-    <tbody>
-    <% if @projects_member.present? %>
-      <% @projects_member.each do |project| %>
-        <tr>
-          <td><%= project.name %></td>
+        <div class="row">
+            <% if @projects_member.present? %>
+                <% @projects_member.each do |project| %>
+                    <div class="col-md-4">
+                        <div class="card border-primary mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><%= project.name %></div>
+                            <div class="card-body text-primary">
+                            <% if project.stato== "aperto" %>
+                                <p class="card-text", style="color: green;">Status: <%= project.stato %></p>
+                            <%else%>
+                                <p class="card-text"style="color: red;">Status: <%= project.stato %></p>
+                            <%end%>
+                                <%= link_to "Accedi al progetto", user_project_show_my_project_path(@user, project), class: "btn btn-sm btn-primary" %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% else %>
+                <div class="col">
+                    <p style="color: red;">Nessun progetto disponibile.</p>
+                </div>
+            <% end %>
+        </div>
+    </div>
+   
+  
 
-          <td><%= project.stato %></td>
+  <div class="container mt-5">
+              <h2 class="section-heading">Progetti di cui sono leader</h2>
 
+        <div class="row">
 
-          <td><%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "project-link" %></td>
-          <td></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td colspan="4">Nessun progetto disponibile.</td>
-      </tr>
-    <% end %>
-    </tr>
-
-    </tbody>
-  </table>
-  <table>
-    <caption style="caption-side: top">Progetti di cui sei leader:</caption>
-    <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Stato</th>
-      <th>Azioni</th>
-      <th></th>
-
-    </thead>
-    <tbody>
-    <% if @projects_leader.present? %>
-      <% @projects_leader.each do |project| %>
-        <tr>
-          <td><%= project.name %></td>
-
-          <td><%= project.stato %></td>
-
-
-          <td><%= link_to "Accedi al progetto", project_show_my_project_path(project), class: "project-link" %></td>
-          <td><%= link_to "Modifica progetto", edit_project_path(project), class: "project-link" %></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td colspan="4">Nessun progetto disponibile.</td>
-      </tr>
-    <% end %>
-    </tr>
-
-    </tbody>
-  </table>
-
+            <% if @projects_leader.present? %>
+                <% @projects_leader.each do |project| %>
+                    <div class="col-md-4">
+                        <div class="card border-primary mb-3" style="max-width: 20rem;">
+                            <div class="card-header"><%= project.name %></div>
+                            <div class="card-body text-primary">
+                                <% if project.stato== "aperto" %>
+                                <p class="card-text", style="color: green;">Status: <%= project.stato %></p>
+                            <%else%>
+                                <p class="card-text"style="color: red;">Status: <%= project.stato %></p>
+                            <%end%>
+                                <%= link_to "Accedi al progetto", user_project_show_my_project_path(@user, project), class: "btn btn-sm btn-primary" %>
+                                <%= link_to "Modifica progetto", edit_user_project_path(@user, project), class: "btn btn-sm btn-secondary" %>
+                                <% if project.stato == "aperto" %>
+                                    <%= link_to "Visualizza richieste", user_project_requests_path(@user, project), class: "btn btn-sm btn-info" %>
+                                <% else %>
+                                    <p style="color: red;  margin-top: 10px;">Richieste di partecipazione chiuse</p>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% else %>
+                <div class="col">
+                    <p style="color: red;">Nessun progetto disponibile.</p>
+                </div>
+            <% end %>
+        </div>
+    </div>
   <div id="new-proj" style="text-align: center; margin-bottom: 5px; width: fit-content; margin-left: auto;margin-right: auto;">
-    <%= link_to "New project", new_project_path, class: "btn btn-custom-center"%>
+    <%= link_to "New project", new_user_project_path(user_id: @user.id), class: "btn btn-custom-center" %>
   </div>
 </div>
+
+
+        
 
