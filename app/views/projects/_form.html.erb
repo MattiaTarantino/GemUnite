@@ -1,4 +1,4 @@
-<%= form_with(model: project) do |form| %>
+<%= form_with(model: [@user, project]) do |form| %>
   <% if project.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -33,8 +33,13 @@
   </div>
 
   <div>
-    <%= form.label :field, style: "display: block" %>
-    <%= form.select :field_id, options_for_select(Field.all.map{|fie| [fie.nome, fie.id]}), {}, { multiple: true } %>
+    <label class="form-label">Select Fields:</label>
+    <% Field.all.each do |field| %>
+      <label class="checkbox-label">
+        <input type="checkbox" name="field_ids[]" value="<%= field.id %>" <%= 'checked' if project.fields.exists?(field.id) %>>
+        <%= field.nome %>
+      </label>
+    <% end %>
   </div>
 
   <div>

@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 
@@ -26,29 +25,31 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <!-- <a class="navbar-brand" href="#">Projects</a> You can add a custom brand here for each page if needed -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <%= link_to "GemUnite", root_path, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <% if user_signed_in? %>
-            <%= link_to "Home", root_path, class: "nav-link" %>
-            <%= link_to "I miei progetti", my_projects_projects_path, class: "nav-link" %>
-            <%= link_to "Notizie", latest_news_index_path, class: "nav-link" %>
-            <%= link_to "Profilo", edit_user_registration_path, class: "nav-link" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" }, class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link text-dark" %>
+            <%= link_to "I miei progetti", my_projects_user_projects_path(user_id: current_user.id), class: "nav-link text-dark" %>
+            <%= link_to "Le mie richieste", my_requests_user_requests_path(user_id: current_user.id), class: "nav-link text-dark" %>
+            <%= link_to "Notizie", user_latest_news_index_path(user_id: current_user.id), class: "nav-link text-dark" %>
+            <%= link_to "Profilo", edit_user_registration_path, class: "nav-link text-dark" %>
+            <%= link_to "Log out", destroy_user_session_path, class: "nav-link text-dark", method: :delete %>
           <% else %>
-            <%= link_to "Accedi", new_user_session_path, class: "nav-link" %>
-            <%= link_to "Registrati", new_user_registration_path, class: "nav-link" %>
+            <% unless current_page?(root_path) %>
+              <%= link_to "Accedi", new_user_session_path, class: "nav-link text-dark" %>
+              <%= link_to "Registrati", new_user_registration_path, class: "nav-link text-dark" %>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
   </nav>
-
 
   <% flash.each do |type, msg| %>
     <div class="alert alert-info">

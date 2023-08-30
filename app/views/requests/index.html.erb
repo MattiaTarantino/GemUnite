@@ -1,14 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Requests</h1>
-
-<div id="requests">
-  <% @requests.each do |request| %>
-    <%= render request %>
-    <p>
-      <%= link_to "Show this request", project_request_path(request.project, request) %>
-    </p>
-  <% end %>
+<div class="container py-5">
+  <div class="py-5 p-lg-5 ">
+    <div class="row text-center py-5">
+      <h1 class="login-title">Requests</h1>
+    </div>
+    <div id="requests">
+      <% if @requests.empty? %>
+        <p>Non ci sono richieste di partecipazione in sospeso</p>
+      <% else %>
+        <div class="row mx-auto d-flex justify-content-center py-5" style="max-width: 900px;">
+          <% @requests.each do |request| %>
+          <div class="col-md-6">
+            <%= render request %>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row d-flex justify-content-center mt-5">
+      <%= link_to "Torna ai progetti", my_projects_user_projects_path(user_id: @user.id), class:"btn-request btn rounded-pill shadow" %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New request", new_project_request_path(project_id: @project.id) %>

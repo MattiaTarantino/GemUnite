@@ -1,24 +1,12 @@
-<div>
-  <p>
-    <strong>Request:</strong>
-    <%= request.id %>
-  </p>
-
-  <p>
-    <strong>Utente:</strong>
-    <%= request.user.username %>
-  </p>
-
-  <p>
-    <strong>Note:</strong>
-    <%= request.note %>
-  </p>
-
-<% if @owner == false %>
-  <p>
-    <%= button_to "Accetta richiesta", project_request_accept_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success" %>
-    <%= button_to "Rifiuta richiesta", project_request_decline_path(project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger" %>
-  </p>
-  <% end %>
-
+<div class="card shadow-sm">
+  <div class="card-body px-4 py-5 px-md-5">
+    <h5 class="request-title card-title">Utente: <%= request.user.username %></h5>
+    <p class="text-muted card-text mb-4 mt-3">Note:  <%= request.note %></p>
+    <% if @owner == false %>
+      <div class="button-container d-flex justify-content-between">
+        <%= button_to "Accetta richiesta", user_project_request_accept_path(user_id: @user.id, project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success shadow" %>
+        <%= button_to "Rifiuta richiesta", user_project_request_decline_path(user_id: @user.id, project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger shadow" %>
+      </div>
+    <% end %>
+  </div>
 </div>

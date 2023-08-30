@@ -24,12 +24,13 @@ class CheckpointsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @checkpoint = Checkpoint.new(checkpoint_params)
     @project = Project.find(params[:project_id])
     @project.checkpoints << @checkpoint
     respond_to do |format|
       if @checkpoint.save
-        format.html { redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Checkpoint was successfully created." }
+        format.html { redirect_to user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: @checkpoint.id), notice: "Checkpoint was successfully created." }
         format.json { render :show, status: :created, location: @checkpoint }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +43,7 @@ class CheckpointsController < ApplicationController
     @checkpoint.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_show_my_project_path(project_id: @project.id), notice: "Checkpoint was successfully destroyed." }
+      format.html { redirect_to user_project_show_my_project_path(user_id: @user.id, project_id: @project.id), notice: "Checkpoint was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -50,7 +51,7 @@ class CheckpointsController < ApplicationController
   def update
     respond_to do |format|
       if @checkpoint.update(checkpoint_params)
-        format.html { redirect_to project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), notice: "Progetto was successfully updated." }
+        format.html { redirect_to user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: @checkpoint.id), notice: "Progetto was successfully updated." }
         format.json { render :show, status: :ok, location: @checkpoint }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -62,7 +63,7 @@ class CheckpointsController < ApplicationController
 
   def change_state
     if @checkpoint.completato == true
-      redirect_to project_show_my_project_path(project_id: @project.id), notice: "Checkpoint già completato"
+      redirect_to user_project_show_my_project_path(user_id: @user.id, project_id: @project.id), notice: "Checkpoint già completato"
     end
     completati = true
     @checkpoint.tasks.each do |task|
@@ -73,9 +74,9 @@ class CheckpointsController < ApplicationController
     if completati
       @checkpoint.completato = true
       @checkpoint.save
-      redirect_to project_show_my_project_path(project_id: @project.id)
+      redirect_to user_project_show_my_project_path(user_id: @user.id,project_id: @project.id)
     else
-      redirect_to project_show_my_project_path(project_id: @project.id), notice: "Non puoi completare il checkpoint se non hai completato tutti i task del checkpoint"
+      redirect_to user_project_show_my_project_path(user_id: @user.id,project_id: @project.id), notice: "Non puoi completare il checkpoint se non hai completato tutti i task del checkpoint"
     end
   end
 
@@ -97,7 +98,7 @@ class CheckpointsController < ApplicationController
     def is_member?
       @user_project = UserProject.where(user_id: current_user.id, project_id: params[:project_id]).first
       if @user_project.nil?
-        redirect_to my_projects_projects_path
+        redirect_to my_projects_user_projects_path @user
         flash[:notice] = "Non sei membro di questo progetto"
       else
         @role = @user_project.role
@@ -106,7 +107,7 @@ class CheckpointsController < ApplicationController
 
     def is_leader?
       if @user_project.role != "leader"
-        redirect_to my_projects_projects_path
+        redirect_to my_projects_user_projects_path @user
         flash[:notice] = "Non sei il leader di questo progetto"
       end
     end
@@ -114,13 +115,13 @@ class CheckpointsController < ApplicationController
     def project_started?
       @project = Project.find(params[:project_id])
       if @project.stato == "aperto"
-        redirect_to project_show_my_project_path(project_id: @project.id)
+        redirect_to user_project_show_my_project_path(user_id: @user.id, project_id: @project.id)
         flash[:notice] = "Il progetto non è ancora iniziato"
         return
       end
 
       if @project.stato == "chiuso"
-        redirect_to project_show_my_project_path(project_id: @project.id)
+        redirect_to user_project_show_my_project_path(user_id: @user.id, project_id: @project.id)
         flash[:notice] = "Il progetto è chiuso"
         return
       end

@@ -8,12 +8,18 @@
       body {
           font-family: Arial, sans-serif;
       }
+
       .no-tasks {
           text-align: center;
           font-style: italic;
           color: #888;
           margin-top: 20px;
       }
+     .btn:not(:disabled):not(.disabled)  {
+    cursor: pointer;
+    color: #0d0c0c;
+    background: #f4f4ff;
+    }
   </style>
 </head>
 <body>
@@ -36,8 +42,8 @@
                 <% end %>
               </p>
               <div class="d-flex justify-content-between">
-                <% if @project.stato == "iniziato" and not task.completato %>
-                  <%= button_to "Segna come completato", project_checkpoint_task_change_state_path(project_id: @project.id, checkpoint_id: @checkpoint.id, task_id: task.id), method: :put, class: "btn btn-success", data: { confirm: "Sei sicuro di segnare questo task come completato?", turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } %>
+                <% if @project.stato == "iniziato" and not task.completato and not @checkpoint.completato %>
+                  <%= button_to "Segna come completato", user_project_checkpoint_task_change_state_path(user_id: @user.id, project_id: @project.id, checkpoint_id: @checkpoint.id, task_id: task.id), method: :put, class: "btn btn-success", data: { confirm: "Sei sicuro di segnare questo task come completato?", turbo_confirm: "Sei sicuro di segnare questo checkpoint come completato?" } %>
                 <% elsif task.completato %>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg text-success" viewBox="0 0 16 16">
                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
@@ -60,14 +66,16 @@
   <div class="d-flex justify-content-between align-items-center mt-3">
     <% if @project.stato == "iniziato" %>
       <% if @role == "leader" %>
-        <%= link_to "Modifica checkpoint", edit_project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), class: "btn btn-primary me-2" %>
-        <%= button_to "Elimina checkpoint", project_checkpoint_path(project_id: @project.id, id: @checkpoint.id), method: :delete, class: "btn btn-danger", data: { confirm: "Sei sicuro di voler eliminare questo checkpoint?" } %>
+        <%= link_to "Modifica checkpoint", edit_user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: @checkpoint.id), class: "btn btn-primary me-2" %>
+        <%= button_to "Elimina checkpoint", user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: @checkpoint.id), method: :delete, class: "btn btn-danger", data: { confirm: "Sei sicuro di voler eliminare questo checkpoint?" } %>
       <% end %>
-      <%= link_to "Nuovo task", new_project_checkpoint_task_path(project_id: @project.id, checkpoint_id: @checkpoint.id), class: "btn btn-success" %>
+      <% if not @checkpoint.completato %>
+        <%= link_to "Nuovo task", new_user_project_checkpoint_task_path(user_id: @user.id, project_id: @project.id, checkpoint_id: @checkpoint.id), class: "btn btn-success" %>
+      <% end %>
     <% end %>
   </div>
 </div>
-<%= link_to "Torna al progetto", project_show_my_project_path(project_id: @project.id), class: "btn btn-secondary mt-3" %>
+<%= link_to "Torna al progetto", user_project_show_my_project_path(user_id: @user.id, project_id: @project.id), class: "btn btn-secondary mt-3" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,28 +1,36 @@
-
-<body>
-<div id="open-projects" class="container mt-5">
-  <h2 class="mb-4">Progetti aperti:</h2>
-
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <% @projects.each do |project| %>
-      <% if project.stato == "aperto" %>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= project.name %></h5>
-              <p class="card-text"><%= project.descrizione %></p>
-              <p class="card-text">Numero membri: <%= UserProject.where(:project_id => project.id).count %></p>
-              <p class="card-text">
-                <% project.fields.each do |field| %>
-                  <span class="badge bg-primary me-1"><%= field.nome %></span>
-                <% end %>
-              </p>
-              <a href="<%= project_path(project.id) %>" class="btn btn-primary">Show this project</a>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<div class="row mb-5">
+  <div class="col-md-8 col-xl-6 text-center mx-auto">
+    <h1 class="fw-bold" , style="color: black">Progetti disponibili su GemUnite</h1>
+    <p class="text-muted" style="padding-left: 0px;padding-right: 0px;margin-right: 50px;margin-left: 50px;">Qui
+      troverai una lista di p<span style="color: rgb(94, 100, 105);">rogetti che cercano persone preparate riguardo i tuoi ambiti d’interesse</span>
+    </p>
+  </div>
+</div>
+<div class="d-flex justify-content-between mb-3">
+  <div data-controller="project-sort", style="margin-top: 20px">
+    <label for="sort_by">Ordina per:</label>
+    <select name="sort_by" id="sort_by" data-action="project-sort#update" data-project-sort-target="select" data-user-id="<%= current_user.id %>">
+      <option></option>
+      <option value="time_posted" <%= 'selected' if @sorting == 'time_posted' %> >Più recenti</option>
+      <option value="time_posted_reverse" <%= 'selected' if @sorting == 'time_posted_reverse' %> >Meno recenti</option>
+      <option value="members" <%= 'selected' if @sorting == 'members' %> >Numero membri (crescente)</option>
+      <option value="members_reverse" <%= 'selected' if @sorting == 'members_reverse' %> >Numero membri (decrescente)
+      </option>
+    </select>
+  </div>
+  <div class="filter_by">
+    <%= form_tag(user_projects_path(current_user), method: :get) do %>
+      <%= label_tag :filter_by, "Seleziona un campo:" %>
+      <% all_fields = [["Tutti", "all"]] + Field.all.map { |fie| [fie.nome, fie.id.to_s] } %>
+      <%= select_tag :filter_by, options_for_select(all_fields, selected: (@selected_fields == 'all') ? 'all' : @selected_fields.to_s) %>
+      <%= submit_tag "Filtra" %>
     <% end %>
   </div>
 </div>
+
+<%= render "projects/projects", projects: @projects %>
+<div id="segnalazione">
+  <%= link_to "Manda una segnalazione", new_user_report_path(user_id: @user.id) %>
+</div>
+
 

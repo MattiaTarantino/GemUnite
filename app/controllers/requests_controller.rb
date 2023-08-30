@@ -1,7 +1,9 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[ show edit update destroy ]
+  before_action :set_request, except: %i[ index new create my_requests ]
   before_action :set, except: %i{ my_requests }
   before_action :is_leader?, only: %i[ show edit update destroy accept decline ]
+  before_action :is_project_open?, except: %i[ index new create my_requests ]
+  before_action :is_owner?, only: %i[ show edit update ]
 
   def set
     @project = Project.find(params[:project_id])
@@ -16,6 +18,20 @@ class RequestsController < ApplicationController
     end
   end
 
+  def is_owner?
+    if @user.id != @request.user_id
+      redirect_to root_path
+      flash[:notice] = "Non puoi accedere a questa richiesta"
+    end
+  end
+
+  def is_project_open?
+    if @project.stato != "aperto"
+      redirect_to root_path
+      flash[:notice] = "Le richieste di questo progetto sono chiuse"
+    end
+  end
+
   # GET /requests or /requests.json
   def index
     if @user_project && @user_project.role == "leader"
@@ -26,6 +42,7 @@ class RequestsController < ApplicationController
       flash[:notice] = "Solo il leader del progetto può accedere a questa pagina"
     end
   end
+
   # GET /requests/1 or /requests/1.json
   def show
     @request = Request.find(params[:id])
@@ -40,8 +57,11 @@ class RequestsController < ApplicationController
 
   # GET /requests/new
   def new
-    @request = Request.new
     @project = Project.where(id: params[:project_id]).first
+    if UserProject.where(user_id: current_user.id, project_id: @project.id).first
+      redirect_to root_path, notice: "Fai già parte di questo progetto"
+    end
+    @request = Request.new
   end
 
   # GET /requests/1/edit
@@ -59,7 +79,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to project_request_path(project_id: @project_id, id: @request.id), notice: "Request was successfully created." }
+        format.html { redirect_to user_project_request_path(user_id: @user.id, project_id: @project_id, id: @request.id), notice: "Request was successfully created." }
         format.json { render :show, status: :created, location: @request }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -72,7 +92,7 @@ class RequestsController < ApplicationController
   def update
     respond_to do |format|
       if @request.update(request_params)
-        format.html { redirect_to project_request_path(project_id: @project_id, id: @request.id), notice: "Request was successfully updated." }
+        format.html { redirect_to user_project_request_path(user_id: @user.id, project_id: @project_id, id: @request.id), notice: "Request was successfully updated." }
         format.json { render :show, status: :ok, location: @request }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -86,7 +106,7 @@ class RequestsController < ApplicationController
     @request.destroy
 
     respond_to do |format|
-      format.html { redirect_to my_requests_requests_path, notice: "Request was successfully destroyed." }
+      format.html { redirect_to my_requests_user_requests_path @user, notice: "Request was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -94,25 +114,31 @@ class RequestsController < ApplicationController
   def accept
     @request = Request.find(params[:request_id])
     @request.update(stato_accettazione: "Accettata")
-    UserProject.create(user_id: @request.user_id, project_id: @project.id)
-    redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta accettata"
+    if UserProject.where(user_id: @request.user.id, project_id: @project.id).first
+      redirect_to user_project_requests_path(user_id: @user.id,project_id: @project.id), notice: "L'utente fa già parte del progetto"
+    else
+      UserProject.create(user_id: @request.user_id, project_id: @project.id)
+      redirect_to user_project_requests_path(user_id: @user.id,project_id: @project.id), notice: "Richiesta accettata"
+    end
   end
 
   def decline
     @request = Request.find(params[:request_id])
     @request.update(stato_accettazione: "Rifiutata")
-    redirect_to project_requests_path(project_id: @project.id), notice: "Richiesta rifiutata"
+    redirect_to user_project_requests_path(user_id: @user.id,project_id: @project.id), notice: "Richiesta rifiutata"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_request
-      @project = Project.find(params[:project_id])
-      @request = Request.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def request_params
-      params.require(:request).permit(:request_id, :note, :stato_accettazione)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_request
+    @project = Project.find(params[:project_id])
+    parameter = params[:id] || params[:request_id]
+    @request = Request.find(parameter)
+  end
+
+  # Only allow a list of trusted parameters through.
+  def request_params
+    params.require(:request).permit(:request_id, :note, :stato_accettazione)
+  end
 end

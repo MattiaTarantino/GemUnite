@@ -42,7 +42,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     fields_to_add = Field.where(id: selected_field_ids - current_field_ids)
     fields_to_remove = @user.fields.where.not(id: selected_field_ids)
 
-    @user.fields << fields_to_add
+    fields_to_add.each do |field|
+      @user.fields << field unless @user.fields.include?(field)
+    end
     @user.fields.delete(fields_to_remove)
 
     if current_user.provider
@@ -77,10 +79,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :firstname, :lastname,field_ids: []])
   end
-
-  # If you have extra params to permit, append them to the sanitizer.
+  #
+  # # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  #   devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username) }
   # end
 
   # The path used after sign up.

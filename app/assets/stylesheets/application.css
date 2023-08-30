@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,26 +15,31 @@
  *= require_tree .
  *= require_self
  */
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+a:link {
+    text-decoration: none;
+}
 
 
-
-a:link { text-decoration: none; }
-
-
-a:visited { text-decoration: none; }
+a:visited {
+    text-decoration: none;
+}
 
 
-a:hover { text-decoration: none; }
+a:hover {
+    text-decoration: none;
+}
 
 
-a:active { text-decoration: none; }
+a:active {
+    text-decoration: none;
+}
 
 /* Colori definiti come variabili */
 :root {
-    --gray:  #E5E5E5;
+    --gray: #E5E5E5;
     --gray2: #808080;
-    --blue:  #2183DD;
+    --blue: #2183DD;
     --green: #009900;
     --white: #FFFFFF;
 }
@@ -41,6 +48,9 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     padding: 20px;
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
 }
 
 img {
@@ -58,10 +68,10 @@ img {
 
 .chat-container {
     max-width: 400px;
-    margin: 10px;
+    margin: 30px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    padding: 30px;
     border-radius: 30px;
 }
 
@@ -77,6 +87,7 @@ img {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .chat-input {
@@ -106,6 +117,7 @@ table {
     margin-right: auto;
     margin-top: 20px;
     margin-bottom: 10px;
+
 }
 
 /* Add borders to the table cells */
@@ -118,7 +130,7 @@ th, td {
 .btn-custom-center {
     display: block;
     margin: 0 auto;
-    background-color:#c3d9ff;
+    background-color: #c3d9ff;
     color: white;
     border-radius: 4px;
     padding: 10px 20px;
@@ -129,6 +141,7 @@ th, td {
 .btn-custom-center:hover {
     background-color: lightblue;
 }
+
 /* Style for "Show this project" link */
 .project-link {
     display: inline-block;
@@ -153,21 +166,25 @@ th, td {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
+
 .project-title {
     font-size: 24px;
     color: #2E2F30;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .project-description {
     font-size: 16px;
     color: #2E2F30;
     margin-bottom: 10px;
 }
+
 h3 {
     font-weight: 600;
     color: slategray;
 }
+
 .back-button {
 
     display: inline-block;
@@ -180,6 +197,189 @@ h3 {
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
+
 .back-button:hover {
     background-color: lightblue;
+}
+
+.list-inline-item {
+    border: 2px solid #c3d9ff;
+    border-radius: 4px;
+    background-color: #c3d9ff
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: var(--bs-secondary-color) !important;
+}
+
+/* Homepage */
+.home-title {
+    font-weight: 700;
+    font-size: 5rem;
+    color: var(--bs-emphasis-color);
+}
+
+.btn-home-text {
+    color: #fff;
+}
+
+.btn-home-login {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-home-login:hover {
+    color: #fff;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
+}
+
+/* h1{
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ font-size: 25px;
+ font-weight: bold;
+ margin-top:30px;
+ }
+*/
+form {
+    max-width: 600px;
+    text-align: left;
+}
+
+label {
+    display: inline-block;
+
+    font-weight: bold;
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    border-radius: 7px;
+    /* color: #4a4545;
+    background: #9aaede;
+    background-color: #9aaede; */ 
+    margin-top: 20px;
+    font-weight: normal;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    /* border: 1px solid green; */
+}
+
+/* Log in, Sign up */
+.login-title {
+    font-weight: 700;
+    font-size: 3rem;
+    color: black;
+}
+
+.card {
+    display: flex;
+    border-radius: 20px;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bs-icon {
+    --bs-icon-size: 2.5rem;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--bs-icon-size);
+    width: calc(var(--bs-icon-size) * 2);
+    height: calc(var(--bs-icon-size) * 2);
+}
+
+.bs-icon.bs-icon-circle {
+    border-radius: 50%;
+}
+
+.bs-icon.bs-icon-color {
+    color: var(--bs-white);
+    background: var(--bs-primary);
+}
+
+.form-text {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.form-field {
+    display: center;
+    width: 300px;
+    border-radius: 50px;
+}
+
+.btn-login-login {
+    color: white;
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-login-login:active {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-login-login:focus {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-login-login:hover {
+    color: white;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
+}
+
+.btn-signup {
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-signup:hover {
+    color: white;
+    background-color: #07889b;
+    border-color: #07889b;
+}
+
+
+/* Requests */
+.request-title {
+    color: black;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.btn-request {
+    color: white;
+    background-color: #3763f4;
+    border-color: #3763f4;
+    width: 400px;
+}
+
+.btn-request:active {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-request:focus {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-request:hover {
+    color: white;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
 }

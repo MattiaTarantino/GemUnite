@@ -13,6 +13,10 @@ class LatestNewsController < ApplicationController
     current_date = Time.now.strftime("%Y-%m-%d")
     from_date = (Time.now - 1.month + 1.day).strftime("%Y-%m-%d")
 
+    if topics == ""
+      topics = "Technology"
+    end
+
     @all_articles = newsapi.get_everything(q: topics,
                                            from: from_date,
                                            to: current_date,
@@ -24,29 +28,6 @@ class LatestNewsController < ApplicationController
 
   end
 
-  # GET /latest_news/1 or /latest_news/1.json
-  def show
-  end
 
-  # GET /latest_news/new
-  def new
-
-  end
-
-  # GET /latest_news/1/edit
-  def edit
-  end
-
-  # POST /latest_news or /latest_news.json
-  def create
-  end
-
-  # PATCH/PUT /latest_news/1 or /latest_news/1.json
-  def update
-  end
-
-  # DELETE /latest_news/1 or /latest_news/1.json
-  def destroy
-  end
 
 end

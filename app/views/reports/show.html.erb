@@ -1,8 +1,8 @@
-<p style="color: green"><%= notice %></p>
+
 
 <%= render @report %>
 
 <div>
-  <%= link_to "Visualizza tutte le tue segnalazioni", reports_path %>
+  <%= link_to "Visualizza tutte le tue segnalazioni", user_reports_path(user_id: @user.id) %>
 
 </div>
