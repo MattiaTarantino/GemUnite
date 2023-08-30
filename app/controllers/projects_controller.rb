@@ -117,16 +117,7 @@ class ProjectsController < ApplicationController
   end
 
   def my_projects
-    # Provide authentication credentials
-    @client = Octokit::Client.new(:access_token => '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')#
 
-    # You can still use the username/password syntax by replacing the password value with your PAT.
-    # client = Octokit::Client.new(:login => 'defunkt', :password => 'personal_access_token')
-
-    # Fetch the current user
-    @github_user = @client.user
-
-    @repos = @client.followers
   end
 
   def show_my_project
