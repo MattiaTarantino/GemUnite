@@ -1,8 +1,5 @@
 
 Given("the user is logged in") do
-  user = FactoryBot.create(:user)
-
-  sign_in user
 end
 
 And("the user is on the project page") do

@@ -55,8 +55,6 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rubocop', require: false
 
-  gem 'cucumber-rails'
-
   gem 'factory_bot_rails', '~> 6.2.0'
   # The RSpec testing framework
   gem 'rspec-rails'
@@ -78,6 +76,7 @@ end
 group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "cucumber-rails", require: false
 end
 
 gem "activeadmin", "~> 3.0"
