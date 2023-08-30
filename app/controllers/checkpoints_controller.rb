@@ -1,7 +1,7 @@
 class CheckpointsController < ApplicationController
   before_action :set_variables, only: %i[ show edit update destroy change_state]
   before_action :is_member?
-  before_action :is_leader?, only: %i[ new edit update destroy  ]
+  before_action :is_leader?, only: %i[ new create edit update destroy  ]
   before_action :project_started?, only: %i[ new edit update destroy create change_state ]
 
 
@@ -30,7 +30,7 @@ class CheckpointsController < ApplicationController
     @project.checkpoints << @checkpoint
     respond_to do |format|
       if @checkpoint.save
-        format.html { redirect_to user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: @checkpoint.id), notice: "Checkpoint was successfully created." }
+        format.html { redirect_to user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: @checkpoint.id), notice: "Checkpoint creato con successo." }
         format.json { render :show, status: :created, location: @checkpoint }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -98,7 +98,7 @@ class CheckpointsController < ApplicationController
     def is_member?
       @user_project = UserProject.where(user_id: current_user.id, project_id: params[:project_id]).first
       if @user_project.nil?
-        redirect_to my_projects_user_projects_path @user
+        redirect_to my_projects_user_projects_path current_user
         flash[:notice] = "Non sei membro di questo progetto"
       else
         @role = @user_project.role
@@ -107,7 +107,7 @@ class CheckpointsController < ApplicationController
 
     def is_leader?
       if @user_project.role != "leader"
-        redirect_to my_projects_user_projects_path @user
+        redirect_to my_projects_user_projects_path current_user
         flash[:notice] = "Non sei il leader di questo progetto"
       end
     end

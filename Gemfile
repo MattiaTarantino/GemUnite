@@ -54,6 +54,14 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rubocop', require: false
+
+  gem 'cucumber-rails'
+
+  gem 'factory_bot_rails', '~> 6.2.0'
+  # The RSpec testing framework
+  gem 'rspec-rails'
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
 end
 
 group :development do
@@ -68,11 +76,6 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails'
-  # The RSpec testing framework
-  gem 'rspec-rails'
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
 end
@@ -102,3 +105,5 @@ gem 'bootstrap-sass'
 # >> require 'table_print'
 # >> tp Table.all
 gem 'table_print'
+
+gem 'rails-controller-testing'
