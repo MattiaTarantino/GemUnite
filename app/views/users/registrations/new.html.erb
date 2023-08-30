@@ -21,8 +21,8 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form" }) do |f| %>
             <%= render "users/shared/error_messages", resource: resource %>
             <div class="field">
-              <%= f.label :email, class: "form-text" %>    <!-- mettere text -->
-              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-field mb-3" %>   <!-- era form-control -->
+              <%= f.label :email, class: "form-text" %>
+              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-field mb-3" %>
             </div>
             <div class="field">
               <%= f.label :username, class: "form-text" %>
@@ -59,7 +59,6 @@
             <div class="actions mb-3 d-flex justify-content-center">
               <%= f.submit "Sign up", class: "btn-signup btn shadow rounded-pill btn-lg w-100 mb-2" %>
             </div>
-            
           <% end %>
           <%= render "users/shared/links" %>
         </div>
