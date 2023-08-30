@@ -285,7 +285,7 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
+}
 
 .bs-icon {
     --bs-icon-size: 2.5rem;
@@ -294,14 +294,14 @@ label {
     justify-content: center;
     align-items: center;
     font-size: var(--bs-icon-size);
-    width: calc(var(--bs-icon-size)*2);
-    height: calc(var(--bs-icon-size)*2);
+    width: calc(var(--bs-icon-size) * 2);
+    height: calc(var(--bs-icon-size) * 2);
 }
 
 .bs-icon.bs-icon-circle {
     border-radius: 50%;
 }
-      
+
 .bs-icon.bs-icon-color {
     color: var(--bs-white);
     background: var(--bs-primary);
