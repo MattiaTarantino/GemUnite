@@ -106,6 +106,7 @@ class ProjectsController < ApplicationController
         @chat = Chat.new(project_id: @project.id)
         @chat.save
         @user_project.save
+        @project.chat = @chat
         format.html { redirect_to user_project_path(@user, @project), notice: "Progetto was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -168,7 +169,7 @@ class ProjectsController < ApplicationController
   def show_my_project
     @checkpoints = @project.checkpoints
     @members = @project.users
-    @chat = @project.chat # attenzione che alcuni non ce l'hanno
+    @chat = @project.chat
     @messages = @chat.messages
   end
 
