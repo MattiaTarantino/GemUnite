@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_22_102420) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_182412) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_102420) do
   create_table "messages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content", limit: 50, null: false
     t.integer "user_id", null: false
     t.integer "chat_id", null: false
   end
@@ -92,6 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_102420) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
+    t.string "github_link"
   end
 
   create_table "reports", force: :cascade do |t|
