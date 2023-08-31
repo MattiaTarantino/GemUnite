@@ -85,11 +85,15 @@
     <h2 class="mb-3">Informazioni Progetto</h2>
     <p><%=@project.descrizione %></p>
     <p><%=@project.stato %></p>
-   <!--
-    <div class="github-link">
-      <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
-    </div>
-    -->
+    <% if @role == "leader" and not @project.github_link.present? and @user.provider == "github"%>
+      <div class="github-link">
+        <%= link_to 'Crea Repository su GitHub <i class="fa fa-github"></i>'.html_safe, user_project_open_github_path(@user, @project) %>
+      </div>
+    <% elsif @project.github_link.present? %>
+      <div class="github-link">
+        <%= link_to 'Apri su GitHub <i class="fa fa-github"></i>'.html_safe, @project[:github_link] %>
+      </div>
+    <% end %>
     <br>
     <% if @role == "leader" %>
 

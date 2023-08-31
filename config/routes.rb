@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :projects do
       get 'my_projects', on: :collection
+      get 'open_github'
       get 'show_my_project'
       put 'close_requests'
       put 'close_project'
