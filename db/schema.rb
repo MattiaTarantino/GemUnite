@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_182412) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_133731) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_182412) do
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nome"], name: "index_fields_on_nome", unique: true
   end
 
   create_table "fields_projects", force: :cascade do |t|
@@ -150,6 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_182412) do
     t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "chats", "projects"

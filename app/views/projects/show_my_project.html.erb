@@ -69,8 +69,9 @@
   <h2> Chat di gruppo </h2>
     <div class="chat-log" id="chat-log">
       <% @messages.each do |message| %>
+        <% label = User.find(message.user_id).username || User.find(message.user_id).email %>
         <div class="message">
-          <%= User.find(message.user_id).username %>: <%= message.content %>
+          <%= label %>: <%= message.content %>
         </div>
       <% end %>
     </div>
