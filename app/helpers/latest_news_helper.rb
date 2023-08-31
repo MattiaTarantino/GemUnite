@@ -1,0 +1,2 @@
+module LatestNewsHelper
+end

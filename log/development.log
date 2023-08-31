@@ -5809,3 +5809,436 @@ Processing by PagesController#home as HTML
 Completed 200 OK in 69ms (Views: 54.8ms | ActiveRecord: 0.0ms | Allocations: 4845)
 
 
+Started GET "/" for 127.0.0.1 at 2023-08-31 11:35:13 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (Duration: 4.9ms | Allocations: 882)
+  Rendered layout layouts/application.html.erb (Duration: 972.8ms | Allocations: 261959)
+Completed 200 OK in 1012ms (Views: 982.2ms | ActiveRecord: 0.0ms | Allocations: 267566)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-08-31 11:35:16 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (Duration: 3.2ms | Allocations: 1024)
+  Rendered users/sessions/new.html.erb within layouts/application (Duration: 22.4ms | Allocations: 5059)
+  Rendered layout layouts/application.html.erb (Duration: 26.0ms | Allocations: 7910)
+Completed 200 OK in 51ms (Views: 28.1ms | ActiveRecord: 0.7ms | Allocations: 17771)
+
+
+Started POST "/users/auth/github" for 127.0.0.1 at 2023-08-31 11:35:18 +0200
+Started GET "/users/auth/github/callback?code=b777c954d830cb12dd9f&state=3464f4cce2ba778ffbb246cd7f36b130cf80ca8aad40d057" for 127.0.0.1 at 2023-08-31 11:35:19 +0200
+Processing by Users::OmniauthCallbacksController#github as HTML
+  Parameters: {"code"=>"b777c954d830cb12dd9f", "state"=>"3464f4cce2ba778ffbb246cd7f36b130cf80ca8aad40d057"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "github"], ["uid", "72206852"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `from_omniauth'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 14ms (ActiveRecord: 0.7ms | Allocations: 3480)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-31 11:35:20 +0200
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Processing by ProjectsController#index as HTML
+  [1m[36mUserProject Load (0.2ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields"[0m
+  ↳ app/controllers/projects_controller.rb:33:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/projects/index.html.erb:24:in `map'
+  [1m[36mField Pluck (0.4ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:2
+  [1m[36mUserProject Pluck (0.5ms)[0m  [1m[34mSELECT "user_projects"."project_id" FROM "user_projects" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:3
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT DISTINCT "projects".* FROM "projects" INNER JOIN "fields_projects" ON "fields_projects"."project_id" = "projects"."id" INNER JOIN "fields" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields"."id" IN (?, ?, ?) ORDER BY "projects"."created_at" DESC[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/views/projects/_projects.html.erb:5
+  [1m[36mField Pluck (0.5ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.4ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/_projects.html.erb:6
+  Rendered projects/_projects.html.erb (Duration: 78.1ms | Allocations: 18719)
+  Rendered projects/index.html.erb within layouts/application (Duration: 96.1ms | Allocations: 22060)
+  Rendered layout layouts/application.html.erb (Duration: 102.3ms | Allocations: 25142)
+Completed 200 OK in 174ms (Views: 99.8ms | ActiveRecord: 7.3ms | Allocations: 42952)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2023-08-31 11:35:23 +0200
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/registrations/edit_oauth.html.erb within layouts/application
+  Rendered users/shared/_error_messages.html.erb (Duration: 0.8ms | Allocations: 238)
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/users/registrations/edit_oauth.html.erb:15
+  [1m[36mField Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 1], ["LIMIT", 1]]
+  ↳ app/views/users/registrations/edit_oauth.html.erb:17
+  [1m[36mField Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/registrations/edit_oauth.html.erb:17
+  [1m[36mField Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 3], ["LIMIT", 1]]
+  ↳ app/views/users/registrations/edit_oauth.html.erb:17
+  Rendered users/registrations/edit_oauth.html.erb within layouts/application (Duration: 13.1ms | Allocations: 4613)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 7679)
+Completed 200 OK in 22ms (Views: 18.1ms | ActiveRecord: 0.9ms | Allocations: 10190)
+
+
+Started PUT "/users" for 127.0.0.1 at 2023-08-31 11:35:25 +0200
+Processing by Users::RegistrationsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "username"=>"RickySniper", "field_ids"=>["1"], "commit"=>"Update"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mField Pluck (0.3ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/controllers/users/registrations_controller.rb:40:in `update'
+  [1m[36mField Load (0.3ms)[0m  [1m[34mSELECT "fields".* FROM "fields" WHERE "fields"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:45:in `update'
+  [1m[36mField Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:46:in `block in update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users/registrations_controller.rb:46:in `block in update'
+  [1m[36mUser::HABTM_Fields Create (0.6ms)[0m  [1m[32mINSERT INTO "fields_users" ("user_id", "field_id") VALUES (?, ?)[0m  [["user_id", 3], ["field_id", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:46:in `block in update'
+  [1m[36mTRANSACTION (22.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users/registrations_controller.rb:46:in `block in update'
+  [1m[36mField Load (0.3ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" != ?[0m  [["user_id", 3], ["id", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:48:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users/registrations_controller.rb:52:in `update'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "RickySniper"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:52:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users/registrations_controller.rb:52:in `update'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 85ms (ActiveRecord: 25.5ms | Allocations: 13377)
+
+
+Started GET "/" for 127.0.0.1 at 2023-08-31 11:35:25 +0200
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Processing by ProjectsController#index as TURBO_STREAM
+  [1m[36mUserProject Load (0.2ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.2ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields"[0m
+  ↳ app/controllers/projects_controller.rb:33:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/projects/index.html.erb:24:in `map'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:2
+  [1m[36mUserProject Pluck (0.2ms)[0m  [1m[34mSELECT "user_projects"."project_id" FROM "user_projects" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:3
+  [1m[36mProject Load (0.6ms)[0m  [1m[34mSELECT DISTINCT "projects".* FROM "projects" INNER JOIN "fields_projects" ON "fields_projects"."project_id" = "projects"."id" INNER JOIN "fields" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields"."id" IN (?, ?, ?) ORDER BY "projects"."created_at" DESC[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/views/projects/_projects.html.erb:5
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:30
+  Rendered projects/_projects.html.erb (Duration: 34.7ms | Allocations: 12846)
+  Rendered projects/index.html.erb within layouts/application (Duration: 37.9ms | Allocations: 13923)
+  Rendered layout layouts/application.html.erb (Duration: 42.8ms | Allocations: 16880)
+Completed 200 OK in 54ms (Views: 41.0ms | ActiveRecord: 3.4ms | Allocations: 19558)
+
+
+Started GET "/users/3/projects?sort_by=members" for 127.0.0.1 at 2023-08-31 11:35:28 +0200
+Processing by ProjectsController#index as HTML
+  Parameters: {"sort_by"=>"members", "user_id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUserProject Load (0.2ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields"[0m
+  ↳ app/controllers/projects_controller.rb:33:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/projects/index.html.erb:24:in `map'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:2
+  [1m[36mUserProject Pluck (0.1ms)[0m  [1m[34mSELECT "user_projects"."project_id" FROM "user_projects" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:3
+  [1m[36mProject Load (0.4ms)[0m  [1m[34mSELECT DISTINCT "projects".* FROM "projects" INNER JOIN "fields_projects" ON "fields_projects"."project_id" = "projects"."id" INNER JOIN "fields" ON "fields"."id" = "fields_projects"."field_id" INNER JOIN "user_projects" ON "user_projects"."project_id" = "projects"."id" WHERE "fields"."id" IN (?, ?, ?) GROUP BY "projects"."id" ORDER BY COUNT(user_projects.id)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/views/projects/_projects.html.erb:5
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:30
+  Rendered projects/_projects.html.erb (Duration: 24.0ms | Allocations: 12540)
+  Rendered projects/index.html.erb within layouts/application (Duration: 25.8ms | Allocations: 13570)
+  Rendered layout layouts/application.html.erb (Duration: 32.0ms | Allocations: 16538)
+Completed 200 OK in 43ms (Views: 30.6ms | ActiveRecord: 2.8ms | Allocations: 20460)
+
+
+Started GET "/users/3/projects?sort_by=members_reverse" for 127.0.0.1 at 2023-08-31 11:35:30 +0200
+Processing by ProjectsController#index as HTML
+  Parameters: {"sort_by"=>"members_reverse", "user_id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.2ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields"[0m
+  ↳ app/controllers/projects_controller.rb:33:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/projects/index.html.erb:24:in `map'
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:2
+  [1m[36mUserProject Pluck (0.2ms)[0m  [1m[34mSELECT "user_projects"."project_id" FROM "user_projects" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:3
+  [1m[36mProject Load (1.1ms)[0m  [1m[34mSELECT DISTINCT "projects".* FROM "projects" INNER JOIN "fields_projects" ON "fields_projects"."project_id" = "projects"."id" INNER JOIN "fields" ON "fields"."id" = "fields_projects"."field_id" INNER JOIN "user_projects" ON "user_projects"."project_id" = "projects"."id" WHERE "fields"."id" IN (?, ?, ?) GROUP BY "projects"."id" ORDER BY COUNT(user_projects.id) DESC[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/views/projects/_projects.html.erb:5
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 7]]
+  ↳ app/views/projects/_projects.html.erb:30
+  Rendered projects/_projects.html.erb (Duration: 50.4ms | Allocations: 11718)
+  Rendered projects/index.html.erb within layouts/application (Duration: 55.2ms | Allocations: 12748)
+  Rendered layout layouts/application.html.erb (Duration: 64.0ms | Allocations: 15705)
+Completed 200 OK in 82ms (Views: 61.7ms | ActiveRecord: 4.9ms | Allocations: 19627)
+
+
+Started GET "/users/3/projects?filter_by=2&commit=Filtra" for 127.0.0.1 at 2023-08-31 11:35:35 +0200
+Processing by ProjectsController#index as HTML
+  Parameters: {"filter_by"=>"2", "commit"=>"Filtra", "user_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields"[0m
+  ↳ app/controllers/projects_controller.rb:33:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/projects/index.html.erb:24:in `map'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:2
+  [1m[36mUserProject Pluck (0.1ms)[0m  [1m[34mSELECT "user_projects"."project_id" FROM "user_projects" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:3
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT DISTINCT "projects".* FROM "projects" INNER JOIN "fields_projects" ON "fields_projects"."project_id" = "projects"."id" INNER JOIN "fields" ON "fields"."id" = "fields_projects"."field_id" INNER JOIN "user_projects" ON "user_projects"."project_id" = "projects"."id" WHERE "fields"."id" = ? GROUP BY "projects"."id" ORDER BY COUNT(user_projects.id) DESC[0m  [["id", 2]]
+  ↳ app/views/projects/_projects.html.erb:5
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mUserProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:30
+  [1m[36mUserProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 8]]
+  ↳ app/views/projects/_projects.html.erb:30
+  Rendered projects/_projects.html.erb (Duration: 19.8ms | Allocations: 6887)
+  Rendered projects/index.html.erb within layouts/application (Duration: 22.6ms | Allocations: 7914)
+  Rendered layout layouts/application.html.erb (Duration: 30.1ms | Allocations: 10870)
+Completed 200 OK in 41ms (Views: 29.2ms | ActiveRecord: 2.1ms | Allocations: 14784)
+
+
+Started GET "/users/3/projects?filter_by=3&commit=Filtra" for 127.0.0.1 at 2023-08-31 11:35:38 +0200
+Processing by ProjectsController#index as HTML
+  Parameters: {"filter_by"=>"3", "commit"=>"Filtra", "user_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."id" FROM "fields"[0m
+  ↳ app/controllers/projects_controller.rb:33:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/projects/index.html.erb:24:in `map'
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:2
+  [1m[36mUserProject Pluck (0.1ms)[0m  [1m[34mSELECT "user_projects"."project_id" FROM "user_projects" WHERE "user_projects"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/projects/_projects.html.erb:3
+  [1m[36mProject Load (0.4ms)[0m  [1m[34mSELECT DISTINCT "projects".* FROM "projects" INNER JOIN "fields_projects" ON "fields_projects"."project_id" = "projects"."id" INNER JOIN "fields" ON "fields"."id" = "fields_projects"."field_id" INNER JOIN "user_projects" ON "user_projects"."project_id" = "projects"."id" WHERE "fields"."id" = ? GROUP BY "projects"."id" ORDER BY COUNT(user_projects.id) DESC[0m  [["id", 3]]
+  ↳ app/views/projects/_projects.html.erb:5
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.2ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 9]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mField Pluck (0.1ms)[0m  [1m[34mSELECT "fields"."nome" FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 11]]
+  ↳ app/views/projects/_projects.html.erb:6
+  [1m[36mUserProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_projects" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:22
+  [1m[36mField Load (0.2ms)[0m  [1m[34mSELECT "fields".* FROM "fields" INNER JOIN "fields_projects" ON "fields"."id" = "fields_projects"."field_id" WHERE "fields_projects"."project_id" = ?[0m  [["project_id", 10]]
+  ↳ app/views/projects/_projects.html.erb:30
+  Rendered projects/_projects.html.erb (Duration: 21.4ms | Allocations: 6334)
+  Rendered projects/index.html.erb within layouts/application (Duration: 24.3ms | Allocations: 7361)
+  Rendered layout layouts/application.html.erb (Duration: 32.4ms | Allocations: 10317)
+Completed 200 OK in 42ms (Views: 31.7ms | ActiveRecord: 2.1ms | Allocations: 14234)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2023-08-31 11:35:51 +0200
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering users/registrations/edit_oauth.html.erb within layouts/application
+  Rendered users/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 14)
+  [1m[36mField Load (0.1ms)[0m  [1m[34mSELECT "fields".* FROM "fields"[0m
+  ↳ app/views/users/registrations/edit_oauth.html.erb:15
+  [1m[36mField Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 1], ["LIMIT", 1]]
+  ↳ app/views/users/registrations/edit_oauth.html.erb:17
+  [1m[36mField Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/registrations/edit_oauth.html.erb:17
+  [1m[36mField Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "fields" INNER JOIN "fields_users" ON "fields"."id" = "fields_users"."field_id" WHERE "fields_users"."user_id" = ? AND "fields"."id" = ? LIMIT ?[0m  [["user_id", 3], ["id", 3], ["LIMIT", 1]]
+  ↳ app/views/users/registrations/edit_oauth.html.erb:17
+  Rendered users/registrations/edit_oauth.html.erb within layouts/application (Duration: 11.8ms | Allocations: 3664)
+  Rendered layout layouts/application.html.erb (Duration: 17.2ms | Allocations: 6620)
+Completed 200 OK in 22ms (Views: 17.2ms | ActiveRecord: 0.9ms | Allocations: 8374)
+
+
+Started GET "/users/3/projects/my_projects" for 127.0.0.1 at 2023-08-31 11:35:53 +0200
+Processing by ProjectsController#my_projects as HTML
+  Parameters: {"user_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/my_projects.html.erb within layouts/application
+  Rendered projects/my_projects.html.erb within layouts/application (Duration: 2.2ms | Allocations: 980)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 3945)
+Completed 200 OK in 14ms (Views: 8.0ms | ActiveRecord: 0.4ms | Allocations: 7332)
+
+
+Started GET "/users/3/projects/2/show_my_project" for 127.0.0.1 at 2023-08-31 11:35:54 +0200
+Processing by ProjectsController#show_my_project as HTML
+  Parameters: {"user_id"=>"3", "project_id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:241:in `set_project'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "member"]]
+  ↳ app/controllers/projects_controller.rb:228:in `set_user'
+  [1m[36mUserProject Load (0.1ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."role" = ?[0m  [["user_id", 3], ["role", "leader"]]
+  ↳ app/controllers/projects_controller.rb:233:in `set_user'
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:234:in `block in set_user'
+  [1m[36mUserProject Load (0.2ms)[0m  [1m[34mSELECT "user_projects".* FROM "user_projects" WHERE "user_projects"."user_id" = ? AND "user_projects"."project_id" = ? ORDER BY "user_projects"."id" ASC LIMIT ?[0m  [["user_id", 3], ["project_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:9:in `is_member?'
+  [1m[36mChat Load (0.1ms)[0m  [1m[34mSELECT "chats".* FROM "chats" WHERE "chats"."project_id" = ? LIMIT ?[0m  [["project_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:203:in `show_my_project'
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show_my_project.html.erb within layouts/application
+  [1m[36mCheckpoint Load (0.3ms)[0m  [1m[34mSELECT "checkpoints".* FROM "checkpoints" WHERE "checkpoints"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/show_my_project.html.erb:34
+  [1m[36mMessage Load (0.1ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chat_id" = ?[0m  [["chat_id", 1]]
+  ↳ app/views/projects/show_my_project.html.erb:71
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "user_projects" ON "users"."id" = "user_projects"."user_id" WHERE "user_projects"."project_id" = ?[0m  [["project_id", 2]]
+  ↳ app/views/projects/show_my_project.html.erb:119
+  Rendered projects/show_my_project.html.erb within layouts/application (Duration: 25.7ms | Allocations: 11130)
+  Rendered layout layouts/application.html.erb (Duration: 29.9ms | Allocations: 14092)
+Completed 200 OK in 78ms (Views: 28.5ms | ActiveRecord: 3.3ms | Allocations: 33927)
+
+
+Started GET "/users/3/requests/my_requests" for 127.0.0.1 at 2023-08-31 11:36:01 +0200
+Processing by RequestsController#my_requests as HTML
+  Parameters: {"user_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering requests/my_requests.html.erb within layouts/application
+  [1m[36mRequest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "requests" WHERE "requests"."user_id" = ? AND "requests"."user_id" = ? LIMIT ?[0m  [["user_id", 3], ["user_id", 3], ["LIMIT", 1]]
+  ↳ app/views/requests/my_requests.html.erb:4
+  [1m[36mRequest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "requests" WHERE "requests"."user_id" = ? AND "requests"."user_id" = ? AND "requests"."stato_accettazione" = ? LIMIT ?[0m  [["user_id", 3], ["user_id", 3], ["stato_accettazione", "Accettata"], ["LIMIT", 1]]
+  ↳ app/views/requests/my_requests.html.erb:7
+  [1m[36mRequest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "requests" WHERE "requests"."user_id" = ? AND "requests"."user_id" = ? AND "requests"."stato_accettazione" = ? LIMIT ?[0m  [["user_id", 3], ["user_id", 3], ["stato_accettazione", "In attesa"], ["LIMIT", 1]]
+  ↳ app/views/requests/my_requests.html.erb:30
+  [1m[36mRequest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "requests" WHERE "requests"."user_id" = ? AND "requests"."user_id" = ? AND "requests"."stato_accettazione" = ? LIMIT ?[0m  [["user_id", 3], ["user_id", 3], ["stato_accettazione", "Rifiutata"], ["LIMIT", 1]]
+  ↳ app/views/requests/my_requests.html.erb:55
+  Rendered requests/my_requests.html.erb within layouts/application (Duration: 8.2ms | Allocations: 3069)
+  Rendered layout layouts/application.html.erb (Duration: 16.4ms | Allocations: 6178)
+Completed 200 OK in 29ms (Views: 18.0ms | ActiveRecord: 1.2ms | Allocations: 9943)
+
+
