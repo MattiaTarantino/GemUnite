@@ -99,3 +99,9 @@ gem 'bootstrap-sass'
 # >> require 'table_print'
 # >> tp Table.all
 gem 'table_print'
+
+# per inviare richieste http
+gem 'rest-client'
+
+# github api
+gem "octokit", "~> 5.0"
