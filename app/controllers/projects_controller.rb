@@ -2,13 +2,13 @@ class ProjectsController < ApplicationController
   before_action :set_project, except: %i[ index new create my_projects ]
   before_action :set_user
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
-  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro open_github ]
 
 
   def is_member?
     @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
     if @user_project.nil?
-      redirect_to my_projects_projects_path
+      redirect_to my_projects_user_projects_path @user
       flash[:notice] = "Non sei membro di questo progetto"
     else
       @role = @user_project.role
@@ -17,8 +17,12 @@ class ProjectsController < ApplicationController
 
   def is_leader?
     @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
+    if @user_project.nil?
+      redirect_to my_projects_user_projects_path @user
+      flash[:notice] = "Non sei membro di questo progetto"
+    end
     if @user_project.role != "leader"
-      redirect_to my_projects_projects_path
+      redirect_to my_projects_user_projects_path @user
       flash[:notice] = "Non sei il leader di questo progetto"
     end
   end
@@ -89,12 +93,15 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    parameters = project_params.except(:ambiti)
-    @project = Project.new(parameters)
-    id_ambiti = params[:project][:field_id].drop(1)
-    id_ambiti.each do |ambito|
-      @project.fields << Field.find(ambito)
+    if params[:field_ids].present?
+      selected_field_ids = params[:field_ids].reject(&:blank?)
+    else
+      redirect_to new_user_project_path @user, notice: "Devi selezionare almeno un ambito"
+      return
     end
+    parameters = project_params.except(:field_ids)
+    @project = Project.new(parameters)
+    @project.fields = Field.where(id: selected_field_ids)
 
 
     respond_to do |format|
@@ -103,7 +110,7 @@ class ProjectsController < ApplicationController
         @chat = Chat.new(project_id: @project.id)
         @chat.save
         @user_project.save
-        format.html { redirect_to project_url(@project), notice: "Progetto was successfully created." }
+        format.html { redirect_to user_project_path(@user, @project), notice: "Progetto was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -115,21 +122,16 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
-      parameters = project_params.except(:ambiti)
-      id_ambiti = params[:project][:ambiti].drop(1)
+      if params[:field_ids].present?
+        selected_field_ids = params[:field_ids].reject(&:blank?)
+      else
+        redirect_to edit_user_project_path @user, notice: "Devi selezionare almeno un ambito"
+        return
+      end
+      parameters = project_params.except(:field_ids)
       if @project.update(parameters)
-        id_ambiti.each do |ambito|
-          field = Field.find(ambito)
-          if not @project.fields.include? field
-            @project.fields << field
-          end
-        end
-        @project.fields.each do |field|
-          if not id_ambiti.include? field.id.to_s
-            @project.fields.delete(field)
-          end
-        end
-        format.html { redirect_to project_url(@project), notice: "Progetto was successfully updated." }
+        @project.fields = Field.where(id: selected_field_ids)
+        format.html { redirect_to user_project_path(@user, @project), notice: "Progetto was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -155,16 +157,44 @@ class ProjectsController < ApplicationController
     end
     @project.stato = "iniziato"
     @project.save!
-    redirect_to project_show_my_project_path(@project)
+    redirect_to user_project_show_my_project_path(@user, @project)
   end
 
   def close_project
     @project.stato = "chiuso"
     @project.save!
-    redirect_to my_projects_projects_path
+    redirect_to my_projects_user_projects_path @user
   end
 
   def my_projects
+  end
+
+  def open_github
+    if !session["access_token"].present?
+      redirect_to users_projects_show_my_project_path(@user, @project), notice: "Non sei loggato su github"
+      return
+    end
+    if not @project.github_link.present?
+      # Provide authentication credentials
+      client = Octokit::Client.new(:access_token => session["access_token"])
+      repo_name = @project.name
+      repo_description = @project.descrizione
+
+      begin
+        response = client.create_repository(repo_name, description: repo_description)
+        repo_url = response.html_url
+        Rails.logger.debug "Repository creata correttamente: #{repo_url}"
+        @project.github_link = repo_url
+        @project.save!
+        redirect_to user_project_show_my_project_path(@user, @project), notice: "Repository creata correttamente"
+        return
+      rescue Octokit::Error => e
+        Rails.logger.debug "Errore creazione repository: #{e.message}"
+        redirect_to user_project_show_my_project_path(@user, @project), notice: "La repository non è stata creata correttamente"
+      end
+    else
+      redirect_to user_project_show_my_project_path(@user, @project), notice: "Il progetto ha già un link a github"
+    end
   end
 
   def show_my_project
@@ -172,14 +202,21 @@ class ProjectsController < ApplicationController
     @members = @project.users
     @chat = @project.chat # attenzione che alcuni non ce l'hanno
     @messages = @chat.messages
+    if @project.github_link.present?
+      @github_link = @project.github_link
+    end
   end
 
   def espelli_membro
+    if (@project.stato == "chiuso")
+      redirect_to user_project_show_my_project_path(@user, @project), notice: "Non puoi espellere un membro da un progetto chiuso"
+      return
+    end
     @user_project = UserProject.find_by(user_id: params[:member_id], project_id: @project.id)
     if @user_project
       @user_project.destroy
     end
-    redirect_to project_show_my_project_path(@project)
+    redirect_to user_project_show_my_project_path(@user, @project)
   end
 
 

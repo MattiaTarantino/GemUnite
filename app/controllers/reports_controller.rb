@@ -5,14 +5,16 @@ class ReportsController < ApplicationController
 
 
   def new
+    @user = current_user
     @report = Report.new
   end
 
   def create
+    @user = current_user
     @report = Report.new(report_params)
     @report.user_id = current_user.id
     if @report.save
-      redirect_to reports_path, notice: 'Segnalazione creata correttamente.'
+      redirect_to user_reports_path @user, notice: 'Segnalazione creata correttamente.'
     else
       render 'new', notice: 'Errore nella creazione della segnalazione.'
     end

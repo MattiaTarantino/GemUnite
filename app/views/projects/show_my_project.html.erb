@@ -6,16 +6,39 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Chat Example</title>
 
+  <style>
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    /* padding: 20px; */
+    /* margin-top: 30px; */
+    /* text-align: left; */
+    padding: 0px;
+     margin-top: 3px;
+
+}
+  h2{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top:30px;
+  }
+  h1{
+    margin-top:30px;
+  }
+  </style>
+
 <body>
 <h1><%= @project.name %></h1>
 <% if @project.checkpoints.present? %>
   <% @project.checkpoints.each do |checkpoint| %>
     <tr>
       <td><%= checkpoint.nome %></td>
-      <td> <%= link_to "Show this checkpoint", project_checkpoint_path(project_id: @project.id, id: checkpoint.id) %> </td>
+      <td> <%= link_to "Show this checkpoint", user_project_checkpoint_path(user_id: @user.id, project_id: @project.id, id: checkpoint.id) %> </td>
       <% if @role == "leader" and @project.stato == "iniziato" and !checkpoint.completato %>
         <td>
-          <%= button_to project_checkpoint_change_state_path(project_id: @project.id, checkpoint_id: checkpoint.id),
+          <%= button_to user_project_checkpoint_change_state_path(user_id: @user.id, project_id: @project.id, checkpoint_id: checkpoint.id),
                         method: :put,
                         class: "btn btn-outline-primary btn-sm",
                         title: "Segna come completato",
@@ -38,11 +61,12 @@
 <% end %>
 <% if @role == "leader" and @project.stato == "iniziato"%>
     <br>
-  <%= link_to "Add a new checkpoint", new_project_checkpoint_path(project_id: @project.id), class: "btn btn-custom-center" %>
+  <%= link_to "Add a new checkpoint", new_user_project_checkpoint_path(user_id: @user.id, project_id: @project.id), class: "btn btn-custom-center" %>
 <% end %>
 
 <div class="chat-project">
   <div class="chat-container">
+  <h2> Chat di gruppo </h2>
     <div class="chat-log" id="chat-log">
       <% @messages.each do |message| %>
         <div class="message">
@@ -50,7 +74,7 @@
         </div>
       <% end %>
     </div>
-    <%= form_with model: [ @project, @chat, Message.new ], local: false, id: "ajax-form" do |form| %>
+    <%= form_with model: [@user, @project, @chat, Message.new ], local: false, id: "ajax-form" do |form| %>
       <%= form.text_field :content, id: 'message-input', placeholder: 'Type your message...' %>
       <%= form.submit 'Send', id: 'send-button' %>
     <% end %>
@@ -58,25 +82,31 @@
   </div>
 
   <div class="project-container bg-light p-4">
-    <h2 class="mb-3">Project Infos</h2>
+    <h2 class="mb-3">Informazioni Progetto</h2>
     <p><%=@project.descrizione %></p>
     <p><%=@project.stato %></p>
-    <div class="github-link">
-      <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
-    </div>
+    <% if @role == "leader" and not @project.github_link.present? and @user.provider == "github"%>
+      <div class="github-link">
+        <%= link_to 'Crea Repository su GitHub <i class="fa fa-github"></i>'.html_safe, user_project_open_github_path(@user, @project) %>
+      </div>
+    <% elsif @project.github_link.present? %>
+      <div class="github-link">
+        <%= link_to 'Apri su GitHub <i class="fa fa-github"></i>'.html_safe, @project[:github_link] %>
+      </div>
+    <% end %>
     <br>
     <% if @role == "leader" %>
 
       <% if @project.stato == "aperto" %>
-        <%= button_to "Chiudi richieste di partecipazione", project_close_requests_path, method: :put %> <br>
+        <%= button_to "Chiudi richieste di partecipazione", user_project_close_requests_path, method: :put, data: { turbo_confirm: "Sei sicuro di voler chiudere le richieste di partecipazione?" } %> <br>
       <% end %>
 
       <% if @project.stato == "iniziato" %>
-        <%= button_to "Chiudi progetto", project_close_project_path, method: :put  %> <br>
+        <%= button_to "Chiudi progetto", user_project_close_project_path, method: :put, data: { turbo_confirm: "Sei sicuro di voler chiudere questo progetto?" }  %> <br>
       <% end %>
 
     <% end %>
-    <%= link_to "Torna ai miei progetti", my_projects_projects_path, class: "btn btn-custom-center" %>
+    <%= link_to "Torna ai miei progetti", my_projects_user_projects_path, class: "btn btn-custom-center" %>
   </div>
 </div>
 
@@ -89,13 +119,14 @@
         <% @members.each do |member| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <%= member.email %>
-            <% if @role == "leader" and member.id != current_user.id %>
-              <%= button_to "Espelli", project_espelli_membro_path(project_id: @project.id, member_id: member.id), method: :put, data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di voler espellere questo membro?" } %>
+            <% if @role == "leader" and member.id != current_user.id and @project.stato != "chiuso" %>
+              <%= button_to "Espelli", user_project_espelli_membro_path(user_id: @user.id, project_id: @project.id, member_id: member.id), method: :put, data: { confirm: "Are you sure?" , turbo_confirm: "Sei sicuro di voler espellere questo membro?" } %>
             <% end %>
         <% end %>
       </ul>
     </div>
   </div>
+
 </div>
 
 
