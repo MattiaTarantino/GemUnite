@@ -1,12 +1,24 @@
-
-
-<%= render "request", request: @request %>
-
-<div>
-  <%= link_to "Edit this request", edit_user_project_request_path(user_id: @user.id, project_id: @project.id, id: @request.id) %> |
-  <%= link_to "Back to requests", user_project_requests_path(user_id: @user.id, project_id: @project.id) %>
-
-  <%= button_to "Destroy this request", user_project_requests_path(user_id: @user.id, project_id: @project.id), method: :delete %>
-  <%= link_to "Torna ai progetti", user_projects_path(user_id: @user.id) %>
-
+<div class="container py-5">
+  <div class="py-5 p-lg-5">
+    <div class="row text-center py-5">
+      <h1 class="login-title text-success">Richiesta effettuata</h1>
+    </div>
+    <div id="request">
+      <div class="row mx-auto d-flex justify-content-center py-5" style="max-width: 900px;">
+        <div class="col-md-6">
+          <%= render "request_user", request: @request %>
+        </div>
+      </div>
+    </div>
+    <div class="row mx-auto d-flex justify-content-center mx-2 pl-5 my-4">
+      <div class="col-6 mt-4">
+        <%= link_to "Edit this request", edit_user_project_request_path(user_id: @user.id, project_id: @project.id, id: @request.id), class:"btn-request btn rounded-pill shadow mb-4" %>
+        <%= link_to "Back to requests", my_requests_user_requests_path(user_id: @user.id), class:"btn-request btn rounded-pill shadow" %>
+      </div>
+      <div class="col-6 mt-1">
+        <%= button_to "Destroy this request", user_project_request_path(user_id: @user.id, project_id: @project.id, id: @request.id), method: :delete, class:"btn-request btn rounded-pill shadow mb-4" %>
+        <%= link_to "Torna ai progetti", user_projects_path(user_id: @user.id), class:"btn-request btn rounded-pill shadow" %>
+      </div>
+    </div>
+  </div>
 </div>
