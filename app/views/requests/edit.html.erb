@@ -1,7 +1,7 @@
 <h1>Editing request</h1>
 
 <br>
-<%= link_to "Elimina", edit_project_request_path, method: :delete %>
+<%= link_to "Elimina", user_project_request_path(user_id: @user.id, project_id: @project.id, id: @request.id), method: :delete %>
 <div>
-  <%= link_to "Back to requests", my_requests_requests_path %>
+  <%= link_to "Back to requests", my_requests_user_requests_path(user_id: @user.id) %>
 </div>

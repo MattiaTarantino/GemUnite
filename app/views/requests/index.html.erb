@@ -5,7 +5,9 @@
     </div>
     <div id="requests">
       <% if @requests.empty? %>
-        <p>Non ci sono richieste di partecipazione in sospeso</p>
+        <div class="row text-center py-5">
+          <p>Non ci sono richieste di partecipazione in sospeso</p>
+        </div>
       <% else %>
         <div class="row mx-auto d-flex justify-content-center py-5" style="max-width: 900px;">
           <% @requests.each do |request| %>

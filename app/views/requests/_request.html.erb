@@ -2,11 +2,9 @@
   <div class="card-body px-4 py-5 px-md-5">
     <h5 class="request-title card-title">Utente: <%= request.user.username %></h5>
     <p class="text-muted card-text mb-4 mt-3">Note:  <%= request.note %></p>
-    <% if @owner == false %>
-      <div class="button-container d-flex justify-content-between">
-        <%= button_to "Accetta richiesta", user_project_request_accept_path(user_id: @user.id, project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success shadow" %>
-        <%= button_to "Rifiuta richiesta", user_project_request_decline_path(user_id: @user.id, project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger shadow" %>
-      </div>
-    <% end %>
+    <div class="button-container d-flex justify-content-between">
+      <%= button_to "Accetta richiesta", user_project_request_accept_path(user_id: @user.id, project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-success shadow" %>
+      <%= button_to "Rifiuta richiesta", user_project_request_decline_path(user_id: @user.id, project_id: params[:project_id], request_id: request.id), method: :put, class: "btn btn-danger shadow" %>
+    </div>
   </div>
 </div>

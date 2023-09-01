@@ -5,15 +5,13 @@ class LatestNewsController < ApplicationController
     newsapi = News.new("4ee60b1af31f4bd1b9b41fd4c4399b2f")
 
     @user = current_user
-    topics = ""
-    @user.fields.each do |field|
-      topics += field.nome + " "
-    end
+    topics = @user.fields.pluck("nome").join(' OR ')
+
 
     current_date = Time.now.strftime("%Y-%m-%d")
     from_date = (Time.now - 1.month + 1.day).strftime("%Y-%m-%d")
 
-    if topics == ""
+    if !topics || topics == ""
       topics = "Technology"
     end
 

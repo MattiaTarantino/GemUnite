@@ -201,8 +201,9 @@
         </thead>
         <tbody>
         <% @members.each do |member| %>
+          <% label = member.username || member.email %>
           <tr>
-            <td><%= member.username %></td>
+            <td><%= label %></td>
           </tr>
         <% end %>
         </tbody>
