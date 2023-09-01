@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,8 +15,6 @@
  *= require_tree .
  *= require_self
  */
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
-
 
 a:link {
     text-decoration: none;
@@ -257,22 +257,23 @@ label {
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     cursor: pointer;
     border-radius: 7px;
-    color: #4a4545;
+    /* color: #4a4545;
     background: #9aaede;
-    background-color: #9aaede;
+    background-color: #9aaede; */ 
     margin-top: 20px;
     font-weight: normal;
 }
 
 .btn:not(:disabled):not(.disabled) {
     cursor: pointer;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 /* Log in, Sign up */
 .login-title {
     font-weight: 700;
     font-size: 3rem;
+    color: black;
 }
 
 .card {
@@ -285,7 +286,7 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
+}
 
 .bs-icon {
     --bs-icon-size: 2.5rem;
@@ -294,14 +295,14 @@ label {
     justify-content: center;
     align-items: center;
     font-size: var(--bs-icon-size);
-    width: calc(var(--bs-icon-size)*2);
-    height: calc(var(--bs-icon-size)*2);
+    width: calc(var(--bs-icon-size) * 2);
+    height: calc(var(--bs-icon-size) * 2);
 }
 
 .bs-icon.bs-icon-circle {
     border-radius: 50%;
 }
-      
+
 .bs-icon.bs-icon-color {
     color: var(--bs-white);
     background: var(--bs-primary);
@@ -314,28 +315,71 @@ label {
 
 .form-field {
     display: center;
-    width: 300px !important;
-    border-radius: 50px !important;
+    width: 300px;
+    border-radius: 50px;
 }
 
 .btn-login-login {
-    background-color: #3763f4 !important;
-    border-color: #3763f4 !important;
+    color: white;
+    background-color: #3763f4;
+    border-color: #3763f4;
 }
 
 .btn-login-login:active {
-    background-color: #3763f4 !important;
-    border-color: #3763f4 !important;
+    background-color: #3763f4;
+    border-color: #3763f4;
 }
 
 .btn-login-login:focus {
-    background-color: #3763f4 !important;
-    border-color: #3763f4 !important;
+    background-color: #3763f4;
+    border-color: #3763f4;
 }
 
 .btn-login-login:hover {
     color: white;
-    background-color: #2f54cf !important;
-    border-color: #2c4fc3 !important;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
 }
 
+.btn-signup {
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-signup:hover {
+    color: white;
+    background-color: #07889b;
+    border-color: #07889b;
+}
+
+
+/* Requests */
+.request-title {
+    color: black;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.btn-request {
+    color: white;
+    background-color: #3763f4;
+    border-color: #3763f4;
+    width: 400px;
+}
+
+.btn-request:active {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-request:focus {
+    background-color: #3763f4;
+    border-color: #3763f4;
+}
+
+.btn-request:hover {
+    color: white;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
+}

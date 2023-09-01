@@ -1,18 +1,21 @@
-<div class="row mb-5">
+<div class="row mb-5" style="margin-bottom: 5px !important">
   <div class="col-md-8 col-xl-6 text-center mx-auto">
-    <h1 class="fw-bold", style="color: black">Progetti disponibili su GemUnite</h1>
-    <p class="text-muted" style="padding-left: 0px;padding-right: 0px;margin-right: 50px;margin-left: 50px;">Qui troverai una lista di p<span style="color: rgb(94, 100, 105);">rogetti che cercano persone preparate riguardo i tuoi ambiti d’interesse</span></p>
+    <h1 class="fw-bold" , style="color: black; margin-top: 20px">Progetti disponibili su GemUnite</h1>
+    <p class="text-muted" style="padding-left: 0px;padding-right: 0px;margin-right: 50px;margin-left: 50px;">Qui
+      troverai una lista di p<span style="color: rgb(94, 100, 105);">rogetti che cercano persone preparate riguardo i tuoi ambiti d’interesse</span>
+    </p>
   </div>
 </div>
 <div class="d-flex justify-content-between mb-3">
-  <div data-controller="project-sort">
+  <div data-controller="project-sort", style="margin-top: 20px">
     <label for="sort_by">Ordina per:</label>
     <select name="sort_by" id="sort_by" data-action="project-sort#update" data-project-sort-target="select" data-user-id="<%= current_user.id %>">
       <option></option>
       <option value="time_posted" <%= 'selected' if @sorting == 'time_posted' %> >Più recenti</option>
       <option value="time_posted_reverse" <%= 'selected' if @sorting == 'time_posted_reverse' %> >Meno recenti</option>
       <option value="members" <%= 'selected' if @sorting == 'members' %> >Numero membri (crescente)</option>
-      <option value="members_reverse" <%= 'selected' if @sorting == 'members_reverse' %> >Numero membri (decrescente)</option>
+      <option value="members_reverse" <%= 'selected' if @sorting == 'members_reverse' %> >Numero membri (decrescente)
+      </option>
     </select>
   </div>
   <div class="filter_by">

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, except: %i[ index new create my_projects ]
   before_action :set_user
   before_action :is_member?, only: %i[ edit update destroy show_my_project ]
-  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro ]
+  before_action :is_leader?, only: %i[ edit update destroy close_requests close_project espelli_membro open_github ]
 
 
   def is_member?
@@ -17,6 +17,10 @@ class ProjectsController < ApplicationController
 
   def is_leader?
     @user_project = UserProject.where(user_id: @user.id, project_id: @project.id).first
+    if @user_project.nil?
+      redirect_to my_projects_user_projects_path @user
+      flash[:notice] = "Non sei membro di questo progetto"
+    end
     if @user_project.role != "leader"
       redirect_to my_projects_user_projects_path @user
       flash[:notice] = "Non sei il leader di questo progetto"
@@ -166,11 +170,42 @@ class ProjectsController < ApplicationController
   def my_projects
   end
 
+  def open_github
+    if !session["access_token"].present?
+      redirect_to users_projects_show_my_project_path(@user, @project), notice: "Non sei loggato su github"
+      return
+    end
+    if not @project.github_link.present?
+      # Provide authentication credentials
+      client = Octokit::Client.new(:access_token => session["access_token"])
+      repo_name = @project.name
+      repo_description = @project.descrizione
+
+      begin
+        response = client.create_repository(repo_name, description: repo_description)
+        repo_url = response.html_url
+        Rails.logger.debug "Repository creata correttamente: #{repo_url}"
+        @project.github_link = repo_url
+        @project.save!
+        redirect_to user_project_show_my_project_path(@user, @project), notice: "Repository creata correttamente"
+        return
+      rescue Octokit::Error => e
+        Rails.logger.debug "Errore creazione repository: #{e.message}"
+        redirect_to user_project_show_my_project_path(@user, @project), notice: "La repository non è stata creata correttamente"
+      end
+    else
+      redirect_to user_project_show_my_project_path(@user, @project), notice: "Il progetto ha già un link a github"
+    end
+  end
+
   def show_my_project
     @checkpoints = @project.checkpoints
     @members = @project.users
     @chat = @project.chat
     @messages = @chat.messages
+    if @project.github_link.present?
+      @github_link = @project.github_link
+    end
   end
 
   def espelli_membro

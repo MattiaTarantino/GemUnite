@@ -69,8 +69,9 @@
   <h2> Chat di gruppo </h2>
     <div class="chat-log" id="chat-log">
       <% @messages.each do |message| %>
+        <% label = User.find(message.user_id).username || User.find(message.user_id).email %>
         <div class="message">
-          <%= User.find(message.user_id).username %>: <%= message.content %>
+          <%= label %>: <%= message.content %>
         </div>
       <% end %>
     </div>
@@ -85,11 +86,15 @@
     <h2 class="mb-3">Informazioni Progetto</h2>
     <p><%=@project.descrizione %></p>
     <p><%=@project.stato %></p>
-   <!--
-    <div class="github-link">
-      <button style="font-size: 18px; border-radius: 30px;">Open with GitHub <i class="fa fa-github"></i></button>
-    </div>
-    -->
+    <% if @role == "leader" and not @project.github_link.present? and @user.provider == "github"%>
+      <div class="github-link">
+        <%= link_to 'Crea Repository su GitHub <i class="fa fa-github"></i>'.html_safe, user_project_open_github_path(@user, @project) %>
+      </div>
+    <% elsif @project.github_link.present? %>
+      <div class="github-link">
+        <%= link_to 'Apri su GitHub <i class="fa fa-github"></i>'.html_safe, @project[:github_link] %>
+      </div>
+    <% end %>
     <br>
     <% if @role == "leader" %>
 
