@@ -26,5 +26,14 @@ RSpec.describe Request, type: :model do
                 expect(request).not_to be_valid
             end
         end
+
+        context "without a note" do
+            it "is not valid" do
+                user = create(:user)
+                project = create(:project)
+                request = Request.new(user: user, project: project, note: "", stato_accettazione: "In attesa")
+                expect(request).not_to be_valid
+            end
+        end
     end
 end
