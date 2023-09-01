@@ -14,7 +14,7 @@ Given("I am logged in") do
   visit new_user_session_path
   fill_in 'Email', with: 'test@user.com'
   fill_in 'Password', with: 'Ciao1234!'
-  click_button 'Accedi'
+  click_button 'Log in'
 
   expect(page).to have_content('Signed in successfully')
 end
