@@ -1,23 +1,24 @@
-
 <h1>Notizie che potrebbero interessarti</h1>
 <br>
 <div id="latest_news">
   <div class="container">
     <% @all_articles.each do |article| %>
-      <div class="row article">
-        <div class="col-md-4">
-          <% if article["urlToImage"] %>
-            <img src=<%= article["urlToImage"] %> alt="news_image" class="img-fluid">
-          <% end %>
+      <% if not article["title"].blank? %>
+        <div class="row article">
+          <div class="col-md-4">
+            <% if article["urlToImage"] %>
+              <img src=<%= article["urlToImage"] %> alt="news_image" class="img-fluid">
+            <% end %>
+          </div>
+          <div class="col-md-8">
+            <h2><strong><%= article["title"] %></strong></h2>
+            <h3><%= article["description"] %></h3>
+            <p><%= article["content"] %></p>
+            <p><%= link_to "Read more", article["url"], class: "btn btn-primary" %></p>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2><strong><%= article["title"] %></strong></h2>
-          <h3><%= article["description"] %></h3>
-          <p><%= article["content"] %></p>
-          <p><%= link_to "Read more", article["url"], class: "btn btn-primary" %></p>
-        </div>
-      </div>
-      <hr>
+        <hr>
+      <% end %>
     <% end %>
   </div>
 
