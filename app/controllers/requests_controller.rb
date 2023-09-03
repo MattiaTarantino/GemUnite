@@ -66,6 +66,14 @@ class RequestsController < ApplicationController
 
   # POST /requests or /requests.json
   def create
+    if UserProject.where(user_id: current_user.id, project_id: @project.id).first
+      redirect_to root_path, notice: "Fai già parte di questo progetto"
+      return
+    end
+    if @project.stato != "aperto"
+      redirect_to root_path, notice: "Le richieste di questo progetto sono chiuse"
+      return
+    end
     @request = Request.new(request_params)
     @project_id = params[:project_id]
     @request.project_id = @project_id
