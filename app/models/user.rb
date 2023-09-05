@@ -2,8 +2,10 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :requests, dependent: :destroy
   has_and_belongs_to_many :fields
+  before_destroy :delete_projects_with_leader_role
+
   has_many :user_projects, dependent: :destroy
-  has_many :chats
+  has_many :messages, dependent: :destroy
   has_many :projects, through: :user_projects
 
   validates :username, presence: true, uniqueness: true, length: { minimum: 5, maximum: 20 }
@@ -11,6 +13,16 @@ class User < ApplicationRecord
   validate :password_complexity
   validate :custom_validations
 
+  def delete_projects_with_leader_role
+    # Trova tutte le istanze di UserProject dell'utente con 'role' uguale a 'leader'
+    user_projects_to_delete = user_projects.where(user_id: self.id, role: 'leader')
+
+    # Estrai gli ID dei progetti associati a queste istanze di UserProject
+    project_ids_to_delete = user_projects_to_delete.pluck(:project_id)
+
+    # Elimina tutti i progetti con gli ID trovati
+    Project.where(id: project_ids_to_delete).destroy_all
+  end
   def password_complexity
     if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
       errors.add :password, "deve includere almeno una lettera minuscola, una maiuscola e un numero"
@@ -37,7 +49,7 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["fields", "projects", "reports", "requests", "user_projects", "chats"]
+    ["fields", "projects", "reports", "requests", "user_projects", "messages"]
   end
 
   def self.from_omniauth(auth)
