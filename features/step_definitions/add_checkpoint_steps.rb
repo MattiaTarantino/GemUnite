@@ -10,11 +10,6 @@ Given("I am on the project page") do
   visit user_project_show_my_project_path(user_id: @user.id, project_id: @project.id)
 end
 
-
-When("I click the {string} button") do |button_text|
-  click_link button_text
-end
-
 When("I fill in the checkpoint details") do
   fill_in 'Nome', with: 'testcheckpoint'
   fill_in 'Descrizione', with: 'chekpoint testdescription'

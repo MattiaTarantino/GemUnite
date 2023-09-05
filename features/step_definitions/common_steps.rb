@@ -10,3 +10,7 @@ Given("I am logged in") do
 
   expect(page).to have_content('Signed in successfully')
 end
+
+When("I click the {string} button") do |button_text|
+  click_link button_text
+end

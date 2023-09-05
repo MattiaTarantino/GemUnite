@@ -4,6 +4,8 @@ Feature: Adding a checkpoint
     Given I am a registered user
     And I am the leader of a started project
     And I am logged in
+
+  @common
   Scenario: Leader adds a checkpoint through a button
     Given I am on the project page
     When I click the "Aggiungi checkpoint" button
