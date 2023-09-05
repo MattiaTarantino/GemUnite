@@ -1,9 +1,16 @@
-<h1>Editing project</h1>
-<%= render "form", project: @project %>
-
-<br>
-
-<div>
-  <%= link_to "Show this project", [@user, @project] %> |
-  <%= link_to "Back to projects", my_projects_user_projects_path %>
+<div class="container d-flex justify-content-center py-5">
+  <div class="py-5 p-lg-5">
+    <div class="row text-center py-5">
+      <h1>Editing project</h1>
+    </div>
+    <div class="row py-5">
+      <div class="col-12 mb-5">
+        <%= render "form", project: @project %>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <%= link_to "Show this project", [@user, @project], class:"btn-modify-project btn rounded-pill shadow mr-5" %> 
+      <%= link_to "Torna ai miei progetti", my_projects_user_projects_path(user_id: @user.id), class:"btn-modify-project btn rounded-pill shadow m3-5" %>
+    </div>
+  </div>
 </div>

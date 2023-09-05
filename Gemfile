@@ -54,6 +54,12 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rubocop', require: false
+
+  gem 'factory_bot_rails', '~> 6.2.0'
+  # The RSpec testing framework
+  gem 'rspec-rails'
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
 end
 
 group :development do
@@ -68,10 +74,9 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "cucumber-rails", require: false
 end
 
 gem "activeadmin", "~> 3.0"
@@ -100,8 +105,4 @@ gem 'bootstrap-sass'
 # >> tp Table.all
 gem 'table_print'
 
-# per inviare richieste http
-gem 'rest-client'
-
-# github api
-gem "octokit", "~> 5.0"
+gem 'rails-controller-testing'

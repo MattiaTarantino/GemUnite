@@ -61,7 +61,7 @@
 <% end %>
 <% if @role == "leader" and @project.stato == "iniziato"%>
     <br>
-  <%= link_to "Add a new checkpoint", new_user_project_checkpoint_path(user_id: @user.id, project_id: @project.id), class: "btn btn-custom-center" %>
+  <%= link_to "Aggiungi checkpoint", new_user_project_checkpoint_path(user_id: @user.id, project_id: @project.id), class: "btn btn-custom-center" %>
 <% end %>
 
 <div class="chat-project">

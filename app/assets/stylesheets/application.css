@@ -383,3 +383,18 @@ label {
     background-color: #2f54cf;
     border-color: #2c4fc3;
 }
+
+
+/* Edit project */
+.btn-modify-project {
+    color: white;
+    background-color: #3763f4;
+    border-color: #3763f4;
+    width: 200px;
+}
+
+.btn-modify-project:hover {
+    color: white;
+    background-color: #2f54cf;
+    border-color: #2c4fc3;
+}
