@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :chats, only: [] do
         resources :messages, only: [:create]
       end
-      resources :requests do
+      resources :requests, except: [:edit] do
         put 'accept'
         put 'decline'
       end

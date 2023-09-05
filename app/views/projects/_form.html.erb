@@ -1,48 +1,52 @@
-<%= form_with(model: [@user, project]) do |form| %>
-  <% if project.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div class="card">  
+  <div class="card-body text-center d-flex flex-column align-items-center">
+    <%= form_with(model: [@user, project]) do |form| %>
+      <% if project.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-      <ul>
-        <% project.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <ul>
+            <% project.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= form.label :nome, style: "display: block" %>
+        <%= form.text_field :name, required: :true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :dimensione, style: "display: block" %>
+        <%= form.collection_select(:dimensione, [2, 3, 4, 5, 6], :itself, :itself, {}, { required: :true }) %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :info_leader, style: "display: block" %>
+        <%= form.text_field :info_leader, required: :true %>
+      </div>
+
+
+      <div class="mb-4">
+        <%= form.label :descrizione, style: "display: block" %>
+        <%= form.text_field :descrizione, required: :true %>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Select Fields:</label>
+        <% Field.all.each do |field| %>
+          <label class="checkbox-label">
+            <input type="checkbox" name="field_ids[]" value="<%= field.id %>" <%= 'checked' if project.fields.exists?(field.id) %>>
+            <%= field.nome %>
+          </label>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
+      </div>
 
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :name, required: :true %>
-  </div>
-
-  <div>
-    <%= form.label :dimensione, style: "display: block" %>
-    <%= form.collection_select(:dimensione, [2, 3, 4, 5, 6], :itself, :itself, {}, { required: :true }) %>
-  </div>
-
-  <div>
-    <%= form.label :info_leader, style: "display: block" %>
-    <%= form.text_field :info_leader, required: :true %>
-  </div>
-
-
-  <div>
-    <%= form.label :descrizione, style: "display: block" %>
-    <%= form.text_field :descrizione, required: :true %>
-  </div>
-
-  <div>
-    <label class="form-label">Select Fields:</label>
-    <% Field.all.each do |field| %>
-      <label class="checkbox-label">
-        <input type="checkbox" name="field_ids[]" value="<%= field.id %>" <%= 'checked' if project.fields.exists?(field.id) %>>
-        <%= field.nome %>
-      </label>
+      <div>
+        <%= form.submit %>
+      </div>
     <% end %>
   </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

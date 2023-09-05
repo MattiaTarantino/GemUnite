@@ -1,7 +1,7 @@
 <div class="container py-5">
   <div class="py-5 p-lg-5 ">
     <div class="row text-center py-5">
-      <h1 class="login-title">Requests</h1>
+      <h1 class="login-title">Richieste</h1>
     </div>
     <div id="requests">
       <% if @requests.empty? %>
@@ -19,7 +19,7 @@
       <% end %>
     </div>
     <div class="row d-flex justify-content-center mt-5">
-      <%= link_to "Torna ai progetti", my_projects_user_projects_path(user_id: @user.id), class:"btn-request btn rounded-pill shadow" %>
+      <%= link_to "Torna ai miei progetti", my_projects_user_projects_path(user_id: @user.id), class:"btn-request btn rounded-pill shadow" %>
     </div>
   </div>
 </div>
