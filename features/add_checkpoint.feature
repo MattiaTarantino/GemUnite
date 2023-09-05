@@ -1,10 +1,11 @@
 Feature: Adding a checkpoint
 
-  Scenario: Leader adds a checkpoint through a button
-    Given I am registered as user
+  Background: A user is registered
+    Given I am a registered user
     And I am the leader of a started project
     And I am logged in
-    And I am on the project page
+  Scenario: Leader adds a checkpoint through a button
+    Given I am on the project page
     When I click the "Aggiungi checkpoint" button
     And I fill in the checkpoint details
     And I submit the form
