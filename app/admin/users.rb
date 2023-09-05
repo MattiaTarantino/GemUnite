@@ -15,6 +15,6 @@ ActiveAdmin.register User do
   #   permitted
   # end
   actions :index, :edit, :update, :create, :destroy
-  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :username, :firstname, :lastname, :provider, :uid
+  permit_params :email, :encrypted_password, :username, :firstname, :lastname, :provider, :uid
   
 end
