@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
     value = self[attribute]
     if value.blank?
       errors.add(attribute, "non può essere vuoto")
-    elsif value !~ /\A[a-zA-Z_\d ]*\z/i
+    elsif value !~ /\A[a-zA-Z_',.èàòì\d ]*\z/i
       errors.add(attribute, "non può contenere caratteri speciali")
     end
   end
