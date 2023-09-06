@@ -315,7 +315,7 @@ label {
 
 .form-field {
     display: center;
-    width: 300px;
+    width: 100%;
     border-radius: 50px;
 }
 

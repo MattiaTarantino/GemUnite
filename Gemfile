@@ -99,6 +99,8 @@ gem 'omniauth-rails_csrf_protection'
 
 gem 'bootstrap-sass'
 
+# API GITHUB
+gem "octokit", "~> 5.0"
 
 # GEMMA PER VISUALIZZARE LE TABELLE DEL DB IN RAILS CONSOLE:
 # >> require 'table_print'

@@ -1,4 +1,8 @@
-<h1>Manda la tua segnalazione</h1>
+<div class="container mt-5">
+  <header class="header mb-5">
+    <h1>Manda la tua segnalazione</h1>
+  </header>
+
 
 <%= render "form", report: @report %>
 
@@ -6,4 +10,5 @@
 
 <div>
   <%= link_to "Ritorna alla home", user_projects_path(user_id: @user.id) %>
+</div>
 </div>

@@ -1,11 +1,25 @@
-<%= form_with(model: [current_user, @report]) do |form| %>
+<style>
+    /* Stili CSS per il campo di testo */
+    #model_descrizione {
+        width: 300px; /* Puoi regolare la larghezza a tuo piacimento */
+        height: 100px; /* Puoi regolare l'altezza a tuo piacimento */
+        font-size: 16px; /* Puoi regolare la dimensione del testo a tuo piacimento */
+    }
+</style>
 
-  <div>
-    <%= form.label :descrizione, style: "display: block" %>
-    <%= form.text_field :descrizione %>
-  </div>
+<div class="card m-lg-auto " style="width: 50%;">
+  <div class="card-body d-flex flex-column align-items-center">
 
-  <div>
-    <%= form.submit "Invia segnalazione" %>
+    <%= form_with(model: [current_user, @report]) do |form| %>
+      <div>
+        <%= form.label :descrizione, style: "display: block" %>
+        <%= form.text_field :descrizione, style: "width: 500px", id: "model_descrizione" %>
+      </div>
+
+      <div>
+        <%= form.submit "Invia segnalazione" %>
+      </div>
+
+    <% end %>
   </div>
-<% end %>
+</div>
