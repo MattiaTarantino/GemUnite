@@ -1,12 +1,8 @@
-# GemUnite
+#  Project Overview
+GemUnite is an application that allows IT enthusiasts to search for or create small to medium-sized groups to work on projects within their areas of interest.
 
-GemUnite è un’applicazione che permette ad appassionati del mondo IT di cercare o creare gruppi di piccole-medie dimensioni per realizzare progetti nell’ambito d’interesse.
+Upon creating an account, the user, in addition to personal information, enters their areas of interest, such as machine learning, web development, cybersecurity, IoT, etc. On the homepage, the user will see some project proposals in their areas of interest. For each proposal, they can view the current members, get information about the project's creator, and access details about the proposed project, with the option to send a request to join the group.
 
+A registered user can create a project proposal by providing information about the field, a description of the project idea, and the group's size. Once published, they can accept or reject participation requests.
 
-Alla creazione dell’account, l’utente, oltre alle informazioni personali, inserisce i propri ambiti d’interesse, ad es. machine learning, web development, cybersecurity, IoT, ecc.. Nella Home page saranno mostrate alcune proposte di progetti negli ambiti d’interesse dell’utente, e per ogni proposta è possibile visualizzare gli attuali membri e avere informazioni sul creatore del gruppo di progetto, oltre ai dettagli sul progetto proposto, con la possibilità di inviare la richiesta di partecipazione al gruppo.
-
-
-Un utente registrato può creare una proposta di progetto inserendo informazioni sull’ambito, una descrizione dell’idea di progetto e sulla dimensione del gruppo, e una volta pubblicata, accettare o rifiutare le richieste di partecipazione.
-
-
-Nella sezione progetti sono visualizzabili i progetti a cui l’utente sta partecipando (con le relative informazioni) da cui si può accedere alla pagina di ogni progetto. Nella pagina del progetto, un membro può visualizzare il progresso, tramite i checkpoint inseriti dal Leader, aggiungere Task interni ad un checkpoint e segnare task come completati. Un utente può modificare informazioni ed espellere membri di gruppi di cui è il creatore. I membri di un progetto possono utilizzare una chat e accedere alla repository del progetto creata tramite l’API Github
+In the projects section, users can view the projects they are participating in, along with relevant information. By accessing each project's page, a member can track progress through checkpoints set by the leader, add internal tasks to a checkpoint, and mark tasks as completed. A user can also edit project information and remove members from groups they've created. Project members can use a chat and access the project's repository created through the Github API.
